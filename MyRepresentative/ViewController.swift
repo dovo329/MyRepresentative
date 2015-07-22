@@ -28,7 +28,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //println("prepareForSegue")
-        if let destinationViewController = segue.destinationViewController as? DetailViewController
+        if let destinationViewController = segue.destinationViewController as? RepresentativeListViewController
         {
             destinationViewController.zipCode = zipCodeTextField.text
         }

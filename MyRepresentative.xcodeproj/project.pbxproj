@@ -13,10 +13,8 @@
 		A533C4A01B5F0DBC0009155E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A533C49F1B5F0DBC0009155E /* Images.xcassets */; };
 		A533C4A31B5F0DBC0009155E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A533C4A11B5F0DBC0009155E /* LaunchScreen.xib */; };
 		A533C4AF1B5F0DBC0009155E /* MyRepresentativeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A533C4AE1B5F0DBC0009155E /* MyRepresentativeTests.swift */; };
-		A57608D51B5FF22400F80AB5 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57608D31B5FF22400F80AB5 /* DetailViewController.swift */; };
+		A57608D51B5FF22400F80AB5 /* RepresentativeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57608D31B5FF22400F80AB5 /* RepresentativeListViewController.swift */; };
 		A57608D61B5FF22400F80AB5 /* Representative.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57608D41B5FF22400F80AB5 /* Representative.swift */; };
-		A57608D81B5FF3A900F80AB5 /* RepresentativeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57608D71B5FF3A900F80AB5 /* RepresentativeCell.swift */; };
-		A57608DA1B5FF3B200F80AB5 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57608D91B5FF3B200F80AB5 /* JSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,10 +38,8 @@
 		A533C4A81B5F0DBC0009155E /* MyRepresentativeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyRepresentativeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A533C4AD1B5F0DBC0009155E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A533C4AE1B5F0DBC0009155E /* MyRepresentativeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRepresentativeTests.swift; sourceTree = "<group>"; };
-		A57608D31B5FF22400F80AB5 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		A57608D31B5FF22400F80AB5 /* RepresentativeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepresentativeListViewController.swift; sourceTree = "<group>"; };
 		A57608D41B5FF22400F80AB5 /* Representative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Representative.swift; sourceTree = "<group>"; };
-		A57608D71B5FF3A900F80AB5 /* RepresentativeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepresentativeCell.swift; sourceTree = "<group>"; };
-		A57608D91B5FF3B200F80AB5 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,10 +81,8 @@
 		A533C4951B5F0DBC0009155E /* MyRepresentative */ = {
 			isa = PBXGroup;
 			children = (
-				A57608D31B5FF22400F80AB5 /* DetailViewController.swift */,
+				A57608D31B5FF22400F80AB5 /* RepresentativeListViewController.swift */,
 				A57608D41B5FF22400F80AB5 /* Representative.swift */,
-				A57608D71B5FF3A900F80AB5 /* RepresentativeCell.swift */,
-				A57608D91B5FF3B200F80AB5 /* JSON.swift */,
 				A533C4981B5F0DBC0009155E /* AppDelegate.swift */,
 				A533C49A1B5F0DBC0009155E /* ViewController.swift */,
 				A533C49C1B5F0DBC0009155E /* Main.storyboard */,
@@ -225,9 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A57608D61B5FF22400F80AB5 /* Representative.swift in Sources */,
-				A57608D81B5FF3A900F80AB5 /* RepresentativeCell.swift in Sources */,
-				A57608D51B5FF22400F80AB5 /* DetailViewController.swift in Sources */,
-				A57608DA1B5FF3B200F80AB5 /* JSON.swift in Sources */,
+				A57608D51B5FF22400F80AB5 /* RepresentativeListViewController.swift in Sources */,
 				A533C49B1B5F0DBC0009155E /* ViewController.swift in Sources */,
 				A533C4991B5F0DBC0009155E /* AppDelegate.swift in Sources */,
 			);
