@@ -76,9 +76,11 @@ class DetailViewController: UITableViewController {
                                             {
                                                 //println("dict=\(dict)")
                                                 let rep = Representative(dict: dict)
+                                                rep.print()
                                                 self.repArr.append(rep)
                                             }
                                         }
+                                        
                                         self.tableView.reloadData()
                                     }
                                 )
@@ -95,8 +97,16 @@ class DetailViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("representative.cell.id", forIndexPath: indexPath) as! UITableViewCell
-        cell.textLabel?.text = self.repArr[indexPath.row].name
+        let cell = tableView.dequeueReusableCellWithIdentifier("representative.cell.id", forIndexPath: indexPath) as! RepresentativeCell
+        
+        let rep = repArr[indexPath.row]
+        cell.name.text = rep.name
+        cell.partyStateDistrict.text = String(format:"%@, %@, District %@", rep.party!, rep.state!, rep.district!)
+        cell.phoneNumber.text = rep.phone
+        cell.address.text = rep.office
+        cell.webAddress.text = rep.link
+        
+        //cell.textLabel?.text = self.repArr[indexPath.row].name
         return cell
     }
     

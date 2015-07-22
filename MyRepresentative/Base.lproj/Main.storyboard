@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="l8A-ax-1Ph">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -56,24 +57,86 @@
         <scene sceneID="V0e-95-Lp1">
             <objects>
                 <tableViewController id="C9q-9s-J2D" customClass="DetailViewController" customModule="MyRepresentative" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="coe-Nm-QQm">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="243" sectionHeaderHeight="22" sectionFooterHeight="22" id="coe-Nm-QQm">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="representative.cell.id" textLabel="mb5-L0-rUc" style="IBUITableViewCellStyleDefault" id="EaL-8L-6yy">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="representative.cell.id" rowHeight="212" id="EaL-8L-6yy" customClass="RepresentativeCell" customModule="MyRepresentative" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EaL-8L-6yy" id="U5C-bO-oxH">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mb5-L0-rUc">
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tPb-U5-zbk">
+                                            <rect key="frame" x="8" y="8" width="584" height="226"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FirstName LastName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eU6-Kz-jII" userLabel="name">
+                                                    <rect key="frame" x="15" y="15" width="554" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R, UT, District 4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnj-lH-ApV" userLabel="partyStateDistrict">
+                                                    <rect key="frame" x="15" y="51" width="554" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(123) 456-7890" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xtn-zE-2p4" userLabel="phoneNumber">
+                                                    <rect key="frame" x="15" y="87" width="554" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="123 nowhere street some building" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMO-uB-269" userLabel="address">
+                                                    <rect key="frame" x="15" y="123" width="554" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" text="http://someRepresentativeName.house.gov" translatesAutoresizingMaskIntoConstraints="NO" id="KNO-6B-UU8" userLabel="webAddress">
+                                                    <rect key="frame" x="10" y="149" width="559" height="42"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                                                </textView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="eU6-Kz-jII" secondAttribute="trailing" constant="15" id="3Wn-FX-N39"/>
+                                                <constraint firstItem="jnj-lH-ApV" firstAttribute="top" secondItem="eU6-Kz-jII" secondAttribute="bottom" constant="15" id="3fy-Bs-NmY"/>
+                                                <constraint firstItem="xtn-zE-2p4" firstAttribute="leading" secondItem="tPb-U5-zbk" secondAttribute="leading" constant="15" id="BJi-vg-Ywf"/>
+                                                <constraint firstAttribute="trailing" secondItem="KNO-6B-UU8" secondAttribute="trailing" constant="15" id="CgT-ag-TAU"/>
+                                                <constraint firstItem="NMO-uB-269" firstAttribute="top" secondItem="xtn-zE-2p4" secondAttribute="bottom" constant="15" id="E5P-ue-4hZ"/>
+                                                <constraint firstItem="eU6-Kz-jII" firstAttribute="top" secondItem="tPb-U5-zbk" secondAttribute="top" constant="15" id="Gyg-Lh-zaP"/>
+                                                <constraint firstAttribute="trailing" secondItem="NMO-uB-269" secondAttribute="trailing" constant="15" id="NdV-cd-Pyc"/>
+                                                <constraint firstItem="KNO-6B-UU8" firstAttribute="top" secondItem="NMO-uB-269" secondAttribute="bottom" constant="5" id="NrQ-hO-drT"/>
+                                                <constraint firstItem="NMO-uB-269" firstAttribute="leading" secondItem="tPb-U5-zbk" secondAttribute="leading" constant="15" id="U5t-iJ-dj5"/>
+                                                <constraint firstItem="jnj-lH-ApV" firstAttribute="leading" secondItem="tPb-U5-zbk" secondAttribute="leading" constant="15" id="dKj-Zs-7pz"/>
+                                                <constraint firstAttribute="bottom" secondItem="KNO-6B-UU8" secondAttribute="bottom" constant="15" id="hfx-8p-Ht5"/>
+                                                <constraint firstAttribute="trailing" secondItem="xtn-zE-2p4" secondAttribute="trailing" constant="15" id="khM-0F-u84"/>
+                                                <constraint firstItem="KNO-6B-UU8" firstAttribute="leading" secondItem="tPb-U5-zbk" secondAttribute="leading" constant="10" id="knG-aQ-2FU"/>
+                                                <constraint firstItem="eU6-Kz-jII" firstAttribute="leading" secondItem="tPb-U5-zbk" secondAttribute="leading" constant="15" id="mch-wZ-Jd7"/>
+                                                <constraint firstAttribute="trailing" secondItem="jnj-lH-ApV" secondAttribute="trailing" constant="15" id="s8d-IR-XEe"/>
+                                                <constraint firstItem="xtn-zE-2p4" firstAttribute="top" secondItem="jnj-lH-ApV" secondAttribute="bottom" constant="15" id="z9h-Bn-3CW"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="tPb-U5-zbk" firstAttribute="top" secondItem="U5C-bO-oxH" secondAttribute="topMargin" id="Bbf-tm-fG7"/>
+                                        <constraint firstItem="tPb-U5-zbk" firstAttribute="trailing" secondItem="U5C-bO-oxH" secondAttribute="trailingMargin" id="Qoo-QC-v40"/>
+                                        <constraint firstItem="tPb-U5-zbk" firstAttribute="leading" secondItem="U5C-bO-oxH" secondAttribute="leadingMargin" id="ZQw-bI-aHT"/>
+                                        <constraint firstItem="tPb-U5-zbk" firstAttribute="bottom" secondItem="U5C-bO-oxH" secondAttribute="bottomMargin" id="uUM-8T-eA0"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="address" destination="NMO-uB-269" id="Zt5-sJ-TyT"/>
+                                    <outlet property="name" destination="eU6-Kz-jII" id="708-5c-Kkj"/>
+                                    <outlet property="partyStateDistrict" destination="jnj-lH-ApV" id="GSq-kj-rVR"/>
+                                    <outlet property="phoneNumber" destination="xtn-zE-2p4" id="jWf-nh-8rr"/>
+                                    <outlet property="webAddress" destination="KNO-6B-UU8" id="FKg-9G-m6J"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
