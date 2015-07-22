@@ -18,8 +18,6 @@ class RepresentativeListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.allowsSelection = false
-        
         queryRepresentatives()
     }
     
@@ -191,5 +189,41 @@ class RepresentativeListViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Two sections: Senators and House of Representatives
         return 2
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        println("didSelect")
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destinationViewController = segue.destinationViewController as? RepresentativeDetailViewController
+        {
+            if let sender = sender as? UITableViewCell
+            {
+                if let repIndexPath = tableView.indexPathForCell(sender)
+                {
+                    if repIndexPath.section == 0
+                    {
+                        destinationViewController.representative = senatorArr[repIndexPath.row]
+                    }
+                    else
+                    {
+                        destinationViewController.representative = representativeArr[repIndexPath.row]
+                    }
+                }
+                else
+                {
+                    fatalError("Failed to get indexPathForCell")
+                }
+            }
+            else
+            {
+                fatalError("prepareForSegue in RepresentativeListViewController expects sender to be a UITableViewCell but it isn't")
+            }
+        }
+        else
+        {
+            fatalError("Wrong destination view controller type, expected RepresentativeDetailViewController, cast failed")
+        }
     }
 }

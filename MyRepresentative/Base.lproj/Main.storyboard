@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="l8A-ax-1Ph">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Df1-Yp-QSV">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Search For Representatives-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MyRepresentative" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Search For Representatives" id="BYZ-38-t0r" customClass="ViewController" customModule="MyRepresentative" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -25,7 +25,7 @@
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="tka-Qn-YPG"/>
-                                    <segue destination="C9q-9s-J2D" kind="show" id="1Qe-7A-HD6"/>
+                                    <segue destination="DKc-Al-MtG" kind="show" identifier="show.listvc.id" id="O8x-Ss-cRI"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ZipCode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBs-fG-fT3">
@@ -43,36 +43,36 @@
                             <constraint firstItem="uYe-BH-2Vi" firstAttribute="top" secondItem="kBs-fG-fT3" secondAttribute="bottom" constant="8" symbolic="YES" id="xhW-wf-HX0"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="0e3-6T-YXM"/>
+                    <navigationItem key="navigationItem" title="Search For Representatives" id="0e3-6T-YXM"/>
                     <connections>
                         <outlet property="zipCodeTextField" destination="uYe-BH-2Vi" id="i23-Af-pwK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="881" y="998"/>
+            <point key="canvasLocation" x="2505" y="998"/>
         </scene>
         <!--Representative List View Controller-->
-        <scene sceneID="V0e-95-Lp1">
+        <scene sceneID="V4j-O5-tO6">
             <objects>
-                <tableViewController id="C9q-9s-J2D" customClass="RepresentativeListViewController" customModule="MyRepresentative" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" id="coe-Nm-QQm">
+                <tableViewController id="DKc-Al-MtG" customClass="RepresentativeListViewController" customModule="MyRepresentative" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Vy2-jG-bKJ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="representative.cell.id" textLabel="5Sa-HK-Pir" detailTextLabel="1qp-xm-Oec" rowHeight="65" style="IBUITableViewCellStyleValue1" id="EaL-8L-6yy" customClass="RepresentativeCell" customModule="MyRepresentative" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="representative.cell.id" textLabel="E7B-1P-xR5" detailTextLabel="ECF-AM-0sj" style="IBUITableViewCellStyleValue1" id="lyu-pu-Ixo">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EaL-8L-6yy" id="U5C-bO-oxH">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lyu-pu-Ixo" id="eGE-Xx-D1b">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5Sa-HK-Pir">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E7B-1P-xR5">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1qp-xm-Oec">
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ECF-AM-0sj">
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
@@ -80,35 +80,56 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="p6G-2r-zNu" kind="show" identifier="segue.todetailvc.id" id="ghL-Nm-L12"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="C9q-9s-J2D" id="pfh-3f-dFX"/>
-                            <outlet property="delegate" destination="C9q-9s-J2D" id="cpP-wT-Qux"/>
+                            <outlet property="dataSource" destination="DKc-Al-MtG" id="7Cj-XF-HhH"/>
+                            <outlet property="delegate" destination="DKc-Al-MtG" id="JXo-lj-hw1"/>
                         </connections>
                     </tableView>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fmg-rF-hqi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vxn-bD-fnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1584" y="998"/>
+            <point key="canvasLocation" x="3206" y="998"/>
+        </scene>
+        <!--Representative Detail View Controller-->
+        <scene sceneID="rW9-X7-8tK">
+            <objects>
+                <viewController id="p6G-2r-zNu" customClass="RepresentativeDetailViewController" customModule="MyRepresentative" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="K3f-Fp-FV1"/>
+                        <viewControllerLayoutGuide type="bottom" id="3Zk-n0-2q2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6Hh-0S-6NP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F7m-dM-CTs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3876" y="998"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="JSJ-hW-PR5">
+        <scene sceneID="Jr1-fR-tHS">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="l8A-ax-1Ph" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Df1-Yp-QSV" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="qhx-tY-vXt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oNp-WP-Vb2">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="4xG-l5-JwY"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="rQg-oL-qhB"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mRm-Tb-U38" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fjb-BW-a5X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="165" y="998"/>
+            <point key="canvasLocation" x="1693" y="998"/>
         </scene>
     </scenes>
 </document>

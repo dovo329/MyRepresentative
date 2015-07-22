@@ -34,7 +34,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         }
         else
         {
-            fatalError("Wrong destination view controller type, expected DetailViewController, cast failed")
+            fatalError("Wrong destination view controller type, expected RepresentativeListViewController, cast failed")
         }
     }
 }
