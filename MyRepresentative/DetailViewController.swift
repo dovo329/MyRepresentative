@@ -9,15 +9,17 @@
 import UIKit
 
 class DetailViewController: UITableViewController {
-
+    
     var zipCode : String = ""
+    var repArr = [Representative]()
+    let cellId = "representative.cell.id"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
@@ -28,12 +30,12 @@ class DetailViewController: UITableViewController {
     func queryRepresentatives()
     {
         println("my zipCode is \(zipCode)")
-
+        
         // by your zip code
         
         // reps by last name
         //http://whoismyrepresentative.com/getall_reps_byname.php?name=smith
-
+        
         // by user's current location (to get zip code)
         
         // reps by state
@@ -50,55 +52,55 @@ class DetailViewController: UITableViewController {
         {
             let session = NSURLSession.sharedSession()
             let dataTask = session.dataTaskWithURL(nsUrl, completionHandler:
-                { (data, response, error) -> Void in
-                    
-                    /*if let resultDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
-                    {
-                        println("\(resultDictionary)")
-                    }
-                    else
-                    {
-                        fatalError("json serialization failed")
-                    }*/
-                    
-                    if let serverResponse = NSString(data: data, encoding: NSASCIIStringEncoding)
-                    {
-                        println("server Response = \(serverResponse)")
-                    }
+                {(data, response, error) -> Void in
                     
                     println("error: \(error)")
                     if error == nil
                     {
-                        /*
-                        var jsonSerializationError = NSErrorPointer()
-                        //let resultDictionary = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: jsonSerializationError) as? NSDictionary
-                        let resultDictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error: jsonSerializationError)
-                        println("error: \(jsonSerializationError)")
-                        println("dict: \(resultDictionary)")
-                        */
-                        
                         var jsonError:NSError? = nil
-                        if let jsonObject: AnyObject = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.AllowFragments, error:&jsonError) {
-                            if let dict = jsonObject as? NSDictionary {
-                                println(dict)
-                            } else {
-                                println("not a dictionary")
+                        let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error:&jsonError)
+                        
+                        if let jsonObject = jsonObject as? [String:AnyObject]
+                        {
+                            if let dictArr = jsonObject["results"] as? NSArray
+                            {
+                                // update UI is on the main thread
+                                dispatch_async(
+                                    dispatch_get_main_queue(),
+                                    { () -> Void in
+                                        //println("dictArr=\(dictArr)")
+                                        self.repArr = [Representative]()
+                                        for dict in dictArr
+                                        {
+                                            if let dict = dict as? NSDictionary
+                                            {
+                                                //println("dict=\(dict)")
+                                                let rep = Representative(dict: dict)
+                                                self.repArr.append(rep)
+                                            }
+                                        }
+                                        self.tableView.reloadData()
+                                    }
+                                )
                             }
-                        } else {
-                            println("Could not parse JSON: \(jsonError!)")
                         }
                     }
-                    else
-                    {
-                        fatalError("Got an error back")
-                    }
-                }
-            )
+            })
             dataTask.resume()
         }
         else
         {
             fatalError("failed to create nsUrl from urlString \(urlString)")
         }
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("representative.cell.id", forIndexPath: indexPath) as! UITableViewCell
+        cell.textLabel?.text = self.repArr[indexPath.row].name
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return repArr.count
     }
 }
