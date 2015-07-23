@@ -18,7 +18,7 @@ class RepresentativeListViewController: UITableViewController {
     var representativeArr = [Representative]()
     let cellId = "representative.cell.id"
     var timeoutTimer : NSTimer!
-    let kQueryTimeoutInSeconds : NSTimeInterval = 1.0
+    let kQueryTimeoutInSeconds : NSTimeInterval = 4.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
