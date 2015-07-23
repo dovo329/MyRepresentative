@@ -16,13 +16,13 @@ class RepresentativeListViewController: UITableViewController {
     var searchBy : Int = 0
     var senatorArr = [Representative]()
     var representativeArr = [Representative]()
-    let cellId = "representative.cell.id"
+    let kCellReuseId = "representative.cell.id"
     var timeoutTimer : NSTimer!
     let kQueryTimeoutInSeconds : NSTimeInterval = 4.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         queryRepresentatives()
     }
     
@@ -112,7 +112,9 @@ class RepresentativeListViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("representative.cell.id", forIndexPath: indexPath) as! UITableViewCell
+        
+        let cell =
+        tableView.dequeueReusableCellWithIdentifier(kCellReuseId, forIndexPath: indexPath) as! UITableViewCell
         
         let rep : Representative!
         if indexPath.section == 0

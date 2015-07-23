@@ -22,6 +22,13 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     
     let stateList = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
     
+    enum SegueId: String
+    {
+        case ZipCode = "search.by.zip.code.segue"
+        case LastName = "search.by.last.name.segue"
+        case State = "search.by.state.segue"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -29,7 +36,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
             endColor: UIColor(red: 0.9, green: 1.0, blue: 1.0, alpha: 1.0))
         
-            searchByStateButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
+        searchByStateButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
         searchByStateButton.backgroundColor = UIColor.whiteColor()
         searchByStateButton.layer.cornerRadius = 5.0
         searchByStateButton.layer.shadowOffset = CGSizeMake(1.0, 1.0)
@@ -45,7 +52,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     
     /*func outsideTap(sender: UITapGestureRecognizer!)
     {
-        view.endEditing(true)
+    view.endEditing(true)
     }*/
     
     override func viewWillAppear(animated: Bool) {
@@ -53,7 +60,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         lastNameTextField.text = ""
         view.endEditing(true)
     }
-
+    
     override func viewDidLayoutSubviews() {
         bgGradLayer.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)
     }
@@ -75,87 +82,65 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         //println("should return")
         textField.resignFirstResponder()
         
-        let destinationViewController = RepresentativeListViewController()
-                
         /*if let serverResponse = NSString(data: data, encoding: NSAS\
-            CIIStringEncoding)
+        CIIStringEncoding)
         {
-            println("server Response = \(serverResponse)")
+        println("server Response = \(serverResponse)")
         }*/
-
+        
         // check for invalid input and present alert to user to correct it instead of feeding the list view controller bad search input
-        if zipCodeTextField.text != ""
-        {
-            if zipCodeTextField.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) < 5
-            {
-                let alertController = UIAlertController(title: "Zip Code Must Be At Least 5 Digits", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-                let dismissOption = UIAlertAction(title: "Got It", style: UIAlertActionStyle.Default)
-                { _ -> Void in
-                    
-                }
-                alertController.addAction(dismissOption)
-                presentViewController(alertController, animated: true, completion: nil)
-            }
-            else if containsLetters(zipCodeTextField.text)
-            {
-                let alertController = UIAlertController(title: "Zip Codes Are Numbers Only", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-                let dismissOption = UIAlertAction(title: "Got It", style: UIAlertActionStyle.Default)
-                    { _ -> Void in
-                        
-                }
-                alertController.addAction(dismissOption)
-                presentViewController(alertController, animated: true, completion: nil)
-            }
-            else
-            {
-                destinationViewController.searchBy = 0
-                destinationViewController.zipCode = zipCodeTextField.text
-                navigationController?.pushViewController(destinationViewController, animated: true)
-            }
-        }
-        else if lastNameTextField.text != ""
-        {
-            destinationViewController.searchBy = 1
-            destinationViewController.lastName = lastNameTextField.text
-            navigationController?.pushViewController(destinationViewController, animated: true)
-        }
-        else // no valid textfields so just dismiss the keyboard and don't present the list view controller
-        {
-            
-        }
         
         return true
     }
     
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        
+        if let id = identifier {
+            if id == SegueId.ZipCode.rawValue {
+                if zipCodeTextField.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) < 5 {
+                    let alertController = UIAlertController(title: "Zip Code Must Be At Least 5 Digits", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                    let dismissOption = UIAlertAction(title: "Got It", style: UIAlertActionStyle.Default)
+                        { _ -> Void in }
+                    alertController.addAction(dismissOption)
+                    presentViewController(alertController, animated: true, completion: nil)
+                    return false
+                } else if containsLetters(zipCodeTextField.text) {
+                    let alertController = UIAlertController(title: "Zip Codes Are Numbers Only", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                    let dismissOption = UIAlertAction(title: "Got It", style: UIAlertActionStyle.Default)
+                        { _ -> Void in }
+                    alertController.addAction(dismissOption)
+                    presentViewController(alertController, animated: true, completion: nil)
+                    zipCodeTextField.text = ""
+                    return false
+                } else {
+                    return true
+                }
+            } else if id==SegueId.LastName.rawValue {
+                return lastNameTextField.text != ""
+            } else if id==SegueId.State.rawValue {
+                // will always have valid data from the picker
+                return true
+            } else {
+                fatalError("Invalid segue id!")
+                return false
+            }
+        } else {
+            fatalError("nil segue id!")
+            return false
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         //println("prepareForSegue")
-        if let destinationViewController = segue.destinationViewController as? RepresentativeListViewController
-        {
-
-            if (sender != nil)
-            {
-                /*if sender!.isKindOfClass(UITextField)
-                    {
-                    if zipCodeTextField.text != ""
-                    {
-                        destinationViewController.searchBy = 0
-                    }
-                    
-                    if lastNameTextField.text != ""
-                    {
-                        destinationViewController.searchBy = 1
-                }
-                }
-                else*/
-                // now
-                if sender!.isKindOfClass(UIButton)
-                {
-                    destinationViewController.searchBy = 2
-                }
-            }
-            else
-            {
-                fatalError("sender is nil in segue in search view controller")
+        if let destinationViewController = segue.destinationViewController as? RepresentativeListViewController {
+            if segue.identifier == SegueId.ZipCode.rawValue {
+            destinationViewController.searchBy = 0
+        } else if segue.identifier == SegueId.LastName.rawValue {
+            destinationViewController.searchBy = 1
+        } else if segue.identifier == SegueId.State.rawValue {
+            destinationViewController.searchBy = 2
+        } else {
+            fatalError("Invalid segue.identifier")
             }
             
             destinationViewController.zipCode = zipCodeTextField.text
@@ -163,9 +148,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
             let pickerIndex = statePicker.selectedRowInComponent(0)
             destinationViewController.state = stateList[pickerIndex]
             
-        }
-        else
-        {
+        } else {
             fatalError("Wrong destination view controller type, expected RepresentativeListViewController, cast failed")
         }
     }
@@ -191,7 +174,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         if let test = range {
             return true
         }
-        else {
+            else {
             return false
         }
     }

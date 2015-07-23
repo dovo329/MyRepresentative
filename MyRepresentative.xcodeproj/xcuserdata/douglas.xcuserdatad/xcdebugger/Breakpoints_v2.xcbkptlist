@@ -4,22 +4,6 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyRepresentative/SearchViewController.swift"
-            timestampString = "459376458.783093"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "SearchViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
@@ -36,7 +20,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyRepresentative/RepresentativeListViewController.swift"
-            timestampString = "459367603.956943"
+            timestampString = "459382356.182529"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
+            landmarkName = "getSenators(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyRepresentative/RepresentativeListViewController.swift"
+            timestampString = "459382356.182529"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "243"
@@ -52,12 +52,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyRepresentative/RepresentativeListViewController.swift"
-            timestampString = "459367603.956943"
+            timestampString = "459382356.182529"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
-            landmarkName = "getSenators(_:)"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "doQueryWithUrlString(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -67,14 +67,46 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MyRepresentative/RepresentativeListViewController.swift"
-            timestampString = "459367603.956943"
+            filePath = "MyRepresentative/SearchViewController.swift"
+            timestampString = "459382298.192361"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
-            landmarkName = "doQueryWithUrlString(_:)"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "shouldPerformSegueWithIdentifier(_:sender:)"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyRepresentative.SearchViewController.textFieldShouldReturn (MyRepresentative.SearchViewController)(ObjectiveC.UITextField) -&gt; Swift.Bool"
+                  moduleName = "MyRepresentative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/douglas/InterviewCode/MyRepresentative/MyRepresentative/SearchViewController.swift"
+                  timestampString = "459381555.604051"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "2431">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyRepresentative.SearchViewController.(textFieldShouldReturn (MyRepresentative.SearchViewController) -&gt; (ObjectiveC.UITextField) -&gt; Swift.Bool).(closure #1)"
+                  moduleName = "MyRepresentative"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/douglas/InterviewCode/MyRepresentative/MyRepresentative/SearchViewController.swift"
+                  timestampString = "459381555.604461"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "99"
+                  endingLineNumber = "99"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

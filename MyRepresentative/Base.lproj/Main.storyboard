@@ -29,6 +29,7 @@
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="tka-Qn-YPG"/>
+                                    <segue destination="DKc-Al-MtG" kind="show" identifier="search.by.zip.code.segue" id="tWu-yy-hJN"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Search By LastName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZ2-IB-sPu">
@@ -43,6 +44,7 @@
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="qT5-8a-buq"/>
+                                    <segue destination="DKc-Al-MtG" kind="show" identifier="search.by.last.name.segue" id="dtw-Kc-WGd"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ox3-EY-4Ii" userLabel="Search By State">
@@ -55,7 +57,7 @@
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="DKc-Al-MtG" kind="show" identifier="state.segue.to.list" id="yrD-VF-WM6"/>
+                                    <segue destination="DKc-Al-MtG" kind="show" identifier="search.by.state.segue" id="yrD-VF-WM6"/>
                                 </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YYT-AY-zTk">
@@ -209,4 +211,7 @@
             <point key="canvasLocation" x="1693" y="998"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="tWu-yy-hJN"/>
+    </inferredMetricsTieBreakers>
 </document>
