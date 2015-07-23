@@ -64,6 +64,8 @@ class RepresentativeDetailViewController: UIViewController {
             webLink.layer.shadowOffset = CGSizeMake(5.0, 5.0)
             webLink.layer.shadowColor = UIColor.blackColor().CGColor
             webLink.layer.shadowOpacity = 0.5
+            webLink.layer.borderWidth = 1.0
+            webLink.layer.borderColor = UIColor.blackColor().CGColor
             
             webLink.addTarget(self, action: "openWebLink:", forControlEvents: UIControlEvents.TouchUpInside)
             

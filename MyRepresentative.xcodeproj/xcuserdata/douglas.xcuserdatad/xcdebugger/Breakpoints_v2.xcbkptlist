@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyRepresentative/SearchViewController.swift"
-            timestampString = "459362280.950832"
+            timestampString = "459364802.22477"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "SearchViewController"
             landmarkType = "3">
          </BreakpointContent>

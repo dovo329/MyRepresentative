@@ -51,7 +51,7 @@ class RepresentativeListViewController: UITableViewController {
         {
             if zipCode == ""
             {
-                fatalError("attemted to search for empty zip code string")
+                fatalError("attempted to search for empty zip code string")
             }
             let urlString = String(format:"http://whoismyrepresentative.com/getall_mems.php?zip=%@&output=json", zipCode)
             doQueryWithUrlString(urlString)
@@ -60,7 +60,7 @@ class RepresentativeListViewController: UITableViewController {
         {
             if lastName == ""
             {
-                fatalError("attemted to search for empty last name string")
+                fatalError("attempted to search for empty last name string")
             }
             let senatorUrlString = String(format:"http://whoismyrepresentative.com/getall_sens_byname.php?name=%@&output=json", lastName)
             doQueryWithUrlString(senatorUrlString)
@@ -72,7 +72,7 @@ class RepresentativeListViewController: UITableViewController {
         {
             if state == ""
             {
-                fatalError("attemted to search for empty state string")
+                fatalError("attempted to search for empty state string")
             }
             let senatorUrlString = String(format:"http://whoismyrepresentative.com/getall_sens_bystate.php?state=%@&output=json", state)
             doQueryWithUrlString(senatorUrlString)

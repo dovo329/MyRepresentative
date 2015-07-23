@@ -83,10 +83,10 @@
 		A533C4951B5F0DBC0009155E /* MyRepresentative */ = {
 			isa = PBXGroup;
 			children = (
+				A533C49A1B5F0DBC0009155E /* SearchViewController.swift */,
+				A57608D41B5FF22400F80AB5 /* Representative.swift */,
 				A57608D31B5FF22400F80AB5 /* RepresentativeListViewController.swift */,
 				A5C4C8F51B60570A000785B5 /* RepresentativeDetailViewController.swift */,
-				A57608D41B5FF22400F80AB5 /* Representative.swift */,
-				A533C49A1B5F0DBC0009155E /* SearchViewController.swift */,
 				A533C4981B5F0DBC0009155E /* AppDelegate.swift */,
 				A533C49C1B5F0DBC0009155E /* Main.storyboard */,
 				A533C49F1B5F0DBC0009155E /* Images.xcassets */,

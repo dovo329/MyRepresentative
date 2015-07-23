@@ -16,6 +16,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     
     @IBOutlet weak var lastNameTextField: UITextField!
     
+    @IBOutlet weak var searchByStateButton: UIButton!
+    
     var bgGradLayer = CAGradientLayer()
     
     let stateList = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
@@ -26,11 +28,30 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         //navigationController?.navigationBar.tintColor = UIColor.orangeColor()
         doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
             endColor: UIColor(red: 0.9, green: 1.0, blue: 1.0, alpha: 1.0))
+        
+            searchByStateButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
+        searchByStateButton.backgroundColor = UIColor.whiteColor()
+        searchByStateButton.layer.cornerRadius = 5.0
+        searchByStateButton.layer.shadowOffset = CGSizeMake(5.0, 5.0)
+        searchByStateButton.layer.shadowColor = UIColor.blackColor().CGColor
+        searchByStateButton.layer.shadowOpacity = 0.5
+        searchByStateButton.layer.borderWidth = 1.0
+        searchByStateButton.layer.borderColor = UIColor.blackColor().CGColor
+        
+        // dismiss keyboard if user taps outside of keyboard area
+        //let tap = UITapGestureRecognizer(target: self, action: "outsideTap:")
+        //view.addGestureRecognizer(tap)
     }
+    
+    /*func outsideTap(sender: UITapGestureRecognizer!)
+    {
+        view.endEditing(true)
+    }*/
     
     override func viewWillAppear(animated: Bool) {
         zipCodeTextField.text = ""
         lastNameTextField.text = ""
+        view.endEditing(true)
     }
 
     override func viewDidLayoutSubviews() {

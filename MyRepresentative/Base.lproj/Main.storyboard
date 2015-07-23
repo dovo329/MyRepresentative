@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Df1-Yp-QSV">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <scenes>
@@ -48,6 +49,9 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ox3-EY-4Ii" userLabel="Search By State">
                                 <rect key="frame" x="219" y="347" width="162" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="162" id="9A2-L9-vzI"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Search By State">
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -115,6 +119,7 @@
                     <navigationItem key="navigationItem" title="Search For Representatives" id="0e3-6T-YXM"/>
                     <connections>
                         <outlet property="lastNameTextField" destination="Fnb-jg-F0L" id="TdL-vd-XSG"/>
+                        <outlet property="searchByStateButton" destination="Ox3-EY-4Ii" id="mxj-i2-Sy8"/>
                         <outlet property="statePicker" destination="YYT-AY-zTk" id="rTQ-F7-fYQ"/>
                         <outlet property="zipCodeTextField" destination="uYe-BH-2Vi" id="i23-Af-pwK"/>
                     </connections>
