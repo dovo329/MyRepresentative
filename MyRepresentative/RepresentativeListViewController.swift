@@ -11,6 +11,8 @@ import UIKit
 class RepresentativeListViewController: UITableViewController {
     
     var zipCode : String = ""
+    var lastName : String = ""
+    var searchBy : Int = 0
     var senatorArr = [Representative]()
     var representativeArr = [Representative]()
     let cellId = "representative.cell.id"
@@ -24,6 +26,8 @@ class RepresentativeListViewController: UITableViewController {
     func queryRepresentatives()
     {
         println("my zipCode is \(zipCode)")
+        println("my lastName is \(lastName)")
+        println("my searchBy is \(searchBy)")
         
         // by your zip code
         
@@ -41,7 +45,17 @@ class RepresentativeListViewController: UITableViewController {
         // sens by state
         // http://whoismyrepresentative.com/getall_sens_bystate.php?state=ME
         
-        let urlString = String(format:"http://whoismyrepresentative.com/getall_mems.php?zip=%@&output=json", zipCode)
+        // urlString guaranteed to have a value after this if statements
+        var urlString : String!
+        if searchBy == 0
+        {
+            urlString = String(format:"http://whoismyrepresentative.com/getall_mems.php?zip=%@&output=json", zipCode)
+        }
+        else
+        {
+            urlString = String(format:"http://whoismyrepresentative.com/getall_sens_byname.php?name=%@&output=json", lastName)
+        }
+        
         if let nsUrl = NSURL(string: urlString)
         {
             let session = NSURLSession.sharedSession()

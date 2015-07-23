@@ -8,9 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var zipCodeTextField: UITextField!
+    
+    @IBOutlet weak var statePicker: UIPickerView!
+    
+    @IBOutlet weak var lastNameTextField: UITextField!
+    
     
     var bgGradLayer = CAGradientLayer()
     
@@ -20,6 +25,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         //navigationController?.navigationBar.tintColor = UIColor.orangeColor()
         doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
             endColor: UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0))
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        zipCodeTextField.text = ""
+        lastNameTextField.text = ""
     }
 
     override func viewDidLayoutSubviews() {
@@ -49,12 +59,38 @@ class ViewController: UIViewController, UITextFieldDelegate {
         //println("prepareForSegue")
         if let destinationViewController = segue.destinationViewController as? RepresentativeListViewController
         {
+            if zipCodeTextField.text != ""
+            {
+                destinationViewController.searchBy = 0
+            }
+            
+            if lastNameTextField.text != ""
+            {
+                destinationViewController.searchBy = 1
+            }
+            
             destinationViewController.zipCode = zipCodeTextField.text
+            destinationViewController.lastName = lastNameTextField.text
+            
         }
         else
         {
             fatalError("Wrong destination view controller type, expected RepresentativeListViewController, cast failed")
         }
+    }
+    
+    let stateList = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
+    
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return stateList[row]
+    }
+    
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return stateList.count
     }
 }
 
