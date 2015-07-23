@@ -11,6 +11,7 @@ import UIKit
 class RepresentativeDetailViewController: UIViewController {
 
     var representative : Representative?
+    var bgGradLayer = CAGradientLayer()
     var scrollView = UIScrollView()
     var contentView = UIView()
     let kLabelVertSpacing : CGFloat = 15.0
@@ -23,7 +24,6 @@ class RepresentativeDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.orangeColor()
         if let rep = representative
         {
             rep.print()
@@ -36,6 +36,22 @@ class RepresentativeDetailViewController: UIViewController {
             else
             {
                 partyStateDistrictLabel.text = String(format: "%@, %@, %@", rep.party!, rep.state!, rep.district!)
+            }
+            
+            if rep.party == "D"
+            {
+                doBackgroundGradientWithColors(UIColor(red: 0.5, green: 0.5, blue: 1.0, alpha: 1.0),
+                    endColor: UIColor(red: 0.25, green: 0.25, blue: 0.5, alpha: 1.0))
+            }
+            else if rep.party == "R"
+            {
+                doBackgroundGradientWithColors(UIColor(red: 1.0, green: 0.5, blue: 0.5, alpha: 1.0),
+                    endColor: UIColor(red: 0.5, green: 0.25, blue: 0.25, alpha: 1.0))
+            }
+            else
+            {
+                doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+                    endColor: UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0))
             }
 
             webLink.setTitle(rep.link, forState: UIControlState.Normal)
@@ -55,6 +71,23 @@ class RepresentativeDetailViewController: UIViewController {
         {
             fatalError("Representative in Detail View Controller is nil")
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        bgGradLayer.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)
+    }
+    
+    func doBackgroundGradientWithColors(startColor: UIColor, endColor: UIColor)
+    {
+        bgGradLayer.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)
+        bgGradLayer.colors = [
+            startColor.CGColor,
+            endColor.CGColor
+        ]
+        bgGradLayer.startPoint = CGPoint(x:0.0, y:0.0)
+        bgGradLayer.endPoint = CGPoint(x:0.0, y:1.0)
+        bgGradLayer.shouldRasterize = true
+        view.layer.addSublayer(bgGradLayer)
     }
     
     func autoLayoutConstraints()
