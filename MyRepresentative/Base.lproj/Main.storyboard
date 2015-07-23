@@ -29,7 +29,6 @@
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="tka-Qn-YPG"/>
-                                    <segue destination="DKc-Al-MtG" kind="show" identifier="zipCode.segue.to.list" id="O8x-Ss-cRI"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Search By LastName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZ2-IB-sPu">
@@ -44,7 +43,6 @@
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="qT5-8a-buq"/>
-                                    <segue destination="DKc-Al-MtG" kind="show" identifier="lastname.segue.to.list" id="484-Dw-5he"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ox3-EY-4Ii" userLabel="Search By State">
@@ -211,7 +209,4 @@
             <point key="canvasLocation" x="1693" y="998"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="O8x-Ss-cRI"/>
-    </inferredMetricsTieBreakers>
 </document>

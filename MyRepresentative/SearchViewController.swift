@@ -74,6 +74,48 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         //println("should return")
         textField.resignFirstResponder()
+        
+        let destinationViewController = RepresentativeListViewController()
+                
+        /*if let serverResponse = NSString(data: data, encoding: NSAS\
+            CIIStringEncoding)
+        {
+            println("server Response = \(serverResponse)")
+        }*/
+
+        // check for invalid input and present alert to user to correct it instead of feeding the list view controller bad search input
+        if zipCodeTextField.text != ""
+        {
+            if zipCodeTextField.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) < 5
+            {
+               println("invalid zip code")
+                
+                let alertController = UIAlertController(title: "Zip Code Must Be At Least 5 Digits", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                let dismissOption = UIAlertAction(title: "Got It", style: UIAlertActionStyle.Default)
+                { _ -> Void in
+                    
+                }
+                alertController.addAction(dismissOption)
+                presentViewController(alertController, animated: true, completion: nil)
+            }
+            else
+            {
+                destinationViewController.searchBy = 0
+                destinationViewController.zipCode = zipCodeTextField.text
+                navigationController?.pushViewController(destinationViewController, animated: true)
+            }
+        }
+        else if lastNameTextField.text != ""
+        {
+            destinationViewController.searchBy = 1
+            destinationViewController.lastName = lastNameTextField.text
+            navigationController?.pushViewController(destinationViewController, animated: true)
+        }
+        else // no valid textfields so just dismiss the keyboard and don't present the list view controller
+        {
+            
+        }
+        
         return true
     }
     
@@ -84,7 +126,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
 
             if (sender != nil)
             {
-                if sender!.isKindOfClass(UITextField)
+                /*if sender!.isKindOfClass(UITextField)
                     {
                     if zipCodeTextField.text != ""
                     {
@@ -94,12 +136,18 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
                     if lastNameTextField.text != ""
                     {
                         destinationViewController.searchBy = 1
-                    }
                 }
-                else if sender!.isKindOfClass(UIButton)
+                }
+                else*/
+                // now
+                if sender!.isKindOfClass(UIButton)
                 {
                     destinationViewController.searchBy = 2
                 }
+            }
+            else
+            {
+                fatalError("sender is nil in segue in search view controller")
             }
             
             destinationViewController.zipCode = zipCodeTextField.text
