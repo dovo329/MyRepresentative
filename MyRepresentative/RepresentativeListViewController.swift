@@ -17,11 +17,33 @@ class RepresentativeListViewController: UITableViewController {
     var senatorArr = [Representative]()
     var representativeArr = [Representative]()
     let cellId = "representative.cell.id"
+    var timeoutTimer : NSTimer!
+    let kQueryTimeoutInSeconds : NSTimeInterval = 1.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         queryRepresentatives()
+    }
+    
+    func searchTimedOut(sender: NSTimer!)
+    {
+        sender.invalidate()
+        
+        let alertController = UIAlertController(title: "Search Timed Out", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
+        { _ -> Void in
+            self.queryRepresentatives()
+        }
+        
+        let giveUpOption = UIAlertAction(title: "Give Up", style: UIAlertActionStyle.Default)
+        { _ -> Void in
+            
+        }
+        alertController.addAction(retryOption)
+        alertController.addAction(giveUpOption)
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     func queryRepresentatives()
@@ -31,6 +53,7 @@ class RepresentativeListViewController: UITableViewController {
         println("my state is \(state)")
         println("my searchBy is \(searchBy)")
         
+        title = "Searching..."
         // by your zip code
         
         // reps by last name
@@ -85,6 +108,7 @@ class RepresentativeListViewController: UITableViewController {
             fatalError("this search type not implemented")
         }
         
+        timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(kQueryTimeoutInSeconds, target: self, selector: "searchTimedOut:", userInfo: nil, repeats: false)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -135,11 +159,21 @@ class RepresentativeListViewController: UITableViewController {
     
     func doQueryWithUrlString(urlString : String)
     {
+        //self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:kParksQueryTimeoutTimeInSeconds target:self selector:@selector(searchTimedOut:) userInfo:timerArgDict repeats:NO];
+        
+        /*NSMutableDictionary *timerArgDict = [NSMutableDictionary new];
+        [timerArgDict setObject:perkArr forKeyedSubscript:kQueryForPerksPerkArr];
+        NSValue *regionWrap = [NSValue value:(const void *)&region withObjCType:@encode(typeof(MKCoordinateRegion))];
+        [timerArgDict setObject:regionWrap forKeyedSubscript:kQueryForPerksRegion];*/
+        //let timerArgDict = NSMutableDictionary()
+        //timerArgDict.setObject(<#anObject: AnyObject#>, forKey: <#NSCopying#>)
+        
         if let nsUrl = NSURL(string: urlString)
         {
             let session = NSURLSession.sharedSession()
             let dataTask = session.dataTaskWithURL(nsUrl, completionHandler:
                 {(data, response, error) -> Void in
+                    self.timeoutTimer.invalidate()
                     
                     //println("error: \(error)")
                     if error == nil
@@ -156,6 +190,8 @@ class RepresentativeListViewController: UITableViewController {
                                     dispatch_get_main_queue(),
                                     { () -> Void in
                                         //println("dictArr=\(dictArr)")
+                                        self.title = "List"
+                                        
                                         var repArr = [Representative]()
                                         for dict in dictArr
                                         {
