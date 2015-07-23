@@ -31,7 +31,7 @@
                                     <segue destination="DKc-Al-MtG" kind="show" identifier="show.listvc.id" id="O8x-Ss-cRI"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search By LastName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZ2-IB-sPu">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Search By LastName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZ2-IB-sPu">
                                 <rect key="frame" x="219" y="239" width="162" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -46,13 +46,6 @@
                                     <segue destination="DKc-Al-MtG" kind="show" id="484-Dw-5he"/>
                                 </connections>
                             </textField>
-                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YYT-AY-zTk">
-                                <rect key="frame" x="219" y="385" width="162" height="162"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="LRe-hL-Ug4"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="FLs-l4-0HI"/>
-                                </connections>
-                            </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ox3-EY-4Ii" userLabel="Search By State">
                                 <rect key="frame" x="219" y="347" width="162" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -60,6 +53,13 @@
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YYT-AY-zTk">
+                                <rect key="frame" x="219" y="385" width="162" height="162"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="LRe-hL-Ug4"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="FLs-l4-0HI"/>
+                                </connections>
+                            </pickerView>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dS8-E8-IZG" userLabel="spacerView1">
                                 <rect key="frame" x="0.0" y="64" width="600" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -72,10 +72,6 @@
                                 <rect key="frame" x="0.0" y="299" width="600" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="loo-rn-Kxo" userLabel="spacerView4">
-                                <rect key="frame" x="0.0" y="547" width="600" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -84,25 +80,22 @@
                             <constraint firstItem="kBs-fG-fT3" firstAttribute="top" secondItem="dS8-E8-IZG" secondAttribute="bottom" id="B94-KO-JoZ"/>
                             <constraint firstItem="xel-8a-DL4" firstAttribute="height" secondItem="dS8-E8-IZG" secondAttribute="height" id="Dm3-eT-oGG"/>
                             <constraint firstItem="Ox3-EY-4Ii" firstAttribute="width" secondItem="YYT-AY-zTk" secondAttribute="width" id="Ega-z6-ptE"/>
-                            <constraint firstItem="uYe-BH-2Vi" firstAttribute="top" secondItem="kBs-fG-fT3" secondAttribute="bottom" constant="15" id="L5N-4P-1BX"/>
+                            <constraint firstItem="uYe-BH-2Vi" firstAttribute="top" secondItem="kBs-fG-fT3" secondAttribute="bottom" constant="10" id="L5N-4P-1BX"/>
                             <constraint firstItem="Ox3-EY-4Ii" firstAttribute="top" secondItem="L9s-bw-UID" secondAttribute="bottom" id="L8k-Qo-R13"/>
-                            <constraint firstItem="Fnb-jg-F0L" firstAttribute="top" secondItem="vZ2-IB-sPu" secondAttribute="bottom" constant="15" id="NFe-dw-Era"/>
+                            <constraint firstItem="Fnb-jg-F0L" firstAttribute="top" secondItem="vZ2-IB-sPu" secondAttribute="bottom" constant="10" id="NFe-dw-Era"/>
                             <constraint firstItem="YYT-AY-zTk" firstAttribute="top" secondItem="Ox3-EY-4Ii" secondAttribute="bottom" id="Nt9-q7-VdS"/>
                             <constraint firstAttribute="centerX" secondItem="vZ2-IB-sPu" secondAttribute="centerX" id="OAX-vt-d6F"/>
                             <constraint firstItem="xel-8a-DL4" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="OFb-gE-yZ6"/>
                             <constraint firstAttribute="centerX" secondItem="uYe-BH-2Vi" secondAttribute="centerX" id="Ofq-sc-gDi"/>
-                            <constraint firstItem="vZ2-IB-sPu" firstAttribute="top" secondItem="xel-8a-DL4" secondAttribute="bottom" constant="8" id="PW5-g8-H62"/>
-                            <constraint firstItem="loo-rn-Kxo" firstAttribute="height" secondItem="dS8-E8-IZG" secondAttribute="height" id="Vgc-fE-UYn"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="loo-rn-Kxo" secondAttribute="bottom" id="W3Z-r8-edP"/>
+                            <constraint firstItem="vZ2-IB-sPu" firstAttribute="top" secondItem="xel-8a-DL4" secondAttribute="bottom" id="PW5-g8-H62"/>
                             <constraint firstAttribute="centerX" secondItem="kBs-fG-fT3" secondAttribute="centerX" id="axz-zH-B8z"/>
                             <constraint firstItem="L9s-bw-UID" firstAttribute="height" secondItem="dS8-E8-IZG" secondAttribute="height" id="bzz-av-WRQ"/>
-                            <constraint firstItem="loo-rn-Kxo" firstAttribute="top" secondItem="YYT-AY-zTk" secondAttribute="bottom" id="cVw-he-dkw"/>
-                            <constraint firstItem="loo-rn-Kxo" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="fI0-cd-wt1"/>
                             <constraint firstItem="dS8-E8-IZG" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gdX-GT-eCo"/>
                             <constraint firstItem="L9s-bw-UID" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="llL-yx-sgA"/>
                             <constraint firstItem="xel-8a-DL4" firstAttribute="top" secondItem="uYe-BH-2Vi" secondAttribute="bottom" id="oPv-3U-9gZ"/>
                             <constraint firstItem="kBs-fG-fT3" firstAttribute="width" secondItem="uYe-BH-2Vi" secondAttribute="width" id="q9A-v5-I3T"/>
                             <constraint firstAttribute="centerX" secondItem="Ox3-EY-4Ii" secondAttribute="centerX" id="qbc-GI-hJD"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YYT-AY-zTk" secondAttribute="bottom" id="qxW-uS-69e"/>
                             <constraint firstAttribute="centerX" secondItem="YYT-AY-zTk" secondAttribute="centerX" id="ut0-p3-ecj"/>
                             <constraint firstItem="Fnb-jg-F0L" firstAttribute="width" secondItem="vZ2-IB-sPu" secondAttribute="width" id="vwi-iY-R79"/>
                             <constraint firstAttribute="centerX" secondItem="Fnb-jg-F0L" secondAttribute="centerX" id="wZ6-4W-V8m"/>
