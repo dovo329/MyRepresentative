@@ -46,14 +46,13 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         //searchByStateButton.layer.borderColor = UIColor.blackColor().CGColor
         
         // dismiss keyboard if user taps outside of keyboard area
-        //let tap = UITapGestureRecognizer(target: self, action: "outsideTap:")
-        //view.addGestureRecognizer(tap)
+        let tap = UITapGestureRecognizer(target: self, action: "outsideTap:")
+        view.addGestureRecognizer(tap)
     }
     
-    /*func outsideTap(sender: UITapGestureRecognizer!)
-    {
-    view.endEditing(true)
-    }*/
+    func outsideTap(sender: UITapGestureRecognizer!) {
+        view.endEditing(true)
+    }
     
     override func viewWillAppear(animated: Bool) {
         zipCodeTextField.text = ""
@@ -90,6 +89,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         if let id = identifier {
             if id == SegueId.ZipCode.rawValue {
                 if zipCodeTextField.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) < 5 {
+                    zipCodeTextField.text = ""
                     let alertController = UIAlertController(title: "Zip Code Must Be At Least 5 Digits", message: "", preferredStyle: UIAlertControllerStyle.Alert)
                     let dismissOption = UIAlertAction(title: "Got It", style: UIAlertActionStyle.Default)
                         { _ -> Void in }
@@ -97,12 +97,12 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
                     presentViewController(alertController, animated: true, completion: nil)
                     return false
                 } else if containsLetters(zipCodeTextField.text) {
+                    zipCodeTextField.text = ""
                     let alertController = UIAlertController(title: "Zip Codes Are Numbers Only", message: "", preferredStyle: UIAlertControllerStyle.Alert)
                     let dismissOption = UIAlertAction(title: "Got It", style: UIAlertActionStyle.Default)
                         { _ -> Void in }
                     alertController.addAction(dismissOption)
                     presentViewController(alertController, animated: true, completion: nil)
-                    zipCodeTextField.text = ""
                     return false
                 } else {
                     return true
@@ -123,14 +123,14 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //println("prepareForSegue")
+
         if let destinationViewController = segue.destinationViewController as? RepresentativeListViewController {
             if segue.identifier == SegueId.ZipCode.rawValue {
-            destinationViewController.searchBy = 0
+            destinationViewController.searchBy = SearchBy.ZipCode
         } else if segue.identifier == SegueId.LastName.rawValue {
-            destinationViewController.searchBy = 1
+            destinationViewController.searchBy = SearchBy.LastName
         } else if segue.identifier == SegueId.State.rawValue {
-            destinationViewController.searchBy = 2
+            destinationViewController.searchBy = SearchBy.State
         } else {
             fatalError("Invalid segue.identifier")
             }
@@ -139,7 +139,6 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
             destinationViewController.lastName = lastNameTextField.text
             let pickerIndex = statePicker.selectedRowInComponent(0)
             destinationViewController.state = stateList[pickerIndex]
-            
         } else {
             fatalError("Wrong destination view controller type, expected RepresentativeListViewController, cast failed")
         }

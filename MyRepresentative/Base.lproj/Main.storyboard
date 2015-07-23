@@ -17,14 +17,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Search By ZipCode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBs-fG-fT3">
-                                <rect key="frame" x="219" y="116" width="162" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search By ZipCode" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBs-fG-fT3">
+                                <rect key="frame" x="225" y="134" width="150" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uYe-BH-2Vi">
-                                <rect key="frame" x="219" y="145" width="162" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uYe-BH-2Vi">
+                                <rect key="frame" x="225" y="160" width="150" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -32,14 +32,14 @@
                                     <segue destination="DKc-Al-MtG" kind="show" identifier="search.by.zip.code.segue" id="tWu-yy-hJN"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Search By LastName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZ2-IB-sPu">
-                                <rect key="frame" x="219" y="239" width="162" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search By LastName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZ2-IB-sPu">
+                                <rect key="frame" x="219" y="259" width="162" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fnb-jg-F0L">
-                                <rect key="frame" x="219" y="261" width="162" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fnb-jg-F0L">
+                                <rect key="frame" x="219" y="285" width="162" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -47,8 +47,8 @@
                                     <segue destination="DKc-Al-MtG" kind="show" identifier="search.by.last.name.segue" id="dtw-Kc-WGd"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ox3-EY-4Ii" userLabel="Search By State">
-                                <rect key="frame" x="219" y="347" width="138" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ox3-EY-4Ii" userLabel="Search By State">
+                                <rect key="frame" x="219" y="385" width="162" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="162" id="9A2-L9-vzI"/>
                                 </constraints>
@@ -60,23 +60,23 @@
                                     <segue destination="DKc-Al-MtG" kind="show" identifier="search.by.state.segue" id="yrD-VF-WM6"/>
                                 </connections>
                             </button>
-                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YYT-AY-zTk">
-                                <rect key="frame" x="219" y="385" width="162" height="162"/>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YYT-AY-zTk">
+                                <rect key="frame" x="219" y="438" width="162" height="162"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="LRe-hL-Ug4"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="FLs-l4-0HI"/>
                                 </connections>
                             </pickerView>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dS8-E8-IZG" userLabel="spacerView1">
-                                <rect key="frame" x="0.0" y="64" width="600" height="40"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dS8-E8-IZG" userLabel="spacerView1">
+                                <rect key="frame" x="0.0" y="64" width="600" height="65"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xel-8a-DL4" userLabel="spacerView2">
-                                <rect key="frame" x="0.0" y="183" width="600" height="40"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xel-8a-DL4" userLabel="spacerView2">
+                                <rect key="frame" x="0.0" y="190" width="600" height="64"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L9s-bw-UID" userLabel="spacerView3">
-                                <rect key="frame" x="0.0" y="299" width="600" height="40"/>
+                                <rect key="frame" x="-17" y="315" width="600" height="65"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -157,7 +157,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="p6G-2r-zNu" kind="show" identifier="segue.todetailvc.id" id="ghL-Nm-L12"/>
+                                    <segue destination="p6G-2r-zNu" kind="show" identifier="segue.to.detail.view.controller.id" id="ghL-Nm-L12"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -208,7 +208,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fjb-BW-a5X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1693" y="998"/>
+            <point key="canvasLocation" x="1796" y="998"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

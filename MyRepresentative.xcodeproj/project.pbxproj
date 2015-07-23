@@ -16,6 +16,7 @@
 		A57608D51B5FF22400F80AB5 /* RepresentativeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57608D31B5FF22400F80AB5 /* RepresentativeListViewController.swift */; };
 		A57608D61B5FF22400F80AB5 /* Representative.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57608D41B5FF22400F80AB5 /* Representative.swift */; };
 		A5C4C8F61B60570A000785B5 /* RepresentativeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C4C8F51B60570A000785B5 /* RepresentativeDetailViewController.swift */; };
+		A5D280D11B61B06A000AFBA7 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D280D01B61B06A000AFBA7 /* Global.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		A57608D31B5FF22400F80AB5 /* RepresentativeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepresentativeListViewController.swift; sourceTree = "<group>"; };
 		A57608D41B5FF22400F80AB5 /* Representative.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Representative.swift; sourceTree = "<group>"; };
 		A5C4C8F51B60570A000785B5 /* RepresentativeDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepresentativeDetailViewController.swift; sourceTree = "<group>"; };
+		A5D280D01B61B06A000AFBA7 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 		A533C4951B5F0DBC0009155E /* MyRepresentative */ = {
 			isa = PBXGroup;
 			children = (
+				A5D280D01B61B06A000AFBA7 /* Global.swift */,
 				A533C49A1B5F0DBC0009155E /* SearchViewController.swift */,
 				A57608D41B5FF22400F80AB5 /* Representative.swift */,
 				A57608D31B5FF22400F80AB5 /* RepresentativeListViewController.swift */,
@@ -225,6 +228,7 @@
 				A57608D51B5FF22400F80AB5 /* RepresentativeListViewController.swift in Sources */,
 				A5C4C8F61B60570A000785B5 /* RepresentativeDetailViewController.swift in Sources */,
 				A533C49B1B5F0DBC0009155E /* SearchViewController.swift in Sources */,
+				A5D280D11B61B06A000AFBA7 /* Global.swift in Sources */,
 				A533C4991B5F0DBC0009155E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

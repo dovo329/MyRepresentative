@@ -13,11 +13,11 @@ class RepresentativeListViewController: UITableViewController {
     var zipCode : String = ""
     var lastName : String = ""
     var state : String = ""
-    var searchBy : Int = 0
+    var searchBy : SearchBy?
     var senatorArr = [Representative]()
     var representativeArr = [Representative]()
     let kCellReuseId = "representative.cell.id"
-    var timeoutTimer : NSTimer!
+    var searchTimer : NSTimer!
     let kQueryTimeoutInSeconds : NSTimeInterval = 4.0
     
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class RepresentativeListViewController: UITableViewController {
             self.queryRepresentatives()
         }
         
-        let giveUpOption = UIAlertAction(title: "Give Up", style: UIAlertActionStyle.Default)
+        let giveUpOption = UIAlertAction(title: "Don't", style: UIAlertActionStyle.Default)
         { _ -> Void in
             
         }
@@ -48,10 +48,14 @@ class RepresentativeListViewController: UITableViewController {
     
     func queryRepresentatives()
     {
-        println("my zipCode is \(zipCode)")
-        println("my lastName is \(lastName)")
-        println("my state is \(state)")
-        println("my searchBy is \(searchBy)")
+        //println("my zipCode is \(zipCode)")
+        //println("my lastName is \(lastName)")
+        //println("my state is \(state)")
+        //println("my searchBy is \(searchBy)")
+        if let searchBy = searchBy {
+        } else {
+            fatalError("searchBy is nil!")
+        }
         
         title = "Searching..."
         // by your zip code
@@ -70,7 +74,7 @@ class RepresentativeListViewController: UITableViewController {
         // sens by state
         // http://whoismyrepresentative.com/getall_sens_bystate.php?state=ME
         
-        if searchBy == 0
+        if searchBy == SearchBy.ZipCode
         {
             if zipCode == ""
             {
@@ -79,7 +83,7 @@ class RepresentativeListViewController: UITableViewController {
             let urlString = String(format:"http://whoismyrepresentative.com/getall_mems.php?zip=%@&output=json", zipCode)
             doQueryWithUrlString(urlString)
         }
-        else if searchBy == 1
+        else if searchBy == SearchBy.LastName
         {
             if lastName == ""
             {
@@ -91,7 +95,7 @@ class RepresentativeListViewController: UITableViewController {
             let representativeUrlString = String(format:"http://whoismyrepresentative.com/getall_reps_byname.php?name=%@&output=json", lastName)
             doQueryWithUrlString(representativeUrlString)
         }
-        else if searchBy == 2
+        else if searchBy == SearchBy.State
         {
             if state == ""
             {
@@ -108,7 +112,7 @@ class RepresentativeListViewController: UITableViewController {
             fatalError("this search type not implemented")
         }
         
-        timeoutTimer = NSTimer.scheduledTimerWithTimeInterval(kQueryTimeoutInSeconds, target: self, selector: "searchTimedOut:", userInfo: nil, repeats: false)
+        searchTimer = NSTimer.scheduledTimerWithTimeInterval(kQueryTimeoutInSeconds, target: self, selector: "searchTimedOut:", userInfo: nil, repeats: false)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -161,23 +165,14 @@ class RepresentativeListViewController: UITableViewController {
     
     func doQueryWithUrlString(urlString : String)
     {
-        //self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:kParksQueryTimeoutTimeInSeconds target:self selector:@selector(searchTimedOut:) userInfo:timerArgDict repeats:NO];
-        
-        /*NSMutableDictionary *timerArgDict = [NSMutableDictionary new];
-        [timerArgDict setObject:perkArr forKeyedSubscript:kQueryForPerksPerkArr];
-        NSValue *regionWrap = [NSValue value:(const void *)&region withObjCType:@encode(typeof(MKCoordinateRegion))];
-        [timerArgDict setObject:regionWrap forKeyedSubscript:kQueryForPerksRegion];*/
-        //let timerArgDict = NSMutableDictionary()
-        //timerArgDict.setObject(<#anObject: AnyObject#>, forKey: <#NSCopying#>)
         
         if let nsUrl = NSURL(string: urlString)
         {
             let session = NSURLSession.sharedSession()
             let dataTask = session.dataTaskWithURL(nsUrl, completionHandler:
                 {(data, response, error) -> Void in
-                    self.timeoutTimer.invalidate()
+                    self.searchTimer.invalidate()
                     
-                    //println("error: \(error)")
                     if error == nil
                     {
                         var jsonError:NSError? = nil
@@ -191,7 +186,6 @@ class RepresentativeListViewController: UITableViewController {
                                 dispatch_async(
                                     dispatch_get_main_queue(),
                                     { () -> Void in
-                                        //println("dictArr=\(dictArr)")
                                         self.title = "List"
                                         
                                         var repArr = [Representative]()
@@ -199,7 +193,6 @@ class RepresentativeListViewController: UITableViewController {
                                         {
                                             if let dict = dict as? NSDictionary
                                             {
-                                                //println("dict=\(dict)")
                                                 let rep = Representative(dict: dict)
                                                 rep.print()
                                                 repArr.append(rep)
@@ -230,11 +223,6 @@ class RepresentativeListViewController: UITableViewController {
                                 fatalError("Failed to cast JSON response to NSArray")
                             }
                         } else {
-                            
-                            /*if let serverResponse = NSString(data: data, encoding: NSASCIIStringEncoding) {
-                                println("server Response = \(serverResponse)")
-                            }*/
-                            
                             // no data returned from server so no matches
                             // update UI is on the main thread
                             dispatch_async(dispatch_get_main_queue(),
@@ -312,10 +300,6 @@ class RepresentativeListViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // Two sections: Senators and House of Representatives
         return 2
-    }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("didSelect")
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

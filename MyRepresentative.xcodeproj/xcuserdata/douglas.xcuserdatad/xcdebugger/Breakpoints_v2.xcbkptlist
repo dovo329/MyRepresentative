@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyRepresentative/RepresentativeListViewController.swift"
-            timestampString = "459384663.55763"
+            timestampString = "459387382.920475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
             landmarkName = "getSenators(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -36,28 +36,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyRepresentative/RepresentativeListViewController.swift"
-            timestampString = "459384663.55763"
+            timestampString = "459387382.920475"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
             landmarkName = "getSenators(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyRepresentative/RepresentativeListViewController.swift"
-            timestampString = "459382356.182529"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
-            landmarkName = "doQueryWithUrlString(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -68,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyRepresentative/SearchViewController.swift"
-            timestampString = "459384333.960498"
+            timestampString = "459385909.296142"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "shouldPerformSegueWithIdentifier(_:sender:)"
             landmarkType = "5">
             <Locations>
@@ -107,6 +91,54 @@
                   offsetFromSymbolStart = "12">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyRepresentative/SearchViewController.swift"
+            timestampString = "459387172.018035"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "shouldPerformSegueWithIdentifier(_:sender:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyRepresentative/SearchViewController.swift"
+            timestampString = "459386310.802724"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "shouldPerformSegueWithIdentifier(_:sender:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyRepresentative/SearchViewController.swift"
+            timestampString = "459386310.802724"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "shouldPerformSegueWithIdentifier(_:sender:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
