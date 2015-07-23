@@ -32,11 +32,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
             searchByStateButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
         searchByStateButton.backgroundColor = UIColor.whiteColor()
         searchByStateButton.layer.cornerRadius = 5.0
-        searchByStateButton.layer.shadowOffset = CGSizeMake(5.0, 5.0)
+        searchByStateButton.layer.shadowOffset = CGSizeMake(1.0, 1.0)
         searchByStateButton.layer.shadowColor = UIColor.blackColor().CGColor
         searchByStateButton.layer.shadowOpacity = 0.5
-        searchByStateButton.layer.borderWidth = 1.0
-        searchByStateButton.layer.borderColor = UIColor.blackColor().CGColor
+        //searchByStateButton.layer.borderWidth = 1.0
+        //searchByStateButton.layer.borderColor = UIColor.blackColor().CGColor
         
         // dismiss keyboard if user taps outside of keyboard area
         //let tap = UITapGestureRecognizer(target: self, action: "outsideTap:")
