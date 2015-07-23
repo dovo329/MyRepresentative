@@ -41,20 +41,25 @@ class RepresentativeDetailViewController: UIViewController {
             if rep.party == "D"
             {
                 doBackgroundGradientWithColors(UIColor(red: 0.5, green: 0.5, blue: 1.0, alpha: 1.0),
-                    endColor: UIColor(red: 0.25, green: 0.25, blue: 0.5, alpha: 1.0))
+                    endColor: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
             }
             else if rep.party == "R"
             {
                 doBackgroundGradientWithColors(UIColor(red: 1.0, green: 0.5, blue: 0.5, alpha: 1.0),
-                    endColor: UIColor(red: 0.5, green: 0.25, blue: 0.25, alpha: 1.0))
+                    endColor: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
             }
             else
             {
                 doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
-                    endColor: UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0))
+                    endColor: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
             }
 
             webLink.setTitle(rep.link, forState: UIControlState.Normal)
+            webLink.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+            webLink.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
+            webLink.backgroundColor = UIColor.whiteColor()
+            webLink.layer.cornerRadius = 5.0
+            webLink.addTarget(self, action: "openWebLink:", forControlEvents: UIControlEvents.TouchUpInside)
             phoneLabel.text = rep.phone
             addressLabel.text = rep.office
             
@@ -71,6 +76,15 @@ class RepresentativeDetailViewController: UIViewController {
         {
             fatalError("Representative in Detail View Controller is nil")
         }
+    }
+    
+    func openWebLink(sender: UIButton!) {
+        println("weblink opened")
+        var alertView = UIAlertView();
+        alertView.addButtonWithTitle("Ok");
+        alertView.title = "title";
+        alertView.message = "message";
+        alertView.show();
     }
     
     override func viewDidLayoutSubviews() {
