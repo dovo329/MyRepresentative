@@ -203,7 +203,10 @@ class RepresentativeListViewController: UITableViewController {
                                                 let rep = Representative(dict: dict)
                                                 rep.print()
                                                 repArr.append(rep)
+                                            } else {
+                                                fatalError("cast to dictionary failed")
                                             }
+                                            
                                         }
                                         
                                         let testSenArr = self.getSenators(repArr)
@@ -223,8 +226,30 @@ class RepresentativeListViewController: UITableViewController {
                                         self.tableView.reloadData()
                                     }
                                 )
+                            } else {
+                                fatalError("Failed to cast JSON response to NSArray")
                             }
+                        } else {
+                            
+                            /*if let serverResponse = NSString(data: data, encoding: NSASCIIStringEncoding) {
+                                println("server Response = \(serverResponse)")
+                            }*/
+                            
+                            // no data returned from server so no matches
+                            // update UI is on the main thread
+                            dispatch_async(dispatch_get_main_queue(),
+                                { () -> Void in
+                                    self.title = "No Matches"
+                                    let alertController = UIAlertController(title: "No Matches", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                                    let dismissOption = UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default)
+                                        { _ -> Void in }
+                                    alertController.addAction(dismissOption)
+                                    self.presentViewController(alertController, animated: true, completion: nil)
+                            })
                         }
+                    } else {
+                        println("error=\(error)")
+                        fatalError("Error returned from nsurlsession")
                     }
             })
             dataTask.resume()

@@ -79,22 +79,14 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        //println("should return")
+
         textField.resignFirstResponder()
-        
-        /*if let serverResponse = NSString(data: data, encoding: NSAS\
-        CIIStringEncoding)
-        {
-        println("server Response = \(serverResponse)")
-        }*/
-        
-        // check for invalid input and present alert to user to correct it instead of feeding the list view controller bad search input
-        
         return true
     }
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         
+        // check for invalid input and present alert to user to correct it instead of feeding the list view controller bad search input
         if let id = identifier {
             if id == SegueId.ZipCode.rawValue {
                 if zipCodeTextField.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) < 5 {
