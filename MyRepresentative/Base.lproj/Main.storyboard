@@ -123,7 +123,7 @@
             </objects>
             <point key="canvasLocation" x="2505" y="998"/>
         </scene>
-        <!--Representative List View Controller-->
+        <!--List-->
         <scene sceneID="V4j-O5-tO6">
             <objects>
                 <tableViewController id="DKc-Al-MtG" customClass="RepresentativeListViewController" customModule="MyRepresentative" customModuleProvider="target" sceneMemberID="viewController">
@@ -161,6 +161,7 @@
                             <outlet property="delegate" destination="DKc-Al-MtG" id="JXo-lj-hw1"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="List" id="kRP-p6-W3w"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vxn-bD-fnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationItem title="List" id="oak-Aa-QZn"/>
