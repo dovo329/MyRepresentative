@@ -27,7 +27,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSou
             endColor: UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0))
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         zipCodeTextField.text = ""
         lastNameTextField.text = ""
     }
