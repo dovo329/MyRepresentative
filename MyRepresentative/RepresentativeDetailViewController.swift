@@ -27,7 +27,8 @@ class RepresentativeDetailViewController: UIViewController {
         if let rep = representative
         {
             rep.print()
-            nameLabel.text = rep.name
+            //nameLabel.text = rep.name
+            nameLabel.text = "asdfkjopwieuroicviopu4r9087qwe0f98jasdf0jh9820hr98qnef980nwdf980jhq893ru98uf89djas89df0j8902qjr98qner98nwd98js98vj98as0dj980n98rnq98efj98asdnv98asdjf89jasd98fj98qj34r89jq98ef98sandv98asnre89fjq3948jr9ajdv9izxjv98jzx98cvu98sudf98u4iortjfghiuoasdhfguiay89buzx98cvz9xnv98uasdnf98awhef98hq98etu98wrty98adfhvushvu9bncv9uhzxc98vua980ertuy89qy89shdvuishdfv9ubnxcz9ub9adsfh98wuert89uwe89fhas9va98sdhv98ashd98hw98eru89duf98shd98asdf98absd89va89fuq89eruy89duf98ashdf98asd98fas98vuas89dfu98qweyr89ahsdv98absd9f8asdf"
             
             if rep.link!.rangeOfString("house.gov") != nil
             {
@@ -59,8 +60,14 @@ class RepresentativeDetailViewController: UIViewController {
             webLink.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
             webLink.backgroundColor = UIColor.whiteColor()
             webLink.layer.cornerRadius = 5.0
+            webLink.layer.shadowOffset = CGSizeMake(5.0, 5.0)
+            webLink.layer.shadowColor = UIColor.blackColor().CGColor
+            webLink.layer.shadowOpacity = 0.5
+            
             webLink.addTarget(self, action: "openWebLink:", forControlEvents: UIControlEvents.TouchUpInside)
+            
             phoneLabel.text = rep.phone
+            
             addressLabel.text = rep.office
             
             contentView.addSubview(nameLabel)
@@ -299,7 +306,7 @@ class RepresentativeDetailViewController: UIViewController {
                 item: webLink,
                 attribute: .Left,
                 relatedBy: .Equal,
-                toItem: contentView,
+                toItem: view,
                 attribute: .LeftMargin,
                 multiplier: 1.0,
                 constant: 0.0))
@@ -310,7 +317,7 @@ class RepresentativeDetailViewController: UIViewController {
                 item: webLink,
                 attribute: .Right,
                 relatedBy: .Equal,
-                toItem: contentView,
+                toItem: view,
                 attribute: .RightMargin,
                 multiplier: 1.0,
                 constant: 0.0))

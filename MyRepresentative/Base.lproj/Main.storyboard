@@ -92,10 +92,11 @@
                     </tableView>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vxn-bD-fnk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationItem title="List" id="oak-Aa-QZn"/>
             </objects>
             <point key="canvasLocation" x="3206" y="998"/>
         </scene>
-        <!--Representative Detail View Controller-->
+        <!--Details-->
         <scene sceneID="rW9-X7-8tK">
             <objects>
                 <viewController id="p6G-2r-zNu" customClass="RepresentativeDetailViewController" customModule="MyRepresentative" customModuleProvider="target" sceneMemberID="viewController">
@@ -108,6 +109,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Details" id="E5u-84-vYa"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7m-dM-CTs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
