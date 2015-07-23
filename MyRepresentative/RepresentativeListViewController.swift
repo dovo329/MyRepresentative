@@ -45,64 +45,24 @@ class RepresentativeListViewController: UITableViewController {
         // sens by state
         // http://whoismyrepresentative.com/getall_sens_bystate.php?state=ME
         
-        // urlString guaranteed to have a value after this if statements
-        var urlString : String!
         if searchBy == 0
         {
-            urlString = String(format:"http://whoismyrepresentative.com/getall_mems.php?zip=%@&output=json", zipCode)
+            let urlString = String(format:"http://whoismyrepresentative.com/getall_mems.php?zip=%@&output=json", zipCode)
+            doQueryWithUrlString(urlString)
+        }
+        else if searchBy == 1
+        {
+            let senatorUrlString = String(format:"http://whoismyrepresentative.com/getall_sens_byname.php?name=%@&output=json", lastName)
+            doQueryWithUrlString(senatorUrlString)
+            
+            let representativeUrlString = String(format:"http://whoismyrepresentative.com/getall_reps_byname.php?name=%@&output=json", lastName)
+            doQueryWithUrlString(representativeUrlString)
         }
         else
         {
-            urlString = String(format:"http://whoismyrepresentative.com/getall_sens_byname.php?name=%@&output=json", lastName)
+            fatalError("this search type not implemented")
         }
         
-        if let nsUrl = NSURL(string: urlString)
-        {
-            let session = NSURLSession.sharedSession()
-            let dataTask = session.dataTaskWithURL(nsUrl, completionHandler:
-                {(data, response, error) -> Void in
-                    
-                    //println("error: \(error)")
-                    if error == nil
-                    {
-                        var jsonError:NSError? = nil
-                        let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error:&jsonError)
-                        
-                        if let jsonObject = jsonObject as? [String:AnyObject]
-                        {
-                            if let dictArr = jsonObject["results"] as? NSArray
-                            {
-                                // update UI is on the main thread
-                                dispatch_async(
-                                    dispatch_get_main_queue(),
-                                    { () -> Void in
-                                        //println("dictArr=\(dictArr)")
-                                        var repArr = [Representative]()
-                                        for dict in dictArr
-                                        {
-                                            if let dict = dict as? NSDictionary
-                                            {
-                                                //println("dict=\(dict)")
-                                                let rep = Representative(dict: dict)
-                                                rep.print()
-                                                repArr.append(rep)
-                                            }
-                                        }
-                                        self.senatorArr = self.getSenators(repArr)
-                                        self.representativeArr = self.getRepresentatives(repArr)
-                                        self.tableView.reloadData()
-                                    }
-                                )
-                            }
-                        }
-                    }
-            })
-            dataTask.resume()
-        }
-        else
-        {
-            fatalError("failed to create nsUrl from urlString \(urlString)")
-        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -149,6 +109,70 @@ class RepresentativeListViewController: UITableViewController {
         }
 
         return cell
+    }
+    
+    func doQueryWithUrlString(urlString : String)
+    {
+        if let nsUrl = NSURL(string: urlString)
+        {
+            let session = NSURLSession.sharedSession()
+            let dataTask = session.dataTaskWithURL(nsUrl, completionHandler:
+                {(data, response, error) -> Void in
+                    
+                    //println("error: \(error)")
+                    if error == nil
+                    {
+                        var jsonError:NSError? = nil
+                        let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error:&jsonError)
+                        
+                        if let jsonObject = jsonObject as? [String:AnyObject]
+                        {
+                            if let dictArr = jsonObject["results"] as? NSArray
+                            {
+                                // update UI is on the main thread
+                                dispatch_async(
+                                    dispatch_get_main_queue(),
+                                    { () -> Void in
+                                        //println("dictArr=\(dictArr)")
+                                        var repArr = [Representative]()
+                                        for dict in dictArr
+                                        {
+                                            if let dict = dict as? NSDictionary
+                                            {
+                                                //println("dict=\(dict)")
+                                                let rep = Representative(dict: dict)
+                                                rep.print()
+                                                repArr.append(rep)
+                                            }
+                                        }
+                                        
+                                        let testSenArr = self.getSenators(repArr)
+                                        // check if any senators returned, if not not this could be a representative only search so we don't want to clobber the senatorArr
+                                        if testSenArr.count > 0
+                                        {
+                                            self.senatorArr = testSenArr
+                                        }
+                                        
+                                        let testRepArr = self.getRepresentatives(repArr)
+                                        // check if any representatives returned, if not not this could be a representative only search so we don't want to clobber the senatorArr
+                                        if testRepArr.count > 0
+                                        {
+                                            self.representativeArr = testRepArr
+                                        }
+
+                                        self.tableView.reloadData()
+                                    }
+                                )
+                            }
+                        }
+                    }
+            })
+            dataTask.resume()
+        }
+        else
+        {
+            fatalError("failed to create nsUrl from urlString \(urlString)")
+        }
     }
     
     func getSenators(repArr: [Representative]) -> [Representative]
