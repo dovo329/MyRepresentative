@@ -67,15 +67,15 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="FLs-l4-0HI"/>
                                 </connections>
                             </pickerView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dS8-E8-IZG" userLabel="spacerView1">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dS8-E8-IZG" userLabel="spacerView1">
                                 <rect key="frame" x="0.0" y="64" width="600" height="65"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xel-8a-DL4" userLabel="spacerView2">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xel-8a-DL4" userLabel="spacerView2">
                                 <rect key="frame" x="0.0" y="190" width="600" height="64"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L9s-bw-UID" userLabel="spacerView3">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L9s-bw-UID" userLabel="spacerView3">
                                 <rect key="frame" x="-17" y="315" width="600" height="65"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -98,8 +98,10 @@
                             <constraint firstAttribute="centerX" secondItem="kBs-fG-fT3" secondAttribute="centerX" id="axz-zH-B8z"/>
                             <constraint firstItem="L9s-bw-UID" firstAttribute="height" secondItem="dS8-E8-IZG" secondAttribute="height" id="bzz-av-WRQ"/>
                             <constraint firstItem="dS8-E8-IZG" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="gdX-GT-eCo"/>
+                            <constraint firstAttribute="centerX" secondItem="xel-8a-DL4" secondAttribute="centerX" id="i1E-95-LAt"/>
                             <constraint firstItem="L9s-bw-UID" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="llL-yx-sgA"/>
                             <constraint firstItem="xel-8a-DL4" firstAttribute="top" secondItem="uYe-BH-2Vi" secondAttribute="bottom" id="oPv-3U-9gZ"/>
+                            <constraint firstAttribute="centerX" secondItem="L9s-bw-UID" secondAttribute="centerX" constant="17" id="pem-J5-bev"/>
                             <constraint firstItem="kBs-fG-fT3" firstAttribute="width" secondItem="uYe-BH-2Vi" secondAttribute="width" id="q9A-v5-I3T"/>
                             <constraint firstAttribute="centerX" secondItem="Ox3-EY-4Ii" secondAttribute="centerX" id="qbc-GI-hJD"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YYT-AY-zTk" secondAttribute="bottom" id="qxW-uS-69e"/>
@@ -107,6 +109,7 @@
                             <constraint firstItem="Fnb-jg-F0L" firstAttribute="width" secondItem="vZ2-IB-sPu" secondAttribute="width" id="vwi-iY-R79"/>
                             <constraint firstAttribute="centerX" secondItem="Fnb-jg-F0L" secondAttribute="centerX" id="wZ6-4W-V8m"/>
                             <constraint firstItem="Ox3-EY-4Ii" firstAttribute="top" secondItem="L9s-bw-UID" secondAttribute="bottom" constant="8" id="xn9-WC-4di"/>
+                            <constraint firstAttribute="centerX" secondItem="dS8-E8-IZG" secondAttribute="centerX" id="yFc-T7-ZSF"/>
                             <constraint firstItem="L9s-bw-UID" firstAttribute="top" secondItem="Fnb-jg-F0L" secondAttribute="bottom" id="yHk-9I-gsk"/>
                         </constraints>
                         <variation key="default">
