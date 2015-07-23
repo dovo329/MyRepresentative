@@ -88,12 +88,20 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
         {
             if zipCodeTextField.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) < 5
             {
-               println("invalid zip code")
-                
                 let alertController = UIAlertController(title: "Zip Code Must Be At Least 5 Digits", message: "", preferredStyle: UIAlertControllerStyle.Alert)
                 let dismissOption = UIAlertAction(title: "Got It", style: UIAlertActionStyle.Default)
                 { _ -> Void in
                     
+                }
+                alertController.addAction(dismissOption)
+                presentViewController(alertController, animated: true, completion: nil)
+            }
+            else if containsLetters(zipCodeTextField.text)
+            {
+                let alertController = UIAlertController(title: "Zip Codes Are Numbers Only", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+                let dismissOption = UIAlertAction(title: "Got It", style: UIAlertActionStyle.Default)
+                    { _ -> Void in
+                        
                 }
                 alertController.addAction(dismissOption)
                 presentViewController(alertController, animated: true, completion: nil)
@@ -172,6 +180,20 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return stateList.count
+    }
+    
+    func containsLetters(testString: String) -> Bool
+    {
+        let letters = NSCharacterSet.letterCharacterSet()
+        let range = testString.rangeOfCharacterFromSet(letters)
+        
+        // range will be nil if no letters is found
+        if let test = range {
+            return true
+        }
+        else {
+            return false
+        }
     }
 }
 
