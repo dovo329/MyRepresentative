@@ -24,7 +24,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSou
         // Do any additional setup after loading the view, typically from a nib.
         //navigationController?.navigationBar.tintColor = UIColor.orangeColor()
         doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
-            endColor: UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0))
+            endColor: UIColor(red: 0.9, green: 1.0, blue: 1.0, alpha: 1.0))
     }
     
     override func viewWillAppear(animated: Bool) {

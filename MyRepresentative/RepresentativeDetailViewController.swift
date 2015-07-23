@@ -42,18 +42,18 @@ class RepresentativeDetailViewController: UIViewController {
             
             if rep.party == "D"
             {
-                doBackgroundGradientWithColors(UIColor(red: 0.5, green: 0.5, blue: 1.0, alpha: 1.0),
-                    endColor: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
+                doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+                    endColor: UIColor(red: 0.9, green: 0.9, blue: 1.0, alpha: 1.0))
             }
             else if rep.party == "R"
             {
-                doBackgroundGradientWithColors(UIColor(red: 1.0, green: 0.5, blue: 0.5, alpha: 1.0),
-                    endColor: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
+                doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
+                    endColor: UIColor(red: 1.0, green: 0.9, blue: 0.9, alpha: 1.0))
             }
             else
             {
                 doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
-                    endColor: UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0))
+                    endColor: UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0))
             }
 
             webLink.setTitle(rep.link, forState: UIControlState.Normal)
