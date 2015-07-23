@@ -20,6 +20,7 @@ class RepresentativeDetailViewController: UIViewController {
     var webLink = UIButton()
     var phoneLabel = UILabel()
     var addressLabel = UILabel()
+    let veryLongTestString = "asdfkjopwieuroicviopu4r9087qwe0f98jasdf0jh9820hr98qnef980nwdf980jhq893ru98uf89djas89df0j8902qjr98qner98nwd98js98vj98as0dj980n98rnq98efj98asdnv98asdjf89jasd98fj98qj34r89jq98ef98sandv98asnre89fjq3948jr9ajdv9izxjv98jzx98cvu98sudf98u4iortjfghiuoasdhfguiay89buzx98cvz9xnv98uasdnf98awhef98hq98etu98wrty98adfhvushvu9bncv9uhzxc98vua980ertuy89qy89shdvuishdfv9ubnxcz9ub9adsfh98wuert89uwe89fhas9va98sdhv98ashd98hw98eru89duf98shd98asdf98absd89va89fuq89eruy89duf98ashdf98asd98fas98vuas89dfu98qweyr89ahsdv98absd9f8asdf89045879048970897023489u0890g8usiofjodfbijodf0ub089udsfu80gsdfiongjnopsdfghiu0sdf90u8biuh0sdfbinuinu0u0tgiu03rginuosfinougiu0sdfgju3ju90rginu0wiu54g"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +29,6 @@ class RepresentativeDetailViewController: UIViewController {
         {
             rep.print()
             nameLabel.text = rep.name
-            // long debub text test to test scrolling
-            //nameLabel.text = "asdfkjopwieuroicviopu4r9087qwe0f98jasdf0jh9820hr98qnef980nwdf980jhq893ru98uf89djas89df0j8902qjr98qner98nwd98js98vj98as0dj980n98rnq98efj98asdnv98asdjf89jasd98fj98qj34r89jq98ef98sandv98asnre89fjq3948jr9ajdv9izxjv98jzx98cvu98sudf98u4iortjfghiuoasdhfguiay89buzx98cvz9xnv98uasdnf98awhef98hq98etu98wrty98adfhvushvu9bncv9uhzxc98vua980ertuy89qy89shdvuishdfv9ubnxcz9ub9adsfh98wuert89uwe89fhas9va98sdhv98ashd98hw98eru89duf98shd98asdf98absd89va89fuq89eruy89duf98ashdf98asd98fas98vuas89dfu98qweyr89ahsdv98absd9f8asdf07830478789sd8907v8790sdfv8790sd890fvu809erithiowrgu890sdf890b089uydsfbhioudsfoihghiousdgfiuh089ysdf89y0gs90y8dghiuhiuoghu00u8fv9h80sdf90hbv0h9h9084t0h89q9h80rfhu9sdfhiugshiud0fgu98390u84"
             nameLabel.numberOfLines = 0
             
             if rep.link!.rangeOfString("house.gov") != nil
@@ -40,7 +39,6 @@ class RepresentativeDetailViewController: UIViewController {
             {
                 partyStateDistrictLabel.text = String(format: "%@, %@, %@", rep.party!, rep.state!, rep.district!)
             }
-            partyStateDistrictLabel.numberOfLines = 0
             
             if rep.party == "D"
             {
@@ -226,6 +224,18 @@ class RepresentativeDetailViewController: UIViewController {
                 attribute: .Bottom,
                 multiplier: 1.0,
                 constant: 0.0))
+        
+        // needs width constraint
+        // height is handled by height of labels it contains
+        view.addConstraint(
+            NSLayoutConstraint(
+                item: contentView,
+                attribute: .Width,
+                relatedBy: .Equal,
+                toItem: view,
+                attribute: .Width,
+                multiplier: 1.0,
+                constant: 0.0))
     }
     
     func nameLabelConstraints()
@@ -302,43 +312,6 @@ class RepresentativeDetailViewController: UIViewController {
                 constant: kLabelVertSpacing))
     }
     
-    func webLinkConstraints()
-    {
-        webLink.setTranslatesAutoresizingMaskIntoConstraints(false)
-        // pin left
-        view.addConstraint(
-            NSLayoutConstraint(
-                item: webLink,
-                attribute: .Left,
-                relatedBy: .Equal,
-                toItem: view,
-                attribute: .LeftMargin,
-                multiplier: 1.0,
-                constant: 0.0))
-        
-        // pin right
-        view.addConstraint(
-            NSLayoutConstraint(
-                item: webLink,
-                attribute: .Right,
-                relatedBy: .Equal,
-                toItem: view,
-                attribute: .RightMargin,
-                multiplier: 1.0,
-                constant: 0.0))
-        
-        // pin top
-        view.addConstraint(
-            NSLayoutConstraint(
-                item: webLink,
-                attribute: .Top,
-                relatedBy: .Equal,
-                toItem: partyStateDistrictLabel,
-                attribute: .Bottom,
-                multiplier: 1.0,
-                constant: kLabelVertSpacing))
-    }
-    
     func phoneLabelConstraints()
     {
         phoneLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
@@ -370,7 +343,7 @@ class RepresentativeDetailViewController: UIViewController {
                 item: phoneLabel,
                 attribute: .Top,
                 relatedBy: .Equal,
-                toItem: webLink,
+                toItem: partyStateDistrictLabel,
                 attribute: .Bottom,
                 multiplier: 1.0,
                 constant: kLabelVertSpacing))
@@ -411,11 +384,48 @@ class RepresentativeDetailViewController: UIViewController {
                 attribute: .Bottom,
                 multiplier: 1.0,
                 constant: kLabelVertSpacing))
+    }
+    
+    func webLinkConstraints()
+    {
+        webLink.setTranslatesAutoresizingMaskIntoConstraints(false)
+        // pin left
+        view.addConstraint(
+            NSLayoutConstraint(
+                item: webLink,
+                attribute: .Left,
+                relatedBy: .Equal,
+                toItem: view,
+                attribute: .LeftMargin,
+                multiplier: 1.0,
+                constant: 0.0))
+        
+        // pin right
+        view.addConstraint(
+            NSLayoutConstraint(
+                item: webLink,
+                attribute: .Right,
+                relatedBy: .Equal,
+                toItem: view,
+                attribute: .RightMargin,
+                multiplier: 1.0,
+                constant: 0.0))
+        
+        // pin top
+        view.addConstraint(
+            NSLayoutConstraint(
+                item: webLink,
+                attribute: .Top,
+                relatedBy: .Equal,
+                toItem: addressLabel,
+                attribute: .Bottom,
+                multiplier: 1.0,
+                constant: kLabelVertSpacing))
         
         // pin bottom
         view.addConstraint(
             NSLayoutConstraint(
-                item: addressLabel,
+                item: webLink,
                 attribute: .Bottom,
                 relatedBy: .Equal,
                 toItem: contentView,
