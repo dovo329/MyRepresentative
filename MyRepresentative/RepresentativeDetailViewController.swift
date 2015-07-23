@@ -90,11 +90,20 @@ class RepresentativeDetailViewController: UIViewController {
     
     func openWebLink(sender: UIButton!) {
         println("weblink opened")
-        var alertView = UIAlertView();
-        alertView.addButtonWithTitle("Ok");
-        alertView.title = "title";
-        alertView.message = "message";
-        alertView.show();
+        
+        if let nsUrl = NSURL(string: sender.titleLabel!.text!)
+        {
+            UIApplication.sharedApplication().openURL(nsUrl)
+        }
+        else
+        {
+            var alertView = UIAlertView();
+            alertView.addButtonWithTitle("Failed to open url");
+            alertView.title = "link could be broken";
+            alertView.message = "Okay";
+            alertView.show();
+        }
+        //[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.apple.com"]];
     }
     
     override func viewDidLayoutSubviews() {
