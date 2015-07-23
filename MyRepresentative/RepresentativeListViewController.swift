@@ -12,6 +12,7 @@ class RepresentativeListViewController: UITableViewController {
     
     var zipCode : String = ""
     var lastName : String = ""
+    var state : String = ""
     var searchBy : Int = 0
     var senatorArr = [Representative]()
     var representativeArr = [Representative]()
@@ -27,6 +28,7 @@ class RepresentativeListViewController: UITableViewController {
     {
         println("my zipCode is \(zipCode)")
         println("my lastName is \(lastName)")
+        println("my state is \(state)")
         println("my searchBy is \(searchBy)")
         
         // by your zip code
@@ -47,15 +49,35 @@ class RepresentativeListViewController: UITableViewController {
         
         if searchBy == 0
         {
+            if zipCode == ""
+            {
+                fatalError("attemted to search for empty zip code string")
+            }
             let urlString = String(format:"http://whoismyrepresentative.com/getall_mems.php?zip=%@&output=json", zipCode)
             doQueryWithUrlString(urlString)
         }
         else if searchBy == 1
         {
+            if lastName == ""
+            {
+                fatalError("attemted to search for empty last name string")
+            }
             let senatorUrlString = String(format:"http://whoismyrepresentative.com/getall_sens_byname.php?name=%@&output=json", lastName)
             doQueryWithUrlString(senatorUrlString)
             
             let representativeUrlString = String(format:"http://whoismyrepresentative.com/getall_reps_byname.php?name=%@&output=json", lastName)
+            doQueryWithUrlString(representativeUrlString)
+        }
+        else if searchBy == 2
+        {
+            if state == ""
+            {
+                fatalError("attemted to search for empty state string")
+            }
+            let senatorUrlString = String(format:"http://whoismyrepresentative.com/getall_sens_bystate.php?state=%@&output=json", state)
+            doQueryWithUrlString(senatorUrlString)
+            
+            let representativeUrlString = String(format:"http://whoismyrepresentative.com/getall_reps_bystate.php?state=%@&output=json", state)
             doQueryWithUrlString(representativeUrlString)
         }
         else

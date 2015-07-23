@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     @IBOutlet weak var zipCodeTextField: UITextField!
     
@@ -16,8 +16,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSou
     
     @IBOutlet weak var lastNameTextField: UITextField!
     
-    
     var bgGradLayer = CAGradientLayer()
+    
+    let stateList = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,18 +60,31 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSou
         //println("prepareForSegue")
         if let destinationViewController = segue.destinationViewController as? RepresentativeListViewController
         {
-            if zipCodeTextField.text != ""
+
+            if (sender != nil)
             {
-                destinationViewController.searchBy = 0
-            }
-            
-            if lastNameTextField.text != ""
-            {
-                destinationViewController.searchBy = 1
+                if sender!.isKindOfClass(UITextField)
+                    {
+                    if zipCodeTextField.text != ""
+                    {
+                        destinationViewController.searchBy = 0
+                    }
+                    
+                    if lastNameTextField.text != ""
+                    {
+                        destinationViewController.searchBy = 1
+                    }
+                }
+                else if sender!.isKindOfClass(UIButton)
+                {
+                    destinationViewController.searchBy = 2
+                }
             }
             
             destinationViewController.zipCode = zipCodeTextField.text
             destinationViewController.lastName = lastNameTextField.text
+            let pickerIndex = statePicker.selectedRowInComponent(0)
+            destinationViewController.state = stateList[pickerIndex]
             
         }
         else
@@ -78,8 +92,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSou
             fatalError("Wrong destination view controller type, expected RepresentativeListViewController, cast failed")
         }
     }
-    
-    let stateList = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
         return stateList[row]

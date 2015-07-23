@@ -7,7 +7,7 @@
         <!--Search For Representatives-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Search For Representatives" id="BYZ-38-t0r" customClass="ViewController" customModule="MyRepresentative" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Search For Representatives" id="BYZ-38-t0r" customClass="SearchViewController" customModule="MyRepresentative" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -28,7 +28,7 @@
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="tka-Qn-YPG"/>
-                                    <segue destination="DKc-Al-MtG" kind="show" identifier="show.listvc.id" id="O8x-Ss-cRI"/>
+                                    <segue destination="DKc-Al-MtG" kind="show" identifier="zipCode.segue.to.list" id="O8x-Ss-cRI"/>
                                 </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Search By LastName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vZ2-IB-sPu">
@@ -43,7 +43,7 @@
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="qT5-8a-buq"/>
-                                    <segue destination="DKc-Al-MtG" kind="show" id="484-Dw-5he"/>
+                                    <segue destination="DKc-Al-MtG" kind="show" identifier="lastname.segue.to.list" id="484-Dw-5he"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ox3-EY-4Ii" userLabel="Search By State">
@@ -52,6 +52,9 @@
                                 <state key="normal" title="Search By State">
                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="DKc-Al-MtG" kind="show" identifier="state.segue.to.list" id="yrD-VF-WM6"/>
+                                </connections>
                             </button>
                             <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YYT-AY-zTk">
                                 <rect key="frame" x="219" y="385" width="162" height="162"/>
