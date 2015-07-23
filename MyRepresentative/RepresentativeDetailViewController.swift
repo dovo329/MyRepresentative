@@ -27,8 +27,10 @@ class RepresentativeDetailViewController: UIViewController {
         if let rep = representative
         {
             rep.print()
-            //nameLabel.text = rep.name
-            nameLabel.text = "asdfkjopwieuroicviopu4r9087qwe0f98jasdf0jh9820hr98qnef980nwdf980jhq893ru98uf89djas89df0j8902qjr98qner98nwd98js98vj98as0dj980n98rnq98efj98asdnv98asdjf89jasd98fj98qj34r89jq98ef98sandv98asnre89fjq3948jr9ajdv9izxjv98jzx98cvu98sudf98u4iortjfghiuoasdhfguiay89buzx98cvz9xnv98uasdnf98awhef98hq98etu98wrty98adfhvushvu9bncv9uhzxc98vua980ertuy89qy89shdvuishdfv9ubnxcz9ub9adsfh98wuert89uwe89fhas9va98sdhv98ashd98hw98eru89duf98shd98asdf98absd89va89fuq89eruy89duf98ashdf98asd98fas98vuas89dfu98qweyr89ahsdv98absd9f8asdf"
+            nameLabel.text = rep.name
+            // long debub text test to test scrolling
+            //nameLabel.text = "asdfkjopwieuroicviopu4r9087qwe0f98jasdf0jh9820hr98qnef980nwdf980jhq893ru98uf89djas89df0j8902qjr98qner98nwd98js98vj98as0dj980n98rnq98efj98asdnv98asdjf89jasd98fj98qj34r89jq98ef98sandv98asnre89fjq3948jr9ajdv9izxjv98jzx98cvu98sudf98u4iortjfghiuoasdhfguiay89buzx98cvz9xnv98uasdnf98awhef98hq98etu98wrty98adfhvushvu9bncv9uhzxc98vua980ertuy89qy89shdvuishdfv9ubnxcz9ub9adsfh98wuert89uwe89fhas9va98sdhv98ashd98hw98eru89duf98shd98asdf98absd89va89fuq89eruy89duf98ashdf98asd98fas98vuas89dfu98qweyr89ahsdv98absd9f8asdf07830478789sd8907v8790sdfv8790sd890fvu809erithiowrgu890sdf890b089uydsfbhioudsfoihghiousdgfiuh089ysdf89y0gs90y8dghiuhiuoghu00u8fv9h80sdf90hbv0h9h9084t0h89q9h80rfhu9sdfhiugshiud0fgu98390u84"
+            nameLabel.numberOfLines = 0
             
             if rep.link!.rangeOfString("house.gov") != nil
             {
@@ -38,6 +40,7 @@ class RepresentativeDetailViewController: UIViewController {
             {
                 partyStateDistrictLabel.text = String(format: "%@, %@, %@", rep.party!, rep.state!, rep.district!)
             }
+            partyStateDistrictLabel.numberOfLines = 0
             
             if rep.party == "D"
             {
@@ -67,8 +70,10 @@ class RepresentativeDetailViewController: UIViewController {
             webLink.addTarget(self, action: "openWebLink:", forControlEvents: UIControlEvents.TouchUpInside)
             
             phoneLabel.text = rep.phone
+            phoneLabel.numberOfLines = 0
             
             addressLabel.text = rep.office
+            addressLabel.numberOfLines = 0
             
             contentView.addSubview(nameLabel)
             contentView.addSubview(partyStateDistrictLabel)
@@ -232,7 +237,7 @@ class RepresentativeDetailViewController: UIViewController {
                 item: nameLabel,
                 attribute: .Left,
                 relatedBy: .Equal,
-                toItem: contentView,
+                toItem: view,
                 attribute: .LeftMargin,
                 multiplier: 1.0,
                 constant: 0.0))
@@ -243,7 +248,7 @@ class RepresentativeDetailViewController: UIViewController {
                 item: nameLabel,
                 attribute: .Right,
                 relatedBy: .Equal,
-                toItem: contentView,
+                toItem: view,
                 attribute: .RightMargin,
                 multiplier: 1.0,
                 constant: 0.0))
@@ -269,7 +274,7 @@ class RepresentativeDetailViewController: UIViewController {
                 item: partyStateDistrictLabel,
                 attribute: .Left,
                 relatedBy: .Equal,
-                toItem: contentView,
+                toItem: view,
                 attribute: .LeftMargin,
                 multiplier: 1.0,
                 constant: 0.0))
@@ -280,7 +285,7 @@ class RepresentativeDetailViewController: UIViewController {
                 item: partyStateDistrictLabel,
                 attribute: .Right,
                 relatedBy: .Equal,
-                toItem: contentView,
+                toItem: view,
                 attribute: .RightMargin,
                 multiplier: 1.0,
                 constant: 0.0))
@@ -343,7 +348,7 @@ class RepresentativeDetailViewController: UIViewController {
                 item: phoneLabel,
                 attribute: .Left,
                 relatedBy: .Equal,
-                toItem: contentView,
+                toItem: view,
                 attribute: .LeftMargin,
                 multiplier: 1.0,
                 constant: 0.0))
@@ -354,7 +359,7 @@ class RepresentativeDetailViewController: UIViewController {
                 item: phoneLabel,
                 attribute: .Right,
                 relatedBy: .Equal,
-                toItem: contentView,
+                toItem: view,
                 attribute: .RightMargin,
                 multiplier: 1.0,
                 constant: 0.0))
@@ -380,7 +385,7 @@ class RepresentativeDetailViewController: UIViewController {
                 item: addressLabel,
                 attribute: .Left,
                 relatedBy: .Equal,
-                toItem: contentView,
+                toItem: view,
                 attribute: .LeftMargin,
                 multiplier: 1.0,
                 constant: 0.0))
@@ -391,7 +396,7 @@ class RepresentativeDetailViewController: UIViewController {
                 item: addressLabel,
                 attribute: .Right,
                 relatedBy: .Equal,
-                toItem: contentView,
+                toItem: view,
                 attribute: .RightMargin,
                 multiplier: 1.0,
                 constant: 0.0))
