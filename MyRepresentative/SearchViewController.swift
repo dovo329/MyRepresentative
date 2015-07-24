@@ -5,6 +5,7 @@
 //  Created by Douglas Voss on 7/20/15.
 //  Copyright (c) 2015 dougsapps. All rights reserved.
 //
+// Known bug with ios 7.1 simulator when navigating back to this view controller from the RepresentativeListViewController where the layout gets messed up on at least the 4S model.  In ios 8.4 this problem doesn't exist
 
 import UIKit
 
