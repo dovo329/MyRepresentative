@@ -13,7 +13,7 @@ class RepresentativeListViewController: UITableViewController {
     var zipCode : String = ""
     var lastName : String = ""
     var state : String = ""
-    var searchBy : SearchBy?
+    var searchType : SearchType?
     var senatorArr = [Representative]()
     var representativeArr = [Representative]()
     let kCellReuseId = "representative.cell.id"
@@ -51,10 +51,10 @@ class RepresentativeListViewController: UITableViewController {
         //println("my zipCode is \(zipCode)")
         //println("my lastName is \(lastName)")
         //println("my state is \(state)")
-        //println("my searchBy is \(searchBy)")
-        if let searchBy = searchBy {
+        //println("my searchType is \(searchType)")
+        if let searchType = searchType {
         } else {
-            fatalError("searchBy is nil!")
+            fatalError("searchType is nil!")
         }
         
         title = "Searching..."
@@ -74,7 +74,7 @@ class RepresentativeListViewController: UITableViewController {
         // sens by state
         // http://whoismyrepresentative.com/getall_sens_bystate.php?state=ME
         
-        if searchBy == SearchBy.ZipCode
+        if searchType == SearchType.ZipCode
         {
             if zipCode == ""
             {
@@ -83,7 +83,7 @@ class RepresentativeListViewController: UITableViewController {
             let urlString = String(format:"http://whoismyrepresentative.com/getall_mems.php?zip=%@&output=json", zipCode)
             doQueryWithUrlString(urlString)
         }
-        else if searchBy == SearchBy.LastName
+        else if searchType == SearchType.LastName
         {
             if lastName == ""
             {
@@ -95,7 +95,7 @@ class RepresentativeListViewController: UITableViewController {
             let representativeUrlString = String(format:"http://whoismyrepresentative.com/getall_reps_byname.php?name=%@&output=json", lastName)
             doQueryWithUrlString(representativeUrlString)
         }
-        else if searchBy == SearchBy.State
+        else if searchType == SearchType.State
         {
             if state == ""
             {

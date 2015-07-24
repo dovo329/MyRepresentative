@@ -91,19 +91,15 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
             if id == SegueId.ZipCode.rawValue {
                 if zipCodeTextField.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) < 5 {
                     zipCodeTextField.text = ""
-                    let alertController = UIAlertController(title: "Zip Code Must Be At Least 5 Digits", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-                    let dismissOption = UIAlertAction(title: "Got It", style: UIAlertActionStyle.Default)
-                        { _ -> Void in }
-                    alertController.addAction(dismissOption)
-                    presentViewController(alertController, animated: true, completion: nil)
+                    
+                    alertWithTitle("Zip Code Must Be At Least 5 Digits", message: "", dismissText: "Got It", viewController: self)
+                    
                     return false
                 } else if containsLetters(zipCodeTextField.text) {
                     zipCodeTextField.text = ""
-                    let alertController = UIAlertController(title: "Zip Codes Are Numbers Only", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-                    let dismissOption = UIAlertAction(title: "Got It", style: UIAlertActionStyle.Default)
-                        { _ -> Void in }
-                    alertController.addAction(dismissOption)
-                    presentViewController(alertController, animated: true, completion: nil)
+                    
+                    alertWithTitle("Zip Codes Are Numbers Only", message: "", dismissText: "Got It", viewController: self)
+                    
                     return false
                 } else {
                     return true
@@ -127,11 +123,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
 
         if let destinationViewController = segue.destinationViewController as? RepresentativeListViewController {
             if segue.identifier == SegueId.ZipCode.rawValue {
-            destinationViewController.searchBy = SearchBy.ZipCode
+            destinationViewController.searchType = SearchType.ZipCode
         } else if segue.identifier == SegueId.LastName.rawValue {
-            destinationViewController.searchBy = SearchBy.LastName
+            destinationViewController.searchType = SearchType.LastName
         } else if segue.identifier == SegueId.State.rawValue {
-            destinationViewController.searchBy = SearchBy.State
+            destinationViewController.searchType = SearchType.State
         } else {
             fatalError("Invalid segue.identifier")
             }
@@ -159,4 +155,3 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         }
     }
 }
-

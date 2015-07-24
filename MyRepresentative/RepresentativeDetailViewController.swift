@@ -142,17 +142,7 @@ class RepresentativeDetailViewController: UIViewController {
         bgGradLayer.endPoint = CGPoint(x:0.0, y:1.0)
         bgGradLayer.shouldRasterize = true
         view.layer.insertSublayer(bgGradLayer, atIndex: 0)
-    }
-    
-    func doAlertWithTitle(title: String, message: String, dismissText: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        let dismissOption = UIAlertAction(title: dismissText, style: UIAlertActionStyle.Default)
-            { _ -> Void in }
-        
-        alertController.addAction(dismissOption)
-        
-        presentViewController(alertController, animated: true, completion: nil)
-    }
+    }    
     
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if identifier == SegueId.ToWeb.rawValue
@@ -163,12 +153,12 @@ class RepresentativeDetailViewController: UIViewController {
                     return true
                 } else {
                     // do alert that the text is nil
-                    doAlertWithTitle("Open In App Button text doesn't exist", message: "", dismissText: "Okay")
+                    alertWithTitle("Open In App Button text doesn't exist", message: "", dismissText: "Okay", viewController: self)
                     return false
                 }
             } else {
                 // do alert that the webLink label is nil
-                doAlertWithTitle("Open In App Button label is nil", message: "", dismissText: "Okay")
+                alertWithTitle("Open In App Button label is nil", message: "", dismissText: "Okay", viewController: self)
                 return false
             }
             
