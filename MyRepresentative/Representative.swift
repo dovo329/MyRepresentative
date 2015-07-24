@@ -5,6 +5,7 @@
 //  Created by Douglas Voss on 7/21/15.
 //  Copyright (c) 2015 dougsapps. All rights reserved.
 //
+//  Container class to hold myrepresentative API result data
 
 import Foundation
 
