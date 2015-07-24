@@ -20,12 +20,17 @@ func alertWithTitle(title: String, #message: String, #dismissText: String, #view
     
     // only present new alert if no existing alerts
     if viewController.presentedViewController == nil {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        let dismissOption = UIAlertAction(title: dismissText, style: UIAlertActionStyle.Default)
-            { _ -> Void in }
+        if objc_getClass("UIAlertController") != nil {
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            let dismissOption = UIAlertAction(title: dismissText, style: UIAlertActionStyle.Default)
+                { _ -> Void in }
+            
+            alertController.addAction(dismissOption)
         
-        alertController.addAction(dismissOption)
-        
-        viewController.presentViewController(alertController, animated: true, completion: nil)
+            viewController.presentViewController(alertController, animated: true, completion: nil)
+        } else {
+            let alertView = UIAlertView(title: title, message: message, delegate: nil, cancelButtonTitle: dismissText)
+            alertView.show()
+        }
     }
 }
