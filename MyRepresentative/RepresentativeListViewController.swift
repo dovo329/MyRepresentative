@@ -19,7 +19,7 @@ class RepresentativeListViewController: UITableViewController {
     let kCellReuseId = "representative.cell.id"
     var repSearchTimer : NSTimer!
     var senSearchTimer : NSTimer!
-    let kQueryTimeoutInSeconds : NSTimeInterval = 0.5
+    let kQueryTimeoutInSeconds : NSTimeInterval = 4.0
     var senSearchDone = false
     var repSearchDone = false
     
