@@ -211,29 +211,15 @@ class RepresentativeListViewController: UITableViewController {
         }
         
         if let rep = testRep {
-            cell.textLabel!.text = rep.name
+            // rep fields are guaranteed to be valid here
+            cell.textLabel!.text = rep.name!
             cell.detailTextLabel!.text = String(format:"%@, %@", rep.party!, rep.state!)
             cell.detailTextLabel!.textColor = UIColor.blackColor()
             
             cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
             
             // pastel party colors to improve readability over just straight red or blue
-            if rep.party == "D"
-            {
-                cell.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 1.0, alpha: 1.0)
-            }
-            else if rep.party == "R"
-            {
-                cell.backgroundColor = UIColor(red: 1.0, green: 0.5, blue: 0.5, alpha: 1.0)
-            }
-            else if rep.party == "I"
-            {
-                cell.backgroundColor = UIColor.whiteColor()
-            }
-            else
-            {
-                cell.backgroundColor = UIColor.whiteColor()
-            }
+            cell.backgroundColor = UIColor.cellColorForParty(rep.party!)
         } else {
             navigationController?.popViewControllerAnimated(true)
             alertWithTitle("Representative is Nil", message: "", dismissText: "Okay", viewController: self)
