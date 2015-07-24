@@ -16,11 +16,15 @@ enum SearchType: Int {
 }
 
 func alertWithTitle(title: String, #message: String, #dismissText: String, #viewController: UIViewController) {
-    let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-    let dismissOption = UIAlertAction(title: dismissText, style: UIAlertActionStyle.Default)
-        { _ -> Void in }
     
-    alertController.addAction(dismissOption)
-    
-    viewController.presentViewController(alertController, animated: true, completion: nil)
+    // only present new alert if no existing alerts
+    if viewController.presentedViewController != nil {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let dismissOption = UIAlertAction(title: dismissText, style: UIAlertActionStyle.Default)
+            { _ -> Void in }
+        
+        alertController.addAction(dismissOption)
+        
+        viewController.presentViewController(alertController, animated: true, completion: nil)
+    }
 }

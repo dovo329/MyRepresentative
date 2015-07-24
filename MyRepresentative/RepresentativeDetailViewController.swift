@@ -119,11 +119,7 @@ class RepresentativeDetailViewController: UIViewController {
         }
         else
         {
-            let alertController = UIAlertController(title: "Failed to open URL", message: "Link could be broken", preferredStyle: UIAlertControllerStyle.Alert)
-            let dismissOption = UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default)
-                { _ -> Void in }
-            alertController.addAction(dismissOption)
-            presentViewController(alertController, animated: true, completion: nil)
+            alertWithTitle("Failed to open URL", message: "Link could be broken", dismissText: "Okay", viewController: self)
         }
     }
     

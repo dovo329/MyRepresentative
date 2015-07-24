@@ -19,7 +19,7 @@ class RepresentativeListViewController: UITableViewController {
     let kCellReuseId = "representative.cell.id"
     var repSearchTimer : NSTimer!
     var senSearchTimer : NSTimer!
-    let kQueryTimeoutInSeconds : NSTimeInterval = 4.0
+    let kQueryTimeoutInSeconds : NSTimeInterval = 0.5
     var senSearchDone = false
     var repSearchDone = false
     
@@ -107,48 +107,54 @@ class RepresentativeListViewController: UITableViewController {
     {
         sender.invalidate()
         
-        let alertController = UIAlertController(title: "Senator Search Timed Out", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-        let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
-        { _ -> Void in
-            if let searchType = self.searchType {
-                self.searchForRepresentativesBy(searchType)
-            } else {
-                fatalError("Retry senator search no searchType to search for")
+        // only present new alert if no existing alerts
+        if presentedViewController != nil {
+            let alertController = UIAlertController(title: "Senator Search Timed Out", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+            let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
+            { _ -> Void in
+                if let searchType = self.searchType {
+                    self.searchForRepresentativesBy(searchType)
+                } else {
+                    fatalError("Retry senator search no searchType to search for")
+                }
             }
-        }
         
-        let giveUpOption = UIAlertAction(title: "Don't", style: UIAlertActionStyle.Default)
-        { _ -> Void in
+            let giveUpOption = UIAlertAction(title: "Don't", style: UIAlertActionStyle.Default)
+            { _ -> Void in
+                
+            }
+            alertController.addAction(retryOption)
+            alertController.addAction(giveUpOption)
             
+            presentViewController(alertController, animated: true, completion: nil)
         }
-        alertController.addAction(retryOption)
-        alertController.addAction(giveUpOption)
-        
-        presentViewController(alertController, animated: true, completion: nil)
     }
     
     func repSearchTimedOut(sender: NSTimer!)
     {
         sender.invalidate()
         
-        let alertController = UIAlertController(title: "House Search Timed Out", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-        let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
-        { _ -> Void in
-            if let searchType = self.searchType {
-                self.searchForRepresentativesBy(searchType)
-            } else {
-                fatalError("Retry House search no searchType to search for")
+        // only present new alert if no existing alerts
+        if presentedViewController != nil {
+            let alertController = UIAlertController(title: "House Search Timed Out", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+            let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
+                { _ -> Void in
+                    if let searchType = self.searchType {
+                        self.searchForRepresentativesBy(searchType)
+                    } else {
+                        fatalError("Retry house search no searchType to search for")
+                    }
             }
-        }
-        
-        let giveUpOption = UIAlertAction(title: "Don't", style: UIAlertActionStyle.Default)
-        { _ -> Void in
             
+            let giveUpOption = UIAlertAction(title: "Don't", style: UIAlertActionStyle.Default)
+                { _ -> Void in
+                    
+            }
+            alertController.addAction(retryOption)
+            alertController.addAction(giveUpOption)
+            
+            presentViewController(alertController, animated: true, completion: nil)
         }
-        alertController.addAction(retryOption)
-        alertController.addAction(giveUpOption)
-        
-        presentViewController(alertController, animated: true, completion: nil)
     }
     
     /*func queryRepresentatives()
@@ -347,10 +353,12 @@ class RepresentativeListViewController: UITableViewController {
                                             self.repSearchTimer.invalidate()
                                     }
 
-                                    // only alert for no matches if both searches are done, as we wouldn't want to alert the user unless a representative was not found in both the Senate and the House
+                                    // only alert for no matches if both searches are done (and no results from either search), as we wouldn't want to alert the user unless a representative was not found in both the Senate and the House
                                     if self.senSearchDone && self.repSearchDone {
-                                        self.title = "No Matches"
-                                        alertWithTitle("No Matches", message: "", dismissText: "Okay", viewController: self)
+                                        if self.senatorArr.count == 0 && self.representativeArr.count == 0 {
+                                            self.title = "No Matches"
+                                            alertWithTitle("No Matches", message: "", dismissText: "Okay", viewController: self)
+                                        }
                                     }
                             })
                         }

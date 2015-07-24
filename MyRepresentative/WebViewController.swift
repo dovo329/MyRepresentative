@@ -32,17 +32,7 @@ class WebViewController: UIViewController {
             let request = NSURLRequest(URL: url)
             webView.loadRequest(request)
         } else {
-            doAlertWithTitle("Could not make a valid url out of input htmlString", message: "", dismissText: "Okay")
+            alertWithTitle("Not a valid URL", message: "", dismissText: "Okay", viewController: self)
         }
-    }
-    
-    func doAlertWithTitle(title: String, message: String, dismissText: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        let dismissOption = UIAlertAction(title: dismissText, style: UIAlertActionStyle.Default)
-            { _ -> Void in }
-        
-        alertController.addAction(dismissOption)
-        
-        presentViewController(alertController, animated: true, completion: nil)
     }
 }
