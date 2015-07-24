@@ -1,28 +1,24 @@
 //
-//  ViewController.swift
-//  MyRepresentativeSwift
+//  SearchViewController.swift
+//  MyRepresentative
 //
 //  Created by Douglas Voss on 7/20/15.
 //  Copyright (c) 2015 dougsapps. All rights reserved.
 //
-// Known bug with ios 7.1 simulator when navigating back to this view controller from the RepresentativeListViewController where the layout gets messed up on at least the 4S model.  In ios 8.4 this problem doesn't exist
+//  Search UI to feed into http://whoismyrepresentative.com API
+//
+//  Known bug with ios 7.1 simulator when navigating back to this view controller from the RepresentativeListViewController where the layout gets messed up on at least the 4S model.  In ios 8.4 this problem doesn't exist
 
 import UIKit
 
 class SearchViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var zipCodeTextField: UITextField!
-    
     @IBOutlet weak var statePicker: UIPickerView!
-    
     @IBOutlet var statePickerDataSource: StatePickerDataSource!
-    
     @IBOutlet weak var lastNameTextField: UITextField!
-    
     @IBOutlet weak var searchByStateButton: UIButton!
-    
     var bgGradLayer = CAGradientLayer()
-    
     var numberPadBar = UIToolbar()
     
     enum SegueId: String
@@ -37,20 +33,34 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         
         doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
             endColor: UIColor(red: 0.9, green: 1.0, blue: 1.0, alpha: 1.0))
+
+        prettifySearchByStateButton()
+        createNumberPadDoneBar()
         
+        // dismiss keyboard if user taps outside of keyboard area
+        let tap = UITapGestureRecognizer(target: self, action: "outsideTap:")
+        view.addGestureRecognizer(tap)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        // auto clear fields when coming back from list view controller
+        zipCodeTextField.text = ""
+        lastNameTextField.text = ""
+        view.endEditing(true)
+    }
+    
+    func prettifySearchByStateButton()
+    {
         searchByStateButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
         searchByStateButton.backgroundColor = UIColor.whiteColor()
         searchByStateButton.layer.cornerRadius = 5.0
         searchByStateButton.layer.shadowOffset = CGSizeMake(1.0, 1.0)
         searchByStateButton.layer.shadowColor = UIColor.blackColor().CGColor
         searchByStateButton.layer.shadowOpacity = 0.5
-        //searchByStateButton.layer.borderWidth = 1.0
-        //searchByStateButton.layer.borderColor = UIColor.blackColor().CGColor
-        
-        // dismiss keyboard if user taps outside of keyboard area
-        let tap = UITapGestureRecognizer(target: self, action: "outsideTap:")
-        view.addGestureRecognizer(tap)
-
+    }
+    
+    func createNumberPadDoneBar()
+    {
         // numberPadBar is for dismissing the number pad which normally doesn't have a "return" or "done" button
         numberPadBar.barStyle = UIBarStyle.BlackTranslucent
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
@@ -70,13 +80,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
-    override func viewWillAppear(animated: Bool) {
-        zipCodeTextField.text = ""
-        lastNameTextField.text = ""
-        view.endEditing(true)
-    }
-    
     override func viewDidLayoutSubviews() {
+        // needed because layers don't do autolayout so must update frames manually
         bgGradLayer.frame = CGRectMake(0, 0, view.frame.size.width, view.frame.size.height)
     }
     
@@ -94,7 +99,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-
+        // dismiss keyboard when return is hit
         textField.resignFirstResponder()
         return true
     }
