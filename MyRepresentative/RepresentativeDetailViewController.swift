@@ -15,11 +15,16 @@ class RepresentativeDetailViewController: UIViewController {
     var scrollView = UIScrollView()
     var contentView = UIView()
     let kLabelVertSpacing : CGFloat = 15.0
-    var nameLabel = UILabel()
-    var partyStateDistrictLabel = UILabel()
-    var webLink = UIButton()
-    var phoneLabel = UILabel()
-    var addressLabel = UILabel()
+    
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    @IBOutlet weak var partyStateDistrictLabel: UILabel!
+
+    @IBOutlet weak var phoneLabel: UILabel!
+    
+    @IBOutlet weak var addressLabel: UILabel!
+
+    @IBOutlet weak var webLink: UIButton!
     let veryLongTestString = "asdfkjopwieuroicviopu4r9087qwe0f98jasdf0jh9820hr98qnef980nwdf980jhq893ru98uf89djas89df0j8902qjr98qner98nwd98js98vj98as0dj980n98rnq98efj98asdnv98asdjf89jasd98fj98qj34r89jq98ef98sandv98asnre89fjq3948jr9ajdv9izxjv98jzx98cvu98sudf98u4iortjfghiuoasdhfguiay89buzx98cvz9xnv98uasdnf98awhef98hq98etu98wrty98adfhvushvu9bncv9uhzxc98vua980ertuy89qy89shdvuishdfv9ubnxcz9ub9adsfh98wuert89uwe89fhas9va98sdhv98ashd98hw98eru89duf98shd98asdf98absd89va89fuq89eruy89duf98ashdf98asd98fas98vuas89dfu98qweyr89ahsdv98absd9f8asdf89045879048970897023489u0890g8usiofjodfbijodf0ub089udsfu80gsdfiongjnopsdfghiu0sdf90u8biuh0sdfbinuinu0u0tgiu03rginuosfinougiu0sdfgju3ju90rginu0wiu54g"
     
     override func viewDidLoad() {
@@ -29,7 +34,6 @@ class RepresentativeDetailViewController: UIViewController {
         {
             rep.print()
             nameLabel.text = rep.name
-            nameLabel.numberOfLines = 0
             
             if rep.link!.rangeOfString("house.gov") != nil
             {
@@ -55,7 +59,11 @@ class RepresentativeDetailViewController: UIViewController {
                 doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
                     endColor: UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0))
             }
-
+            
+            phoneLabel.text = rep.phone
+            
+            addressLabel.text = rep.office
+            
             webLink.setTitle(rep.link, forState: UIControlState.Normal)
             webLink.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
             webLink.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
@@ -68,21 +76,6 @@ class RepresentativeDetailViewController: UIViewController {
             //webLink.layer.borderColor = UIColor.blackColor().CGColor
             
             webLink.addTarget(self, action: "openWebLink:", forControlEvents: UIControlEvents.TouchUpInside)
-            
-            phoneLabel.text = rep.phone
-            phoneLabel.numberOfLines = 0
-            
-            addressLabel.text = rep.office
-            addressLabel.numberOfLines = 0
-            
-            contentView.addSubview(nameLabel)
-            contentView.addSubview(partyStateDistrictLabel)
-            contentView.addSubview(webLink)
-            contentView.addSubview(phoneLabel)
-            contentView.addSubview(addressLabel)
-            scrollView.addSubview(contentView)
-            view.addSubview(scrollView)
-            autoLayoutConstraints()
         }
         else
         {
@@ -122,7 +115,7 @@ class RepresentativeDetailViewController: UIViewController {
         bgGradLayer.startPoint = CGPoint(x:0.0, y:0.0)
         bgGradLayer.endPoint = CGPoint(x:0.0, y:1.0)
         bgGradLayer.shouldRasterize = true
-        view.layer.addSublayer(bgGradLayer)
+        view.layer.insertSublayer(bgGradLayer, atIndex: 0)
     }
     
     func autoLayoutConstraints()

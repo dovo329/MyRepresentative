@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Search For Representatives-->
@@ -187,9 +188,113 @@
                     <view key="view" contentMode="scaleToFill" id="6Hh-0S-6NP">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wef-Dr-3oq">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sT5-4A-lkT" userLabel="contentView">
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="207"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="luc-Yl-iCF" userLabel="nameLabel">
+                                                <rect key="frame" x="15" y="15" width="570" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Party, State, District" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uD5-gA-yZs" userLabel="partyStateDistrictLabel">
+                                                <rect key="frame" x="15" y="51" width="570" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13v-nP-o7e" userLabel="phoneLabel">
+                                                <rect key="frame" x="15" y="87" width="570" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pvl-Me-83q" userLabel="addressLabel">
+                                                <rect key="frame" x="15" y="123" width="570" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="oM6-yW-ZAR" userLabel="webLink">
+                                                <rect key="frame" x="15" y="159" width="570" height="33"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="WebLink">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="pvl-Me-83q" firstAttribute="top" secondItem="13v-nP-o7e" secondAttribute="bottom" constant="15" id="15m-zS-vNw"/>
+                                            <constraint firstAttribute="trailing" secondItem="luc-Yl-iCF" secondAttribute="trailing" constant="15" id="3TM-LT-yBk"/>
+                                            <constraint firstItem="luc-Yl-iCF" firstAttribute="top" secondItem="sT5-4A-lkT" secondAttribute="top" constant="15" id="6xd-17-Lm0"/>
+                                            <constraint firstItem="uD5-gA-yZs" firstAttribute="leading" secondItem="sT5-4A-lkT" secondAttribute="leading" constant="15" id="8HY-qw-aHU"/>
+                                            <constraint firstItem="13v-nP-o7e" firstAttribute="top" secondItem="pvl-Me-83q" secondAttribute="bottom" constant="15" id="8b3-bh-88H"/>
+                                            <constraint firstItem="pvl-Me-83q" firstAttribute="leading" secondItem="sT5-4A-lkT" secondAttribute="leading" constant="15" id="9mf-Fi-SmE"/>
+                                            <constraint firstItem="13v-nP-o7e" firstAttribute="top" secondItem="uD5-gA-yZs" secondAttribute="bottom" constant="15" id="DhA-Gy-Q5g"/>
+                                            <constraint firstItem="13v-nP-o7e" firstAttribute="leading" secondItem="sT5-4A-lkT" secondAttribute="leading" constant="15" id="Hkw-wG-TeA"/>
+                                            <constraint firstItem="13v-nP-o7e" firstAttribute="top" secondItem="pvl-Me-83q" secondAttribute="bottom" constant="15" id="Ixw-49-1Md"/>
+                                            <constraint firstAttribute="trailing" secondItem="oM6-yW-ZAR" secondAttribute="trailing" constant="15" id="Ly5-Jw-QgF"/>
+                                            <constraint firstAttribute="trailing" secondItem="uD5-gA-yZs" secondAttribute="trailing" constant="15" id="YP0-rv-Ag1"/>
+                                            <constraint firstItem="uD5-gA-yZs" firstAttribute="top" secondItem="luc-Yl-iCF" secondAttribute="bottom" constant="15" id="Ygn-F8-8cf"/>
+                                            <constraint firstItem="oM6-yW-ZAR" firstAttribute="leading" secondItem="sT5-4A-lkT" secondAttribute="leading" constant="15" id="d5u-qr-VV4"/>
+                                            <constraint firstAttribute="trailing" secondItem="pvl-Me-83q" secondAttribute="trailing" constant="15" id="gMH-II-Dgi"/>
+                                            <constraint firstAttribute="bottom" secondItem="oM6-yW-ZAR" secondAttribute="bottom" constant="15" id="lw6-sQ-WaO"/>
+                                            <constraint firstItem="luc-Yl-iCF" firstAttribute="leading" secondItem="sT5-4A-lkT" secondAttribute="leading" constant="15" id="myF-SW-bD0"/>
+                                            <constraint firstItem="oM6-yW-ZAR" firstAttribute="top" secondItem="pvl-Me-83q" secondAttribute="bottom" constant="15" id="nd8-xT-OMb"/>
+                                            <constraint firstAttribute="trailing" secondItem="13v-nP-o7e" secondAttribute="trailing" constant="15" id="zF3-If-927"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="8b3-bh-88H"/>
+                                                <exclude reference="Ixw-49-1Md"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="sT5-4A-lkT" secondAttribute="bottom" id="WmA-GG-8b9"/>
+                                    <constraint firstItem="sT5-4A-lkT" firstAttribute="leading" secondItem="wef-Dr-3oq" secondAttribute="leading" id="c9g-8U-LlM"/>
+                                    <constraint firstAttribute="trailing" secondItem="sT5-4A-lkT" secondAttribute="trailing" id="lNq-XD-quf"/>
+                                    <constraint firstItem="sT5-4A-lkT" firstAttribute="top" secondItem="wef-Dr-3oq" secondAttribute="top" id="rNY-Vn-Zwa"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="sT5-4A-lkT" secondAttribute="width" id="1Z1-VN-fES"/>
+                            <constraint firstItem="wef-Dr-3oq" firstAttribute="leading" secondItem="6Hh-0S-6NP" secondAttribute="leadingMargin" id="A5z-9u-bKx"/>
+                            <constraint firstAttribute="centerX" secondItem="wef-Dr-3oq" secondAttribute="centerX" id="Ci1-fH-dcm"/>
+                            <constraint firstItem="3Zk-n0-2q2" firstAttribute="top" secondItem="wef-Dr-3oq" secondAttribute="bottom" id="DUP-H0-kxh"/>
+                            <constraint firstAttribute="height" secondItem="wef-Dr-3oq" secondAttribute="height" id="DZ7-dP-OMu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="wef-Dr-3oq" secondAttribute="trailing" id="Gsa-CP-N2k"/>
+                            <constraint firstAttribute="width" secondItem="wef-Dr-3oq" secondAttribute="width" id="LH2-bN-kQi"/>
+                            <constraint firstItem="wef-Dr-3oq" firstAttribute="top" secondItem="K3f-Fp-FV1" secondAttribute="bottom" id="MuF-cn-YkN"/>
+                            <constraint firstItem="3Zk-n0-2q2" firstAttribute="top" secondItem="wef-Dr-3oq" secondAttribute="bottom" id="TKv-Xc-lVO"/>
+                            <constraint firstAttribute="centerY" secondItem="wef-Dr-3oq" secondAttribute="centerY" id="st1-6N-QEk"/>
+                            <constraint firstItem="wef-Dr-3oq" firstAttribute="top" secondItem="K3f-Fp-FV1" secondAttribute="bottom" id="vky-Pa-Mhv"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="A5z-9u-bKx"/>
+                                <exclude reference="Gsa-CP-N2k"/>
+                                <exclude reference="MuF-cn-YkN"/>
+                                <exclude reference="vky-Pa-Mhv"/>
+                                <exclude reference="DUP-H0-kxh"/>
+                                <exclude reference="TKv-Xc-lVO"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Details" id="E5u-84-vYa"/>
+                    <connections>
+                        <outlet property="addressLabel" destination="pvl-Me-83q" id="VZv-yr-rXI"/>
+                        <outlet property="nameLabel" destination="luc-Yl-iCF" id="zWM-eZ-coE"/>
+                        <outlet property="partyStateDistrictLabel" destination="uD5-gA-yZs" id="87l-oS-feH"/>
+                        <outlet property="phoneLabel" destination="13v-nP-o7e" id="akV-LN-JTm"/>
+                        <outlet property="webLink" destination="oM6-yW-ZAR" id="3fA-xl-OwX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7m-dM-CTs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
