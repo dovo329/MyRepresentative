@@ -223,6 +223,9 @@
                                                 <state key="normal" title="WebLink">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="B96-f5-HtI" kind="show" id="IEh-Sf-4g8"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -299,6 +302,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7m-dM-CTs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3876" y="998"/>
+        </scene>
+        <!--Web-->
+        <scene sceneID="hbW-mz-yRx">
+            <objects>
+                <viewController id="B96-f5-HtI" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iuS-dt-plP"/>
+                        <viewControllerLayoutGuide type="bottom" id="n12-k0-g41"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gBk-0x-jMN">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E3j-PW-73G">
+                                <rect key="frame" x="16" y="64" width="568" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="E3j-PW-73G" firstAttribute="top" secondItem="iuS-dt-plP" secondAttribute="bottom" id="1u4-LA-8OG"/>
+                            <constraint firstItem="E3j-PW-73G" firstAttribute="leading" secondItem="gBk-0x-jMN" secondAttribute="leadingMargin" id="2oP-rs-YoX"/>
+                            <constraint firstItem="E3j-PW-73G" firstAttribute="top" secondItem="iuS-dt-plP" secondAttribute="bottom" id="FxE-3V-jnl"/>
+                            <constraint firstItem="n12-k0-g41" firstAttribute="top" secondItem="E3j-PW-73G" secondAttribute="bottom" id="MkK-W0-Dmk"/>
+                            <constraint firstItem="E3j-PW-73G" firstAttribute="trailing" secondItem="gBk-0x-jMN" secondAttribute="trailingMargin" id="uN4-dp-Woj"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="1u4-LA-8OG"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" title="Web" id="cWs-b5-awM" userLabel="Web"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SA6-4B-LM7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4545" y="998"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Jr1-fR-tHS">
