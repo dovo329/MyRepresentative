@@ -10,27 +10,39 @@ import UIKit
 
 class WebViewController: UIViewController {
 
+    // due to checking logic in previous view controller, htmlString is guaranteed to not be nil
+    var htmlString : String!
+    @IBOutlet weak var webView: UIWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = UIColor.purpleColor()
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        println("htmlString=\(htmlString)")
+        
+        if let url = NSURL(string: htmlString)
+        {
+            /*- (void)viewDidLoad {
+                [super viewDidLoad];
+                NSString *fullURL = @"http://conecode.com";
+                NSURL *url = [NSURL URLWithString:fullURL];
+                NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+                [_viewWeb loadRequest:requestObj];
+            }*/
+            //webView.loadHTMLString(htmlString, baseURL: url)
+            let request = NSURLRequest(URL: url)
+            webView.loadRequest(request)
+        } else {
+            doAlertWithTitle("Could not make a valid url out of input htmlString", message: "", dismissText: "Okay")
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func doAlertWithTitle(title: String, message: String, dismissText: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let dismissOption = UIAlertAction(title: dismissText, style: UIAlertActionStyle.Default)
+            { _ -> Void in }
+        
+        alertController.addAction(dismissOption)
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
-    */
-
 }

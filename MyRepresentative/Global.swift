@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum SearchBy: Int {
         case ZipCode = 0

@@ -25,6 +25,12 @@ class RepresentativeDetailViewController: UIViewController {
     @IBOutlet weak var addressLabel: UILabel!
 
     @IBOutlet weak var webLink: UIButton!
+    
+    enum SegueId: String
+    {
+        case ToWeb = "to.web.segue"
+    }
+    
     let veryLongTestString = "asdfkjopwieuroicviopu4r9087qwe0f98jasdf0jh9820hr98qnef980nwdf980jhq893ru98uf89djas89df0j8902qjr98qner98nwd98js98vj98as0dj980n98rnq98efj98asdnv98asdjf89jasd98fj98qj34r89jq98ef98sandv98asnre89fjq3948jr9ajdv9izxjv98jzx98cvu98sudf98u4iortjfghiuoasdhfguiay89buzx98cvz9xnv98uasdnf98awhef98hq98etu98wrty98adfhvushvu9bncv9uhzxc98vua980ertuy89qy89shdvuishdfv9ubnxcz9ub9adsfh98wuert89uwe89fhas9va98sdhv98ashd98hw98eru89duf98shd98asdf98absd89va89fuq89eruy89duf98ashdf98asd98fas98vuas89dfu98qweyr89ahsdv98absd9f8asdf89045879048970897023489u0890g8usiofjodfbijodf0ub089udsfu80gsdfiongjnopsdfghiu0sdf90u8biuh0sdfbinuinu0u0tgiu03rginuosfinougiu0sdfgju3ju90rginu0wiu54g"
     
     override func viewDidLoad() {
@@ -75,11 +81,12 @@ class RepresentativeDetailViewController: UIViewController {
             //webLink.layer.borderWidth = 1.0
             //webLink.layer.borderColor = UIColor.blackColor().CGColor
             
-            webLink.addTarget(self, action: "openWebLink:", forControlEvents: UIControlEvents.TouchUpInside)
+            // used to open Safari on clicking web link
+            // but for now I think users would prefer a webview instead so they can navigate back and look at other representatives without having to exit Safari and reopen the app
+            //webLink.addTarget(self, action: "openWebLink:", forControlEvents: UIControlEvents.TouchUpInside)
             
             // detect if ios 8.0 or greater
             if floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1 {
-                println("ios 8.0 or >")
                 // ios 8.0 or > can use autolayout with auto number of lines
                 nameLabel.numberOfLines = 0
                 partyStateDistrictLabel.numberOfLines = 0
@@ -88,7 +95,7 @@ class RepresentativeDetailViewController: UIViewController {
             }
             else
             {
-                println("< ios 8.0")
+                // ios is < 8.0 so can't use numberOfLine = 0
             }
             
         }
@@ -99,8 +106,6 @@ class RepresentativeDetailViewController: UIViewController {
     }
     
     func openWebLink(sender: UIButton!) {
-        println("weblink opened")
-        
         if let nsUrl = NSURL(string: sender.titleLabel!.text!)
         {
             UIApplication.sharedApplication().openURL(nsUrl)
@@ -130,5 +135,51 @@ class RepresentativeDetailViewController: UIViewController {
         bgGradLayer.endPoint = CGPoint(x:0.0, y:1.0)
         bgGradLayer.shouldRasterize = true
         view.layer.insertSublayer(bgGradLayer, atIndex: 0)
+    }
+    
+    func doAlertWithTitle(title: String, message: String, dismissText: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let dismissOption = UIAlertAction(title: dismissText, style: UIAlertActionStyle.Default)
+            { _ -> Void in }
+        
+        alertController.addAction(dismissOption)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
+        if identifier == SegueId.ToWeb.rawValue
+        {
+            if let label = webLink.titleLabel
+            {
+                if let webString = label.text {
+                    return true
+                } else {
+                    // do alert that the webLink text is nil
+                    doAlertWithTitle("Weblink text doesn't exist", message: "", dismissText: "Okay")
+                    return false
+                }
+            } else {
+                // do alert that the webLink label is nil
+                doAlertWithTitle("Weblink label is nil", message: "", dismissText: "Okay")
+                return false
+            }
+            
+        } else {
+            fatalError("unknown segue identifier in RepresentativeDetailViewController")
+            return false
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let destinationViewController = segue.destinationViewController as? WebViewController
+        {
+            // okay force unwrapping webLink.titleLabel.text here because check that it exists has already been performed in shouldPerformSegueWithIdentifier
+            destinationViewController.htmlString = webLink.titleLabel!.text!
+        }
+        else
+        {
+            fatalError("Wrong destination view controller type, expected RepresentativeDetailViewController, cast failed")
+        }
     }
 }
