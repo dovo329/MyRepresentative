@@ -338,7 +338,7 @@
             </objects>
             <point key="canvasLocation" x="3876" y="998"/>
         </scene>
-        <!--Web-->
+        <!--Webpage-->
         <scene sceneID="hbW-mz-yRx">
             <objects>
                 <viewController id="B96-f5-HtI" customClass="WebViewController" customModule="MyRepresentative" customModuleProvider="target" sceneMemberID="viewController">
@@ -363,7 +363,7 @@
                             <constraint firstAttribute="centerY" secondItem="E3j-PW-73G" secondAttribute="centerY" id="KZi-lc-8g0"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Web" id="cWs-b5-awM" userLabel="Web"/>
+                    <navigationItem key="navigationItem" title="Webpage" id="cWs-b5-awM" userLabel="Web"/>
                     <connections>
                         <outlet property="webView" destination="E3j-PW-73G" id="yeN-ql-qFq"/>
                     </connections>
