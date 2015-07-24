@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>3BD7F6B0-8FF4-4B36-90FF-125A12BCD739</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MyRepresentative</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>170D334E3365F928E09C3681B7055623296B6649</key>
+		<string>https://github.com/dovo329/MyRepresentative.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MyRepresentative.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>170D334E3365F928E09C3681B7055623296B6649</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/dovo329/MyRepresentative.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>170D334E3365F928E09C3681B7055623296B6649</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>170D334E3365F928E09C3681B7055623296B6649</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MyRepresentative</string>
+		</dict>
+	</array>
+</dict>
+</plist>
