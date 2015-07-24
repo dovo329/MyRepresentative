@@ -108,7 +108,7 @@ class RepresentativeListViewController: UITableViewController {
         sender.invalidate()
         
         // only present new alert if no existing alerts
-        if presentedViewController != nil {
+        if presentedViewController == nil {
             let alertController = UIAlertController(title: "Senator Search Timed Out", message: "", preferredStyle: UIAlertControllerStyle.Alert)
             let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
             { _ -> Void in
@@ -135,7 +135,7 @@ class RepresentativeListViewController: UITableViewController {
         sender.invalidate()
         
         // only present new alert if no existing alerts
-        if presentedViewController != nil {
+        if presentedViewController == nil {
             let alertController = UIAlertController(title: "House Search Timed Out", message: "", preferredStyle: UIAlertControllerStyle.Alert)
             let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
                 { _ -> Void in

@@ -18,7 +18,7 @@ enum SearchType: Int {
 func alertWithTitle(title: String, #message: String, #dismissText: String, #viewController: UIViewController) {
     
     // only present new alert if no existing alerts
-    if viewController.presentedViewController != nil {
+    if viewController.presentedViewController == nil {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         let dismissOption = UIAlertAction(title: dismissText, style: UIAlertActionStyle.Default)
             { _ -> Void in }
