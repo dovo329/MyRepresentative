@@ -17,7 +17,7 @@ class WebViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        println("htmlString=\(htmlString)")
+        //println("htmlString=\(htmlString)")
         
         if let url = NSURL(string: htmlString)
         {

@@ -38,10 +38,10 @@ class RepresentativeListViewController: UITableViewController {
         senSearchDone = false
         repSearchDone = false
         
-        println("searchType is \(searchType)")
-        println("my zipCode is \(zipCode)")
-        println("my lastName is \(lastName)")
-        println("my state is \(state)")
+        //println("searchType is \(searchType)")
+        //println("my zipCode is \(zipCode)")
+        //println("my lastName is \(lastName)")
+        //println("my state is \(state)")
 
         title = "Searching..."
         // by zip code
@@ -157,75 +157,6 @@ class RepresentativeListViewController: UITableViewController {
         }
     }
     
-    /*func queryRepresentatives()
-    {
-        //println("my zipCode is \(zipCode)")
-        //println("my lastName is \(lastName)")
-        //println("my state is \(state)")
-        //println("my searchBy is \(searchBy)")
-        if let searchBy = searchBy {
-        } else {
-            fatalError("searchBy is nil!")
-        }
-        
-        title = "Searching..."
-        // by your zip code
-        
-        // reps by last name
-        //http://whoismyrepresentative.com/getall_reps_byname.php?name=smith
-        
-        // by user's current location (to get zip code)
-        
-        // reps by state
-        // http://whoismyrepresentative.com/getall_reps_bystate.php?state=CA
-        
-        // sens by last name
-        // http://whoismyrepresentative.com/getall_sens_byname.php?name=johnson
-        
-        // sens by state
-        // http://whoismyrepresentative.com/getall_sens_bystate.php?state=ME
-        
-        if searchBy == SearchBy.ZipCode
-        {
-            if zipCode == ""
-            {
-                fatalError("attempted to search for empty zip code string")
-            }
-            let urlString = String(format:"http://whoismyrepresentative.com/getall_mems.php?zip=%@&output=json", zipCode)
-            doQueryWithUrlString(urlString)
-        }
-        else if searchBy == SearchBy.LastName
-        {
-            if lastName == ""
-            {
-                fatalError("attempted to search for empty last name string")
-            }
-            let senatorUrlString = String(format:"http://whoismyrepresentative.com/getall_sens_byname.php?name=%@&output=json", lastName)
-            doQueryWithUrlString(senatorUrlString)
-            
-            let representativeUrlString = String(format:"http://whoismyrepresentative.com/getall_reps_byname.php?name=%@&output=json", lastName)
-            doQueryWithUrlString(representativeUrlString)
-        }
-        else if searchBy == SearchBy.State
-        {
-            if state == ""
-            {
-                fatalError("attempted to search for empty state string")
-            }
-            let senatorUrlString = String(format:"http://whoismyrepresentative.com/getall_sens_bystate.php?state=%@&output=json", state)
-            doQueryWithUrlString(senatorUrlString)
-            
-            let representativeUrlString = String(format:"http://whoismyrepresentative.com/getall_reps_bystate.php?state=%@&output=json", state)
-            doQueryWithUrlString(representativeUrlString)
-        }
-        else
-        {
-            fatalError("this search type not implemented")
-        }
-        
-        searchTimer = NSTimer.scheduledTimerWithTimeInterval(kQueryTimeoutInSeconds, target: self, selector: "searchTimedOut:", userInfo: nil, repeats: false)
-    }*/
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell =
@@ -312,7 +243,7 @@ class RepresentativeListViewController: UITableViewController {
                                         
                                         if urlString.lowercaseString.rangeOfString("getall_sens") != nil || urlString.lowercaseString.rangeOfString("getall_mems") != nil {
                                             self.senSearchDone = true
-                                            println("sen search done")
+                                            //println("sen search done")
                                             self.senSearchTimer.invalidate()
                                         }
                                         
@@ -321,7 +252,7 @@ class RepresentativeListViewController: UITableViewController {
                                         if testRepArr.count > 0 {
                                             self.representativeArr = testRepArr
                                             self.repSearchDone = true
-                                            println("rep search done")
+                                            //println("rep search done")
                                             self.repSearchTimer.invalidate()
                                         }
                                         
@@ -343,13 +274,13 @@ class RepresentativeListViewController: UITableViewController {
                                     // no results returned, set search to done based on url to get search type and invalidate timers
                                     if urlString.lowercaseString.rangeOfString("getall_sens") != nil || urlString.lowercaseString.rangeOfString("getall_mems") != nil {
                                             self.senSearchDone = true
-                                            println("sen search done")
+                                            //println("sen search done")
                                             self.senSearchTimer.invalidate()
                                     }
                                     
                                     if urlString.lowercaseString.rangeOfString("getall_reps") != nil || urlString.lowercaseString.rangeOfString("getall_mems") != nil {
                                             self.repSearchDone = true
-                                            println("rep search done")
+                                            //println("rep search done")
                                             self.repSearchTimer.invalidate()
                                     }
 
@@ -363,7 +294,8 @@ class RepresentativeListViewController: UITableViewController {
                             })
                         }
                     } else {
-                        println("error=\(error)")
+                        //println("error=\(error)")
+                        alertWithTitle("Error returned from NSURLSession", message: "", dismissText: "Okay", viewController: self)
                         fatalError("Error returned from nsurlsession")
                     }
             })
@@ -374,91 +306,6 @@ class RepresentativeListViewController: UITableViewController {
             fatalError("failed to create nsUrl from urlString \(urlString)")
         }
     }
-    
-    /*func doQueryWithUrlString(urlString : String)
-    {
-        
-        if let nsUrl = NSURL(string: urlString)
-        {
-            let session = NSURLSession.sharedSession()
-            let dataTask = session.dataTaskWithURL(nsUrl, completionHandler:
-                {(data, response, error) -> Void in
-                    self.searchTimer.invalidate()
-                    
-                    if error == nil
-                    {
-                        var jsonError:NSError? = nil
-                        let jsonObject: AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error:&jsonError)
-                        
-                        if let jsonObject = jsonObject as? [String:AnyObject]
-                        {
-                            if let dictArr = jsonObject["results"] as? NSArray
-                            {
-                                // update UI is on the main thread
-                                dispatch_async(
-                                    dispatch_get_main_queue(),
-                                    { () -> Void in
-                                        self.title = "List"
-                                        
-                                        var repArr = [Representative]()
-                                        for dict in dictArr
-                                        {
-                                            if let dict = dict as? NSDictionary
-                                            {
-                                                let rep = Representative(dict: dict)
-                                                rep.print()
-                                                repArr.append(rep)
-                                            } else {
-                                                fatalError("cast to dictionary failed")
-                                            }
-                                            
-                                        }
-                                        
-                                        let testSenArr = self.getSenators(repArr)
-                                        // check if any senators returned, if not not this could be a representative only search so we don't want to clobber the senatorArr
-                                        if testSenArr.count > 0
-                                        {
-                                            self.senatorArr = testSenArr
-                                        }
-                                        
-                                        let testRepArr = self.getRepresentatives(repArr)
-                                        // check if any representatives returned, if not not this could be a representative only search so we don't want to clobber the senatorArr
-                                        if testRepArr.count > 0
-                                        {
-                                            self.representativeArr = testRepArr
-                                        }
-
-                                        self.tableView.reloadData()
-                                    }
-                                )
-                            } else {
-                                fatalError("Failed to cast JSON response to NSArray")
-                            }
-                        } else {
-                            // no data returned from server so no matches
-                            // update UI is on the main thread
-                            dispatch_async(dispatch_get_main_queue(),
-                                { () -> Void in
-                                    self.title = "No Matches"
-                                    let alertController = UIAlertController(title: "No Matches", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-                                    let dismissOption = UIAlertAction(title: "Okay", style: UIAlertActionStyle.Default)
-                                        { _ -> Void in }
-                                    alertController.addAction(dismissOption)
-                                    self.presentViewController(alertController, animated: true, completion: nil)
-                            })
-                        }
-                    } else {
-                        println("error=\(error)")
-                        fatalError("Error returned from nsurlsession")
-                    }
-            })
-            dataTask.resume()
-        }
-        else
-        {
-            fatalError("failed to create nsUrl from urlString \(urlString)")
-        }
-    }*/
     
     func getSenators(repArr: [Representative]) -> [Representative]
     {

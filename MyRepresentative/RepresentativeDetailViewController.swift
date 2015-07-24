@@ -40,7 +40,6 @@ class RepresentativeDetailViewController: UIViewController {
         
         if let rep = representative
         {
-            rep.print()
             nameLabel.text = rep.name
             
             if rep.link!.rangeOfString("house.gov") != nil
