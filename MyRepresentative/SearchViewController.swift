@@ -104,16 +104,16 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         // check for invalid input and present alert to user to correct it instead of feeding the list view controller bad search input
         if let id = identifier {
             if id == SegueId.ZipCode.rawValue {
-                if zipCodeTextField.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) < 5 {
+                if zipCodeTextField.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) != 5 {
                     zipCodeTextField.text = ""
                     
-                    alertWithTitle("Zip Code Must Be At Least 5 Digits", message: "", dismissText: "Got It", viewController: self)
+                    alertWithTitle("Zip Code Must Be 5 Digits Long", message: "", dismissText: "Got It", viewController: self)
                     
                     return false
                 } else if containsLetters(zipCodeTextField.text) {
                     zipCodeTextField.text = ""
                     
-                    alertWithTitle("Zip Codes Are Numbers Only", message: "", dismissText: "Got It", viewController: self)
+                    alertWithTitle("Zip Codes Can't Contain Letters", message: "", dismissText: "Got It", viewController: self)
                     
                     return false
                 } else {
