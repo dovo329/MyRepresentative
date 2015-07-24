@@ -42,16 +42,10 @@ class RepresentativeDetailViewController: UIViewController {
                 partyStateDistrictLabel.text = String(format: "%@, %@, %@", rep.party!, rep.state!, rep.district!)
             }
             
-            if rep.party == "D" {
-                doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
-                    endColor: UIColor(red: 0.9, green: 0.9, blue: 1.0, alpha: 1.0))
-            } else if rep.party == "R" {
-                doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
-                    endColor: UIColor(red: 1.0, green: 0.9, blue: 0.9, alpha: 1.0))
-            } else {
-                doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
-                    endColor: UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0))
-            }
+            // rep fields guaranteed to be valid here
+            let colors = UIColor.gradientColorsForParty(rep.party!)
+
+            doBackgroundGradientWithColors(colors[0], endColor: colors[1])
             
             phoneLabel.text = rep.phone
             

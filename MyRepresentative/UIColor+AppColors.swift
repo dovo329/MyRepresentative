@@ -24,5 +24,18 @@ extension UIColor {
                 return UIColor.whiteColor()
         }
     }
+    
+    class func gradientColorsForParty(party: String) -> [UIColor] {
+        switch party {
+        case "D":
+            return [ UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), UIColor(red: 0.9, green: 0.9, blue: 1.0, alpha: 1.0) ]
+        case "R":
+            return [ UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), UIColor(red: 1.0, green: 0.9, blue: 0.9, alpha: 1.0) ]
+        case "I":
+            return [ UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0) ]
+        default:
+            return [ UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0) ]
+        }
+    }
 }
 
