@@ -120,7 +120,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Search For Representatives" id="0e3-6T-YXM"/>
+                    <navigationItem key="navigationItem" title="Federal Representatives" id="0e3-6T-YXM"/>
                     <connections>
                         <outlet property="lastNameTextField" destination="Fnb-jg-F0L" id="TdL-vd-XSG"/>
                         <outlet property="searchByStateButton" destination="Ox3-EY-4Ii" id="mxj-i2-Sy8"/>
