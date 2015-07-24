@@ -23,6 +23,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     
     var bgGradLayer = CAGradientLayer()
     
+    var numberPadBar = UIToolbar()
+    
     enum SegueId: String
     {
         case ZipCode = "search.by.zip.code.segue"
@@ -32,8 +34,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        //navigationController?.navigationBar.tintColor = UIColor.orangeColor()
+        
         doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
             endColor: UIColor(red: 0.9, green: 1.0, blue: 1.0, alpha: 1.0))
         
@@ -49,9 +50,23 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         // dismiss keyboard if user taps outside of keyboard area
         let tap = UITapGestureRecognizer(target: self, action: "outsideTap:")
         view.addGestureRecognizer(tap)
+
+        // numberPadBar is for dismissing the number pad which normally doesn't have a "return" or "done" button
+        numberPadBar.barStyle = UIBarStyle.BlackTranslucent
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "dismissNumberPad:")
+        numberPadBar.items = [flexibleSpace, doneButton]
+        numberPadBar.sizeToFit()
+        
+        zipCodeTextField.inputAccessoryView = numberPadBar
     }
     
     func outsideTap(sender: UITapGestureRecognizer!) {
+        view.endEditing(true)
+    }
+    
+    func dismissNumberPad(sender: UIBarButtonItem!)
+    {
         view.endEditing(true)
     }
     
