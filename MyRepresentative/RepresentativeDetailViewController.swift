@@ -76,6 +76,21 @@ class RepresentativeDetailViewController: UIViewController {
             //webLink.layer.borderColor = UIColor.blackColor().CGColor
             
             webLink.addTarget(self, action: "openWebLink:", forControlEvents: UIControlEvents.TouchUpInside)
+            
+            // detect if ios 8.0 or greater
+            if floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1 {
+                println("ios 8.0 or >")
+                // ios 8.0 or > can use autolayout with auto number of lines
+                nameLabel.numberOfLines = 0
+                partyStateDistrictLabel.numberOfLines = 0
+                phoneLabel.numberOfLines = 0
+                addressLabel.numberOfLines = 0
+            }
+            else
+            {
+                println("< ios 8.0")
+            }
+            
         }
         else
         {
