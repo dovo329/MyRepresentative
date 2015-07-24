@@ -10,7 +10,7 @@
 
 import UIKit
 
-class RepresentativeListViewController: UITableViewController {
+class RepresentativeListViewController: UITableViewController, UIAlertViewDelegate {
     
     // Following vars should be populated by previous view controller on segue
     var zipCode : String = ""
@@ -39,6 +39,12 @@ class RepresentativeListViewController: UITableViewController {
     {
         case Senator = 0
         case Representative = 1
+    }
+    
+    enum AlertViewButton: Int
+    {
+        case Cancel = 0
+        case Retry = 1
     }
     
     override func viewDidLoad() {
@@ -136,24 +142,48 @@ class RepresentativeListViewController: UITableViewController {
         
         // only present new alert if no existing alerts
         if presentedViewController == nil {
-            let alertController = UIAlertController(title: "Senator Search Timed Out", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-            let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
-            { _ -> Void in
-                if let searchType = self.searchType {
-                    self.searchForRepresentativesBy(searchType)
-                } else {
-                    // this should never happen, but if it does...
-                    self.navigationController?.popViewControllerAnimated(true)
-                    alertWithTitle("Retry Senator Search SearchType Error", message: "", dismissText: "Okay", viewController: self)
+
+            let title = "Senator Search Timed Out"
+            let message = ""
+            if objc_getClass("UIAlertController") != nil {
+                
+                let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
+                    { _ -> Void in
+                        if let searchType = self.searchType {
+                            self.searchForRepresentativesBy(searchType)
+                        } else {
+                            // this should never happen, but if it does...
+                            self.navigationController?.popViewControllerAnimated(true)
+                            alertWithTitle("Retry Senator Search SearchType Error", message: "", dismissText: "Okay", viewController: self)
+                        }
                 }
+                
+                let giveUpOption = UIAlertAction(title: "Don't", style: UIAlertActionStyle.Default)
+                    { _ -> Void in }
+                alertController.addAction(retryOption)
+                alertController.addAction(giveUpOption)
+                
+                presentViewController(alertController, animated: true, completion: nil)
+            } else {
+                let alertView = UIAlertView(title: title, message: message, delegate: self, cancelButtonTitle: "Don't", otherButtonTitles: "Retry")
+
+                alertView.show()
             }
-        
-            let giveUpOption = UIAlertAction(title: "Don't", style: UIAlertActionStyle.Default)
-            { _ -> Void in }
-            alertController.addAction(retryOption)
-            alertController.addAction(giveUpOption)
             
-            presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+        
+        if buttonIndex == AlertViewButton.Retry.rawValue {
+            if let searchType = self.searchType {
+                self.searchForRepresentativesBy(searchType)
+            } else {
+                // this should never happen, but if it does...
+                self.navigationController?.popViewControllerAnimated(true)
+                alertWithTitle("Retry Search SearchType Error", message: "", dismissText: "Okay", viewController: self)
+            }
         }
     }
     
@@ -163,24 +193,35 @@ class RepresentativeListViewController: UITableViewController {
         
         // only present new alert if no existing alerts
         if presentedViewController == nil {
-            let alertController = UIAlertController(title: "House Search Timed Out", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-            let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
-                { _ -> Void in
-                    if let searchType = self.searchType {
-                        self.searchForRepresentativesBy(searchType)
-                    } else {
-                        // this should never happen, but if it does...
-                        self.navigationController?.popViewControllerAnimated(true)
-                        alertWithTitle("Retry House Search SearchType Error", message: "", dismissText: "Okay", viewController: self)
-                    }
+
+            let title = "Representative Search Timed Out"
+            let message = ""
+            if objc_getClass("UIAlertController") != nil {
+                
+                let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
+                    { _ -> Void in
+                        if let searchType = self.searchType {
+                            self.searchForRepresentativesBy(searchType)
+                        } else {
+                            // this should never happen, but if it does...
+                            self.navigationController?.popViewControllerAnimated(true)
+                            alertWithTitle("Retry Representative Search SearchType Error", message: "", dismissText: "Okay", viewController: self)
+                        }
+                }
+                
+                let giveUpOption = UIAlertAction(title: "Don't", style: UIAlertActionStyle.Default)
+                    { _ -> Void in }
+                alertController.addAction(retryOption)
+                alertController.addAction(giveUpOption)
+                
+                presentViewController(alertController, animated: true, completion: nil)
+            } else {
+                let alertView = UIAlertView(title: title, message: message, delegate: self, cancelButtonTitle: "Don't", otherButtonTitles: "Retry")
+
+                alertView.show()
             }
             
-            let giveUpOption = UIAlertAction(title: "Don't", style: UIAlertActionStyle.Default)
-                { _ -> Void in }
-            alertController.addAction(retryOption)
-            alertController.addAction(giveUpOption)
-            
-            presentViewController(alertController, animated: true, completion: nil)
         }
     }
     
