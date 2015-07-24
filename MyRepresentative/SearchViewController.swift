@@ -31,8 +31,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        doBackgroundGradientWithColors(UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
-            endColor: UIColor(red: 0.9, green: 1.0, blue: 1.0, alpha: 1.0))
+        let colors = UIColor.gradientColorsForSearch()
+        doBackgroundGradientWithColors(colors[0], endColor: colors[1])
 
         prettifySearchByStateButton()
         createNumberPadDoneBar()

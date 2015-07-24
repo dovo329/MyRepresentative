@@ -37,5 +37,9 @@ extension UIColor {
             return [ UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0) ]
         }
     }
+    
+    class func gradientColorsForSearch() -> [UIColor] {
+        return [ UIColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), UIColor(red: 0.9, green: 1.0, blue: 1.0, alpha: 1.0) ]
+    }
 }
 
