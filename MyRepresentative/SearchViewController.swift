@@ -9,19 +9,19 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class SearchViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var zipCodeTextField: UITextField!
     
     @IBOutlet weak var statePicker: UIPickerView!
+    
+    @IBOutlet var statePickerDataSource: StatePickerDataSource!
     
     @IBOutlet weak var lastNameTextField: UITextField!
     
     @IBOutlet weak var searchByStateButton: UIButton!
     
     var bgGradLayer = CAGradientLayer()
-    
-    let stateList = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"]
     
     enum SegueId: String
     {
@@ -139,23 +139,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate, UIPickerViewD
             destinationViewController.zipCode = zipCodeTextField.text
             destinationViewController.lastName = lastNameTextField.text
             let pickerIndex = statePicker.selectedRowInComponent(0)
-            destinationViewController.state = stateList[pickerIndex]
+            destinationViewController.state = statePickerDataSource.stateList[pickerIndex]
         } else {
             fatalError("Wrong destination view controller type, expected RepresentativeListViewController, cast failed")
         }
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return stateList[row]
-    }
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return stateList.count
-    }
+    }        
     
     func containsLetters(testString: String) -> Bool
     {

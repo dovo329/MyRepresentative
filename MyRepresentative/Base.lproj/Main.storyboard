@@ -64,8 +64,8 @@
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YYT-AY-zTk">
                                 <rect key="frame" x="219" y="438" width="162" height="162"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="LRe-hL-Ug4"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="FLs-l4-0HI"/>
+                                    <outlet property="dataSource" destination="OX0-kL-SIR" id="9sd-a3-zoU"/>
+                                    <outlet property="delegate" destination="OX0-kL-SIR" id="ZxZ-4w-g5v"/>
                                 </connections>
                             </pickerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dS8-E8-IZG" userLabel="spacerView1">
@@ -125,10 +125,12 @@
                         <outlet property="lastNameTextField" destination="Fnb-jg-F0L" id="TdL-vd-XSG"/>
                         <outlet property="searchByStateButton" destination="Ox3-EY-4Ii" id="mxj-i2-Sy8"/>
                         <outlet property="statePicker" destination="YYT-AY-zTk" id="rTQ-F7-fYQ"/>
+                        <outlet property="statePickerDataSource" destination="OX0-kL-SIR" id="v6J-bM-kYF"/>
                         <outlet property="zipCodeTextField" destination="uYe-BH-2Vi" id="i23-Af-pwK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <customObject id="OX0-kL-SIR" customClass="StatePickerDataSource" customModule="MyRepresentative" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="2505" y="998"/>
         </scene>
