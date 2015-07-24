@@ -19,12 +19,14 @@ class RepresentativeDetailViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     
     @IBOutlet weak var partyStateDistrictLabel: UILabel!
-
+    
     @IBOutlet weak var phoneLabel: UILabel!
     
     @IBOutlet weak var addressLabel: UILabel!
-
-    @IBOutlet weak var webLink: UIButton!
+    
+    @IBOutlet weak var openInAppButton: UIButton!
+    
+    @IBOutlet weak var openInSafariButton: UIButton!
     
     enum SegueId: String
     {
@@ -70,20 +72,25 @@ class RepresentativeDetailViewController: UIViewController {
             
             addressLabel.text = rep.office
             
-            webLink.setTitle(rep.link, forState: UIControlState.Normal)
-            webLink.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
-            webLink.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
-            webLink.backgroundColor = UIColor.whiteColor()
-            webLink.layer.cornerRadius = 5.0
-            webLink.layer.shadowOffset = CGSizeMake(1.0, 1.0)
-            webLink.layer.shadowColor = UIColor.blackColor().CGColor
-            webLink.layer.shadowOpacity = 0.5
-            //webLink.layer.borderWidth = 1.0
-            //webLink.layer.borderColor = UIColor.blackColor().CGColor
+            openInAppButton.setTitle(rep.link, forState: UIControlState.Normal)
+            openInAppButton.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+            openInAppButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
+            openInAppButton.backgroundColor = UIColor.whiteColor()
+            openInAppButton.layer.cornerRadius = 5.0
+            openInAppButton.layer.shadowOffset = CGSizeMake(1.0, 1.0)
+            openInAppButton.layer.shadowColor = UIColor.blackColor().CGColor
+            openInAppButton.layer.shadowOpacity = 0.5
             
-            // used to open Safari on clicking web link
-            // but for now I think users would prefer a webview instead so they can navigate back and look at other representatives without having to exit Safari and reopen the app
-            //webLink.addTarget(self, action: "openWebLink:", forControlEvents: UIControlEvents.TouchUpInside)
+            openInSafariButton.setTitle(rep.link, forState: UIControlState.Normal)
+            openInSafariButton.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+            openInSafariButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
+            openInSafariButton.backgroundColor = UIColor.whiteColor()
+            openInSafariButton.layer.cornerRadius = 5.0
+            openInSafariButton.layer.shadowOffset = CGSizeMake(1.0, 1.0)
+            openInSafariButton.layer.shadowColor = UIColor.blackColor().CGColor
+            openInSafariButton.layer.shadowOpacity = 0.5
+            
+            openInSafariButton.addTarget(self, action: "openInSafari:", forControlEvents: UIControlEvents.TouchUpInside)
             
             // detect if ios 8.0 or greater
             if floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1 {
@@ -105,7 +112,7 @@ class RepresentativeDetailViewController: UIViewController {
         }
     }
     
-    func openWebLink(sender: UIButton!) {
+    func openInSafari(sender: UIButton!) {
         if let nsUrl = NSURL(string: sender.titleLabel!.text!)
         {
             UIApplication.sharedApplication().openURL(nsUrl)
@@ -150,18 +157,18 @@ class RepresentativeDetailViewController: UIViewController {
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         if identifier == SegueId.ToWeb.rawValue
         {
-            if let label = webLink.titleLabel
+            if let label = openInAppButton.titleLabel
             {
                 if let webString = label.text {
                     return true
                 } else {
-                    // do alert that the webLink text is nil
-                    doAlertWithTitle("Weblink text doesn't exist", message: "", dismissText: "Okay")
+                    // do alert that the text is nil
+                    doAlertWithTitle("Open In App Button text doesn't exist", message: "", dismissText: "Okay")
                     return false
                 }
             } else {
                 // do alert that the webLink label is nil
-                doAlertWithTitle("Weblink label is nil", message: "", dismissText: "Okay")
+                doAlertWithTitle("Open In App Button label is nil", message: "", dismissText: "Okay")
                 return false
             }
             
@@ -175,7 +182,7 @@ class RepresentativeDetailViewController: UIViewController {
         if let destinationViewController = segue.destinationViewController as? WebViewController
         {
             // okay force unwrapping webLink.titleLabel.text here because check that it exists has already been performed in shouldPerformSegueWithIdentifier
-            destinationViewController.htmlString = webLink.titleLabel!.text!
+            destinationViewController.htmlString = openInAppButton.titleLabel!.text!
         }
         else
         {

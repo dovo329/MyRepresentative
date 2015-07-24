@@ -193,7 +193,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sT5-4A-lkT" userLabel="contentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="207"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="307"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="luc-Yl-iCF" userLabel="nameLabel">
                                                 <rect key="frame" x="15" y="15" width="570" height="21"/>
@@ -217,15 +217,32 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="oM6-yW-ZAR" userLabel="webLink">
-                                                <rect key="frame" x="15" y="159" width="570" height="33"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open in App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJ0-aZ-svP" userLabel="OpenInApp">
+                                                <rect key="frame" x="15" y="159" width="570" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <state key="normal" title="WebLink">
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="oM6-yW-ZAR" userLabel="openInAppButton">
+                                                <rect key="frame" x="15" y="185" width="570" height="33"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="Open In App Button">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <segue destination="B96-f5-HtI" kind="show" identifier="to.web.segue" id="IEh-Sf-4g8"/>
+                                                    <segue destination="B96-f5-HtI" kind="show" identifier="to.web.segue" id="PcI-kI-Sb1"/>
                                                 </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open in Safari" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="to3-XQ-86a" userLabel="OpenInSafari">
+                                                <rect key="frame" x="15" y="233" width="570" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="nHK-OG-bs3" userLabel="openInSafariButton">
+                                                <rect key="frame" x="15" y="259" width="570" height="33"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <state key="normal" title="OpenInSafariButton">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -233,26 +250,41 @@
                                             <constraint firstItem="pvl-Me-83q" firstAttribute="top" secondItem="13v-nP-o7e" secondAttribute="bottom" constant="15" id="15m-zS-vNw"/>
                                             <constraint firstAttribute="trailing" secondItem="luc-Yl-iCF" secondAttribute="trailing" constant="15" id="3TM-LT-yBk"/>
                                             <constraint firstItem="luc-Yl-iCF" firstAttribute="top" secondItem="sT5-4A-lkT" secondAttribute="top" constant="15" id="6xd-17-Lm0"/>
+                                            <constraint firstAttribute="trailing" secondItem="to3-XQ-86a" secondAttribute="trailing" constant="15" id="7pC-cO-9C5"/>
                                             <constraint firstItem="uD5-gA-yZs" firstAttribute="leading" secondItem="sT5-4A-lkT" secondAttribute="leading" constant="15" id="8HY-qw-aHU"/>
                                             <constraint firstItem="13v-nP-o7e" firstAttribute="top" secondItem="pvl-Me-83q" secondAttribute="bottom" constant="15" id="8b3-bh-88H"/>
                                             <constraint firstItem="pvl-Me-83q" firstAttribute="leading" secondItem="sT5-4A-lkT" secondAttribute="leading" constant="15" id="9mf-Fi-SmE"/>
+                                            <constraint firstItem="nHK-OG-bs3" firstAttribute="leading" secondItem="sT5-4A-lkT" secondAttribute="leading" constant="15" id="B8G-v1-vfO"/>
                                             <constraint firstItem="13v-nP-o7e" firstAttribute="top" secondItem="uD5-gA-yZs" secondAttribute="bottom" constant="15" id="DhA-Gy-Q5g"/>
                                             <constraint firstItem="13v-nP-o7e" firstAttribute="leading" secondItem="sT5-4A-lkT" secondAttribute="leading" constant="15" id="Hkw-wG-TeA"/>
                                             <constraint firstItem="13v-nP-o7e" firstAttribute="top" secondItem="pvl-Me-83q" secondAttribute="bottom" constant="15" id="Ixw-49-1Md"/>
+                                            <constraint firstItem="nJ0-aZ-svP" firstAttribute="top" secondItem="pvl-Me-83q" secondAttribute="bottom" constant="15" id="Lrh-32-RC7"/>
                                             <constraint firstAttribute="trailing" secondItem="oM6-yW-ZAR" secondAttribute="trailing" constant="15" id="Ly5-Jw-QgF"/>
+                                            <constraint firstItem="oM6-yW-ZAR" firstAttribute="top" secondItem="to3-XQ-86a" secondAttribute="bottom" constant="-26" id="Oc8-qi-iLu"/>
+                                            <constraint firstItem="nJ0-aZ-svP" firstAttribute="leading" secondItem="sT5-4A-lkT" secondAttribute="leading" constant="15" id="RLM-Ur-gQu"/>
+                                            <constraint firstItem="nHK-OG-bs3" firstAttribute="top" secondItem="to3-XQ-86a" secondAttribute="bottom" constant="5" id="SX0-Q0-06I"/>
+                                            <constraint firstItem="to3-XQ-86a" firstAttribute="top" secondItem="oM6-yW-ZAR" secondAttribute="bottom" constant="15" id="WnQ-B5-jpT"/>
                                             <constraint firstAttribute="trailing" secondItem="uD5-gA-yZs" secondAttribute="trailing" constant="15" id="YP0-rv-Ag1"/>
                                             <constraint firstItem="uD5-gA-yZs" firstAttribute="top" secondItem="luc-Yl-iCF" secondAttribute="bottom" constant="15" id="Ygn-F8-8cf"/>
+                                            <constraint firstItem="to3-XQ-86a" firstAttribute="leading" secondItem="sT5-4A-lkT" secondAttribute="leading" constant="15" id="bHD-Wk-5Qk"/>
                                             <constraint firstItem="oM6-yW-ZAR" firstAttribute="leading" secondItem="sT5-4A-lkT" secondAttribute="leading" constant="15" id="d5u-qr-VV4"/>
+                                            <constraint firstAttribute="bottom" secondItem="nHK-OG-bs3" secondAttribute="bottom" constant="15" id="dig-Vm-6ID"/>
                                             <constraint firstAttribute="trailing" secondItem="pvl-Me-83q" secondAttribute="trailing" constant="15" id="gMH-II-Dgi"/>
                                             <constraint firstAttribute="bottom" secondItem="oM6-yW-ZAR" secondAttribute="bottom" constant="15" id="lw6-sQ-WaO"/>
+                                            <constraint firstItem="oM6-yW-ZAR" firstAttribute="top" secondItem="nJ0-aZ-svP" secondAttribute="bottom" constant="5" id="mhv-0d-XP3"/>
                                             <constraint firstItem="luc-Yl-iCF" firstAttribute="leading" secondItem="sT5-4A-lkT" secondAttribute="leading" constant="15" id="myF-SW-bD0"/>
                                             <constraint firstItem="oM6-yW-ZAR" firstAttribute="top" secondItem="pvl-Me-83q" secondAttribute="bottom" constant="15" id="nd8-xT-OMb"/>
+                                            <constraint firstAttribute="trailing" secondItem="nHK-OG-bs3" secondAttribute="trailing" constant="15" id="th0-ar-vgJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="nJ0-aZ-svP" secondAttribute="trailing" constant="15" id="ywS-Yg-qOR"/>
                                             <constraint firstAttribute="trailing" secondItem="13v-nP-o7e" secondAttribute="trailing" constant="15" id="zF3-If-927"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="8b3-bh-88H"/>
                                                 <exclude reference="Ixw-49-1Md"/>
+                                                <exclude reference="Oc8-qi-iLu"/>
+                                                <exclude reference="lw6-sQ-WaO"/>
+                                                <exclude reference="nd8-xT-OMb"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -294,9 +326,10 @@
                     <connections>
                         <outlet property="addressLabel" destination="pvl-Me-83q" id="VZv-yr-rXI"/>
                         <outlet property="nameLabel" destination="luc-Yl-iCF" id="zWM-eZ-coE"/>
+                        <outlet property="openInAppButton" destination="oM6-yW-ZAR" id="0yN-XP-vmN"/>
+                        <outlet property="openInSafariButton" destination="nHK-OG-bs3" id="u1f-ip-dQx"/>
                         <outlet property="partyStateDistrictLabel" destination="uD5-gA-yZs" id="87l-oS-feH"/>
                         <outlet property="phoneLabel" destination="13v-nP-o7e" id="akV-LN-JTm"/>
-                        <outlet property="webLink" destination="oM6-yW-ZAR" id="3fA-xl-OwX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7m-dM-CTs" userLabel="First Responder" sceneMemberID="firstResponder"/>
