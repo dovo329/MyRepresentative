@@ -17,23 +17,104 @@ class RepresentativeListViewController: UITableViewController {
     var senatorArr = [Representative]()
     var representativeArr = [Representative]()
     let kCellReuseId = "representative.cell.id"
-    var searchTimer : NSTimer!
+    var repSearchTimer : NSTimer!
+    var senSearchTimer : NSTimer!
     let kQueryTimeoutInSeconds : NSTimeInterval = 4.0
+    var senSearchDone = false
+    var repSearchDone = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        queryRepresentatives()
+        if let searchType = searchType {
+            searchForRepresentativesBy(searchType)
+        } else {
+            fatalError("No searchType to search for")
+        }
     }
     
-    func searchTimedOut(sender: NSTimer!)
+    func searchForRepresentativesBy(searchType: SearchType)
+    {
+        senSearchDone = false
+        repSearchDone = false
+        
+        println("searchType is \(searchType)")
+        println("my zipCode is \(zipCode)")
+        println("my lastName is \(lastName)")
+        println("my state is \(state)")
+
+        title = "Searching..."
+        // by zip code
+        // Or by user's current location (to get zip code)
+        // http://whoismyrepresentative.com/getall_mems.php?zip=31023
+        
+        // reps by last name
+        //http://whoismyrepresentative.com/getall_reps_byname.php?name=smith
+        
+        // sens by last name
+        // http://whoismyrepresentative.com/getall_sens_byname.php?name=johnson
+        
+        // reps by state
+        // http://whoismyrepresentative.com/getall_reps_bystate.php?state=CA
+        
+        // sens by state
+        // http://whoismyrepresentative.com/getall_sens_bystate.php?state=ME
+        
+        if searchType == SearchType.ZipCode
+        {
+            if zipCode == ""
+            {
+                fatalError("attempted to search for empty zip code string")
+            }
+            let urlString = String(format:"http://whoismyrepresentative.com/getall_mems.php?zip=%@&output=json", zipCode)
+            queryWithUrlString(urlString)
+        }
+        else if searchType == SearchType.LastName
+        {
+            if lastName == ""
+            {
+                fatalError("attempted to search for empty last name string")
+            }
+            let senatorUrlString = String(format:"http://whoismyrepresentative.com/getall_sens_byname.php?name=%@&output=json", lastName)
+            queryWithUrlString(senatorUrlString)
+            
+            let representativeUrlString = String(format:"http://whoismyrepresentative.com/getall_reps_byname.php?name=%@&output=json", lastName)
+            queryWithUrlString(representativeUrlString)
+        }
+        else if searchType == SearchType.State
+        {
+            if state == ""
+            {
+                fatalError("attempted to search for empty state string")
+            }
+            let senatorUrlString = String(format:"http://whoismyrepresentative.com/getall_sens_bystate.php?state=%@&output=json", state)
+            queryWithUrlString(senatorUrlString)
+            
+            let representativeUrlString = String(format:"http://whoismyrepresentative.com/getall_reps_bystate.php?state=%@&output=json", state)
+            queryWithUrlString(representativeUrlString)
+        }
+        else
+        {
+            fatalError("this search type not implemented")
+        }
+        
+        senSearchTimer = NSTimer.scheduledTimerWithTimeInterval(kQueryTimeoutInSeconds, target: self, selector: "senSearchTimedOut:", userInfo: nil, repeats: false)
+        repSearchTimer = NSTimer.scheduledTimerWithTimeInterval(kQueryTimeoutInSeconds, target: self, selector: "repSearchTimedOut:", userInfo: nil, repeats: false)
+        //searchTimer = NSTimer.scheduledTimerWithTimeInterval(kQueryTimeoutInSeconds, target: self, selector: "searchTimedOut:", userInfo: nil, repeats: false)
+    }
+    
+    func senSearchTimedOut(sender: NSTimer!)
     {
         sender.invalidate()
         
-        let alertController = UIAlertController(title: "Search Timed Out", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        let alertController = UIAlertController(title: "Senator Search Timed Out", message: "", preferredStyle: UIAlertControllerStyle.Alert)
         let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
         { _ -> Void in
-            self.queryRepresentatives()
+            if let searchType = self.searchType {
+                self.searchForRepresentativesBy(searchType)
+            } else {
+                fatalError("Retry senator search no searchType to search for")
+            }
         }
         
         let giveUpOption = UIAlertAction(title: "Don't", style: UIAlertActionStyle.Default)
@@ -46,15 +127,39 @@ class RepresentativeListViewController: UITableViewController {
         presentViewController(alertController, animated: true, completion: nil)
     }
     
-    func queryRepresentatives()
+    func repSearchTimedOut(sender: NSTimer!)
+    {
+        sender.invalidate()
+        
+        let alertController = UIAlertController(title: "House Search Timed Out", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
+        { _ -> Void in
+            if let searchType = self.searchType {
+                self.searchForRepresentativesBy(searchType)
+            } else {
+                fatalError("Retry House search no searchType to search for")
+            }
+        }
+        
+        let giveUpOption = UIAlertAction(title: "Don't", style: UIAlertActionStyle.Default)
+        { _ -> Void in
+            
+        }
+        alertController.addAction(retryOption)
+        alertController.addAction(giveUpOption)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    /*func queryRepresentatives()
     {
         //println("my zipCode is \(zipCode)")
         //println("my lastName is \(lastName)")
         //println("my state is \(state)")
-        //println("my searchType is \(searchType)")
-        if let searchType = searchType {
+        //println("my searchBy is \(searchBy)")
+        if let searchBy = searchBy {
         } else {
-            fatalError("searchType is nil!")
+            fatalError("searchBy is nil!")
         }
         
         title = "Searching..."
@@ -74,7 +179,7 @@ class RepresentativeListViewController: UITableViewController {
         // sens by state
         // http://whoismyrepresentative.com/getall_sens_bystate.php?state=ME
         
-        if searchType == SearchType.ZipCode
+        if searchBy == SearchBy.ZipCode
         {
             if zipCode == ""
             {
@@ -83,7 +188,7 @@ class RepresentativeListViewController: UITableViewController {
             let urlString = String(format:"http://whoismyrepresentative.com/getall_mems.php?zip=%@&output=json", zipCode)
             doQueryWithUrlString(urlString)
         }
-        else if searchType == SearchType.LastName
+        else if searchBy == SearchBy.LastName
         {
             if lastName == ""
             {
@@ -95,7 +200,7 @@ class RepresentativeListViewController: UITableViewController {
             let representativeUrlString = String(format:"http://whoismyrepresentative.com/getall_reps_byname.php?name=%@&output=json", lastName)
             doQueryWithUrlString(representativeUrlString)
         }
-        else if searchType == SearchType.State
+        else if searchBy == SearchBy.State
         {
             if state == ""
             {
@@ -113,7 +218,7 @@ class RepresentativeListViewController: UITableViewController {
         }
         
         searchTimer = NSTimer.scheduledTimerWithTimeInterval(kQueryTimeoutInSeconds, target: self, selector: "searchTimedOut:", userInfo: nil, repeats: false)
-    }
+    }*/
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -130,17 +235,11 @@ class RepresentativeListViewController: UITableViewController {
             rep = representativeArr[indexPath.row]
         }
         
-        /*cell.name.text = rep.name
-        cell.partyStateDistrict.text = String(format:"%@, %@, District %@", rep.party!, rep.state!, rep.district!)
-        cell.phoneNumber.text = rep.phone
-        cell.address.text = rep.office
-        cell.webAddress.text = rep.link*/
         cell.textLabel!.text = rep.name
         cell.detailTextLabel!.text = String(format:"%@, %@", rep.party!, rep.state!)
         cell.detailTextLabel!.textColor = UIColor.blackColor()
         
         cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-        //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator
         
         // pastel party colors to improve readability
         if rep.party == "D"
@@ -163,7 +262,112 @@ class RepresentativeListViewController: UITableViewController {
         return cell
     }
     
-    func doQueryWithUrlString(urlString : String)
+    func queryWithUrlString(urlString : String)
+    {
+        if let nsUrl = NSURL(string: urlString)
+        {
+            let session = NSURLSession.sharedSession()
+            let dataTask = session.dataTaskWithURL(nsUrl, completionHandler:
+                {(data, response, error) -> Void in
+                    //self.searchTimer.invalidate()
+                    
+                    if error == nil
+                    {
+                        var jsonError : NSError? = nil
+                        let jsonObject : AnyObject? = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error:&jsonError)
+                        
+                        if let jsonObject = jsonObject as? [String:AnyObject]
+                        {
+                            if let dictArr = jsonObject["results"] as? NSArray
+                            {
+                                // update UI is on the main thread
+                                dispatch_async(
+                                    dispatch_get_main_queue(),
+                                    { () -> Void in
+                                        self.title = "List"
+                                        
+                                        var repArr = [Representative]()
+                                        for dict in dictArr
+                                        {
+                                            if let dict = dict as? NSDictionary
+                                            {
+                                                let rep = Representative(dict: dict)
+                                                repArr.append(rep)
+                                            } else {
+                                                fatalError("cast to dictionary failed")
+                                            }
+                                        }
+                                        
+                                        let testSenArr = self.getSenators(repArr)
+                                        // check if any senators returned, if not not this could be a representative only search so we don't want to clobber the senatorArr
+                                        if testSenArr.count > 0 {
+                                            self.senatorArr = testSenArr
+                                        }
+                                        
+                                        if urlString.lowercaseString.rangeOfString("getall_sens") != nil || urlString.lowercaseString.rangeOfString("getall_mems") != nil {
+                                            self.senSearchDone = true
+                                            println("sen search done")
+                                            self.senSearchTimer.invalidate()
+                                        }
+                                        
+                                        let testRepArr = self.getRepresentatives(repArr)
+                                        // check if any representatives returned, if not not this could be a representative only search so we don't want to clobber the senatorArr
+                                        if testRepArr.count > 0 {
+                                            self.representativeArr = testRepArr
+                                            self.repSearchDone = true
+                                            println("rep search done")
+                                            self.repSearchTimer.invalidate()
+                                        }
+                                        
+                                        if urlString.lowercaseString.rangeOfString("getall_reps") != nil || urlString.lowercaseString.rangeOfString("getall_mems") != nil {
+                                            self.repSearchDone = true
+                                        }
+
+                                        self.tableView.reloadData()
+                                    }
+                                )
+                            } else {
+                                fatalError("Failed to cast JSON response to NSArray")
+                            }
+                        } else {
+                            // no data returned from server so no matches
+                            // update UI is on the main thread
+                            dispatch_async(dispatch_get_main_queue(),
+                                { () -> Void in
+                                    // no results returned, set search to done based on url to get search type and invalidate timers
+                                    if urlString.lowercaseString.rangeOfString("getall_sens") != nil || urlString.lowercaseString.rangeOfString("getall_mems") != nil {
+                                            self.senSearchDone = true
+                                            println("sen search done")
+                                            self.senSearchTimer.invalidate()
+                                    }
+                                    
+                                    if urlString.lowercaseString.rangeOfString("getall_reps") != nil || urlString.lowercaseString.rangeOfString("getall_mems") != nil {
+                                            self.repSearchDone = true
+                                            println("rep search done")
+                                            self.repSearchTimer.invalidate()
+                                    }
+
+                                    // only alert for no matches if both searches are done, as we wouldn't want to alert the user unless a representative was not found in both the Senate and the House
+                                    if self.senSearchDone && self.repSearchDone {
+                                        self.title = "No Matches"
+                                        alertWithTitle("No Matches", message: "", dismissText: "Okay", viewController: self)
+                                    }
+                            })
+                        }
+                    } else {
+                        println("error=\(error)")
+                        fatalError("Error returned from nsurlsession")
+                    }
+            })
+            dataTask.resume()
+        }
+        else
+        {
+            fatalError("failed to create nsUrl from urlString \(urlString)")
+        }
+    }
+    
+    /*func doQueryWithUrlString(urlString : String)
     {
         
         if let nsUrl = NSURL(string: urlString)
@@ -246,7 +450,7 @@ class RepresentativeListViewController: UITableViewController {
         {
             fatalError("failed to create nsUrl from urlString \(urlString)")
         }
-    }
+    }*/
     
     func getSenators(repArr: [Representative]) -> [Representative]
     {
