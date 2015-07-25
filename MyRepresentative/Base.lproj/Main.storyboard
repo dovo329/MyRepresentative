@@ -92,6 +92,7 @@
                                             <constraint firstItem="kBs-fG-fT3" firstAttribute="top" secondItem="uYe-BH-2Vi" secondAttribute="bottom" constant="15" id="LEx-CP-lgg"/>
                                             <constraint firstAttribute="centerX" secondItem="YYT-AY-zTk" secondAttribute="centerX" id="LcT-2J-Xek"/>
                                             <constraint firstItem="kBs-fG-fT3" firstAttribute="leading" secondItem="Dhn-c2-6eA" secondAttribute="leading" constant="15" id="NZS-f9-aBN"/>
+                                            <constraint firstItem="L9s-bw-UID" firstAttribute="height" secondItem="xel-8a-DL4" secondAttribute="height" id="Rgd-U7-Hzf"/>
                                             <constraint firstItem="Fnb-jg-F0L" firstAttribute="top" secondItem="vZ2-IB-sPu" secondAttribute="bottom" constant="15" id="WLg-5e-crE"/>
                                             <constraint firstItem="YYT-AY-zTk" firstAttribute="width" secondItem="Ox3-EY-4Ii" secondAttribute="width" id="YOd-kN-Arx"/>
                                             <constraint firstItem="YYT-AY-zTk" firstAttribute="top" secondItem="Ox3-EY-4Ii" secondAttribute="bottom" constant="15" id="YyO-IU-hnD"/>
@@ -114,6 +115,7 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="hy5-33-yeM"/>
                                                 <exclude reference="LEx-CP-lgg"/>
                                                 <exclude reference="NZS-f9-aBN"/>
                                                 <exclude reference="9FF-S1-H2x"/>
