@@ -162,12 +162,28 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        // disable searching by state button while entering text to avoid strange double search results (searching for both text field (zip code or last name) and state at the same time, resulting in an odd two list result screens being pushed on the nav stack
+        searchByStateButtonPortrait.enabled = false
+        searchByStateButtonLandscape.enabled = false
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        // reenable search by state button because it's safe to press it now that the text field entry is done
+        searchByStateButtonPortrait.enabled = true
+        searchByStateButtonLandscape.enabled = true
+    }
+    
     override func shouldPerformSegueWithIdentifier(identifier: String?, sender: AnyObject?) -> Bool {
         
         // check for invalid input and present alert to user to correct it instead of feeding the list view controller bad search input
         if let id = identifier {
             if id == SegueId.ZipCodePortrait.rawValue {
-                if zipCodeTextFieldPortrait.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) != 5 {
+                if zipCodeTextFieldPortrait.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) == 0 {
+                    // just dismiss with no alert, they may have just changed their minds and don't need an annoying alert
+                    return false
+                    
+                } else if zipCodeTextFieldPortrait.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) != 5 {
                     
                     alertWithTitle("Zip Code Must Be 5 Digits Long", message: "", dismissText: "Got It", viewController: self)
                     
@@ -181,7 +197,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
                     return true
                 }
             } else if id == SegueId.ZipCodeLandscape.rawValue {
-                if zipCodeTextFieldLandscape.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) != 5 {
+                if zipCodeTextFieldLandscape.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) == 0 {
+                    // just dismiss with no alert, they may have just changed their minds and don't need an annoying alert
+                    return false
+                    
+                } else if zipCodeTextFieldLandscape.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) != 5 {
                     
                     alertWithTitle("Zip Code Must Be 5 Digits Long", message: "", dismissText: "Got It", viewController: self)
                     
