@@ -383,7 +383,6 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
             })
             dataTask.resume()
         } else {
-            // this is outside the dataTask completion block so it's already on the main thread so no need for dispatch_async
             self.navigationController?.popViewControllerAnimated(true)
             alertWithTitle("NSURL Creation Failed", message: "", dismissText: "Okay", viewController: self)
         }
