@@ -62,7 +62,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     func createNumberPadDoneBar()
     {
         // numberPadBar is for dismissing the number pad which normally doesn't have a "return" or "done" button
-        numberPadBar.barStyle = UIBarStyle.BlackTranslucent
+        numberPadBar.barStyle = UIBarStyle.Default
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "dismissNumberPad:")
         numberPadBar.items = [flexibleSpace, doneButton]
