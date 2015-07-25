@@ -241,6 +241,7 @@
                                                 <rect key="frame" x="61" y="163" width="162" height="33"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="162" id="i0c-0h-46K"/>
+                                                    <constraint firstAttribute="height" constant="33" id="xPg-dh-p5h"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <state key="normal" title="Search By State">

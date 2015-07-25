@@ -214,6 +214,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
                 alertWithTitle("Invalid segue.identifier", message: "", dismissText: "Okay", viewController: self)
             }
             
+            // can use force unwrap here because default case will catch when it's nil
             switch segue.identifier! {
             case SegueId.ZipCodePortrait.rawValue:
                 destinationViewController.zipCode = zipCodeTextFieldPortrait.text
