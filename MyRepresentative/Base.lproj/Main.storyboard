@@ -130,17 +130,31 @@
                                     <constraint firstAttribute="trailing" secondItem="Dhn-c2-6eA" secondAttribute="trailing" id="RVi-dN-3nJ"/>
                                     <constraint firstItem="xel-8a-DL4" firstAttribute="width" secondItem="1HY-o9-stj" secondAttribute="width" id="aL4-IQ-14c"/>
                                     <constraint firstItem="Dhn-c2-6eA" firstAttribute="top" secondItem="1HY-o9-stj" secondAttribute="top" id="spc-jq-LiB"/>
+                                    <constraint firstAttribute="centerY" secondItem="Dhn-c2-6eA" secondAttribute="centerY" constant="106.5" id="vRk-L8-Ipe"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="vRk-L8-Ipe"/>
+                                        <exclude reference="aL4-IQ-14c"/>
+                                    </mask>
+                                </variation>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="1HY-o9-stj" secondAttribute="centerX" id="6Ms-M9-YSh"/>
+                            <constraint firstItem="L9s-bw-UID" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="M1G-Pk-a6J"/>
                             <constraint firstAttribute="width" secondItem="Dhn-c2-6eA" secondAttribute="width" id="ZDX-Wg-XS6"/>
                             <constraint firstItem="1HY-o9-stj" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="ZZj-cM-gha"/>
+                            <constraint firstItem="xel-8a-DL4" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="jPQ-nY-oAs"/>
                             <constraint firstItem="1HY-o9-stj" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="pie-kO-I5w"/>
                             <constraint firstAttribute="centerY" secondItem="1HY-o9-stj" secondAttribute="centerY" id="u7w-VO-Fzy"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="ZDX-Wg-XS6"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Federal Representatives" id="0e3-6T-YXM"/>
                     <connections>
