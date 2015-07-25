@@ -264,7 +264,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     
     func containsSpecialCharacters(testString: String) -> Bool
     {
-        let specialChars = NSCharacterSet(charactersInString: " !@#$%^&*()<>?:\"{}|~,./;'[]\\`=_+")
+        let specialChars = NSCharacterSet(charactersInString: " !@#$%^&*()<>?:\"{}|~,./;'[]\\`=_+1234567890+")
         let range = testString.rangeOfCharacterFromSet(specialChars)
         
         // range will be nil if anything but letters is found
