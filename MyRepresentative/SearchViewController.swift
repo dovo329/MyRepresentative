@@ -13,6 +13,7 @@ import UIKit
 
 class SearchViewController: UIViewController, UITextFieldDelegate {
     
+    // To support ios 7 can't use adaptive views so must make a separate portrait and landscape view and hide the appropriate one based on orientation.  Oy vey!
     @IBOutlet weak var portraitView: UIView!
     @IBOutlet weak var landscapeView: UIView!
 
@@ -201,6 +202,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
         if let destinationViewController = segue.destinationViewController as? RepresentativeListViewController {
+            
             if segue.identifier == SegueId.ZipCodePortrait.rawValue ||
                 segue.identifier == SegueId.ZipCodeLandscape.rawValue {
                 destinationViewController.searchType = SearchType.ZipCode
@@ -214,23 +216,21 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
                 alertWithTitle("Invalid segue.identifier", message: "", dismissText: "Okay", viewController: self)
             }
             
-            // can use force unwrap here because default case will catch when it's nil
-            switch segue.identifier! {
-            case SegueId.ZipCodePortrait.rawValue:
+            if segue.identifier == SegueId.ZipCodePortrait.rawValue {
                 destinationViewController.zipCode = zipCodeTextFieldPortrait.text
-            case SegueId.ZipCodeLandscape.rawValue:
-                destinationViewController.zipCode = zipCodeTextFieldLandscape.text
-            case SegueId.LastNamePortrait.rawValue:
-                destinationViewController.lastName = lastNameTextFieldPortrait.text
-            case SegueId.LastNameLandscape.rawValue:
-                destinationViewController.lastName = lastNameTextFieldLandscape.text
-            case SegueId.StatePortrait.rawValue:
+            } else if segue.identifier == SegueId.ZipCodeLandscape.rawValue {
+                 destinationViewController.zipCode = zipCodeTextFieldLandscape.text
+            } else if segue.identifier == SegueId.LastNamePortrait.rawValue {
+                destinationViewController.zipCode = lastNameTextFieldPortrait.text
+            } else if segue.identifier == SegueId.LastNameLandscape.rawValue {
+                destinationViewController.zipCode = lastNameTextFieldLandscape.text
+            } else if segue.identifier == SegueId.StatePortrait.rawValue {
                 let pickerIndex = statePickerPortrait.selectedRowInComponent(0)
                 destinationViewController.state = statePickerDataSource.stateList[pickerIndex]
-            case SegueId.StateLandscape.rawValue:
+            } else if segue.identifier == SegueId.StateLandscape.rawValue {
                 let pickerIndex = statePickerLandscape.selectedRowInComponent(0)
                 destinationViewController.state = statePickerDataSource.stateList[pickerIndex]
-            default:
+            } else {
                 alertWithTitle("Invalid segue.identifier", message: "", dismissText: "Okay", viewController: self)
             }
         } else {
