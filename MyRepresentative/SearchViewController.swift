@@ -13,23 +13,55 @@ import UIKit
 
 class SearchViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var zipCodeTextField: UITextField!
-    @IBOutlet weak var statePicker: UIPickerView!
+    // To support ios 7 can't use adaptive views so must make a separate portrait and landscape view and hide the appropriate one based on orientation.  Oy vey!
+    @IBOutlet weak var portraitView: UIView!
+    @IBOutlet weak var landscapeView: UIView!
+
+    @IBOutlet weak var zipCodeTextFieldPortrait: UITextField!
+    @IBOutlet weak var zipCodeTextFieldLandscape: UITextField!
+    
+    @IBOutlet weak var lastNameTextFieldPortrait: UITextField!
+    @IBOutlet weak var lastNameTextFieldLandscape: UITextField!
+
+    @IBOutlet weak var searchByStateButtonPortrait: UIButton!
+    @IBOutlet weak var searchByStateButtonLandscape: UIButton!
+    
+    @IBOutlet weak var statePickerPortrait: UIPickerView!
+    @IBOutlet weak var statePickerLandscape: UIPickerView!
+    
     @IBOutlet var statePickerDataSource: StatePickerDataSource!
-    @IBOutlet weak var lastNameTextField: UITextField!
-    @IBOutlet weak var searchByStateButton: UIButton!
     var bgGradLayer = CAGradientLayer()
     var numberPadBar = UIToolbar()
     
     enum SegueId: String
     {
-        case ZipCode = "search.by.zip.code.segue"
-        case LastName = "search.by.last.name.segue"
-        case State = "search.by.state.segue"
+        case ZipCodePortrait = "search.by.zip.code.portrait.segue"
+        case LastNamePortrait = "search.by.last.name.portrait.segue"
+        case StatePortrait = "search.by.state.portrait.segue"
+        case ZipCodeLandscape = "search.by.zip.code.landscape.segue"
+        case LastNameLandscape = "search.by.last.name.landscape.segue"
+        case StateLandscape = "search.by.state.landscape.segue"
+    }
+    
+    func updateHiddenViews() {
+        //let orientation = UIDevice.currentDevice().orientation
+        let orientation = UIApplication.sharedApplication().statusBarOrientation
+
+        if orientation == UIInterfaceOrientation.Portrait {
+            portraitView.hidden = false
+            landscapeView.hidden = true
+        } else {
+            portraitView.hidden = true
+            landscapeView.hidden = false
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateHiddenViews()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHiddenViews", name: UIDeviceOrientationDidChangeNotification, object: nil)
         
         let colors = UIColor.gradientColorsForSearch()
         doBackgroundGradientWithColors(colors[0], endColor: colors[1])
@@ -44,31 +76,41 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(animated: Bool) {
         // auto clear fields when coming back from list view controller
-        zipCodeTextField.text = ""
-        lastNameTextField.text = ""
+        zipCodeTextFieldPortrait.text = ""
+        zipCodeTextFieldLandscape.text = ""
+        lastNameTextFieldPortrait.text = ""
+        lastNameTextFieldLandscape.text = ""
         view.endEditing(true)
     }
     
     func prettifySearchByStateButton()
     {
-        searchByStateButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
-        searchByStateButton.backgroundColor = UIColor.whiteColor()
-        searchByStateButton.layer.cornerRadius = 5.0
-        searchByStateButton.layer.shadowOffset = CGSizeMake(1.0, 1.0)
-        searchByStateButton.layer.shadowColor = UIColor.blackColor().CGColor
-        searchByStateButton.layer.shadowOpacity = 0.5
+        searchByStateButtonPortrait.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
+        searchByStateButtonPortrait.backgroundColor = UIColor.whiteColor()
+        searchByStateButtonPortrait.layer.cornerRadius = 5.0
+        searchByStateButtonPortrait.layer.shadowOffset = CGSizeMake(1.0, 1.0)
+        searchByStateButtonPortrait.layer.shadowColor = UIColor.blackColor().CGColor
+        searchByStateButtonPortrait.layer.shadowOpacity = 0.5
+        
+        searchByStateButtonLandscape.setTitleColor(UIColor.blackColor(), forState: UIControlState.Highlighted)
+        searchByStateButtonLandscape.backgroundColor = UIColor.whiteColor()
+        searchByStateButtonLandscape.layer.cornerRadius = 5.0
+        searchByStateButtonLandscape.layer.shadowOffset = CGSizeMake(1.0, 1.0)
+        searchByStateButtonLandscape.layer.shadowColor = UIColor.blackColor().CGColor
+        searchByStateButtonLandscape.layer.shadowOpacity = 0.5
     }
     
     func createNumberPadDoneBar()
     {
         // numberPadBar is for dismissing the number pad which normally doesn't have a "return" or "done" button
-        numberPadBar.barStyle = UIBarStyle.BlackTranslucent
+        numberPadBar.barStyle = UIBarStyle.Default
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "dismissNumberPad:")
         numberPadBar.items = [flexibleSpace, doneButton]
         numberPadBar.sizeToFit()
         
-        zipCodeTextField.inputAccessoryView = numberPadBar
+        zipCodeTextFieldPortrait.inputAccessoryView = numberPadBar
+        zipCodeTextFieldLandscape.inputAccessoryView = numberPadBar
     }
     
     func outsideTap(sender: UITapGestureRecognizer!) {
@@ -108,15 +150,15 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         
         // check for invalid input and present alert to user to correct it instead of feeding the list view controller bad search input
         if let id = identifier {
-            if id == SegueId.ZipCode.rawValue {
-                if zipCodeTextField.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) != 5 {
-                    zipCodeTextField.text = ""
+            if id == SegueId.ZipCodePortrait.rawValue {
+                if zipCodeTextFieldPortrait.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) != 5 {
+                    zipCodeTextFieldPortrait.text = ""
                     
                     alertWithTitle("Zip Code Must Be 5 Digits Long", message: "", dismissText: "Got It", viewController: self)
                     
                     return false
-                } else if containsLetters(zipCodeTextField.text) {
-                    zipCodeTextField.text = ""
+                } else if containsLetters(zipCodeTextFieldPortrait.text) {
+                    zipCodeTextFieldPortrait.text = ""
                     
                     alertWithTitle("Zip Codes Can't Contain Letters", message: "", dismissText: "Got It", viewController: self)
                     
@@ -124,9 +166,27 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
                 } else {
                     return true
                 }
-            } else if id==SegueId.LastName.rawValue {
-                return lastNameTextField.text != ""
-            } else if id==SegueId.State.rawValue {
+            } else if id == SegueId.ZipCodeLandscape.rawValue {
+                if zipCodeTextFieldLandscape.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) != 5 {
+                    zipCodeTextFieldLandscape.text = ""
+                    
+                    alertWithTitle("Zip Code Must Be 5 Digits Long", message: "", dismissText: "Got It", viewController: self)
+                    
+                    return false
+                } else if containsLetters(zipCodeTextFieldLandscape.text) {
+                    zipCodeTextFieldLandscape.text = ""
+                    
+                    alertWithTitle("Zip Codes Can't Contain Letters", message: "", dismissText: "Got It", viewController: self)
+                    
+                    return false
+                } else {
+                    return true
+                }
+            } else if id==SegueId.LastNamePortrait.rawValue {
+                return lastNameTextFieldPortrait.text != ""
+            } else if id==SegueId.LastNameLandscape.rawValue {
+                return lastNameTextFieldLandscape.text != ""
+            } else if id==SegueId.StatePortrait.rawValue || id==SegueId.StateLandscape.rawValue {
                 // will always have valid data from the picker
                 return true
             } else {
@@ -142,20 +202,37 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
         if let destinationViewController = segue.destinationViewController as? RepresentativeListViewController {
-            if segue.identifier == SegueId.ZipCode.rawValue {
-            destinationViewController.searchType = SearchType.ZipCode
-        } else if segue.identifier == SegueId.LastName.rawValue {
-            destinationViewController.searchType = SearchType.LastName
-        } else if segue.identifier == SegueId.State.rawValue {
-            destinationViewController.searchType = SearchType.State
-        } else {
+            
+            if segue.identifier == SegueId.ZipCodePortrait.rawValue ||
+                segue.identifier == SegueId.ZipCodeLandscape.rawValue {
+                destinationViewController.searchType = SearchType.ZipCode
+            } else if segue.identifier == SegueId.LastNamePortrait.rawValue ||
+                segue.identifier == SegueId.LastNameLandscape.rawValue {
+                destinationViewController.searchType = SearchType.LastName
+            } else if segue.identifier == SegueId.StatePortrait.rawValue ||
+                segue.identifier == SegueId.StateLandscape.rawValue {
+                destinationViewController.searchType = SearchType.State
+            } else {
                 alertWithTitle("Invalid segue.identifier", message: "", dismissText: "Okay", viewController: self)
             }
             
-            destinationViewController.zipCode = zipCodeTextField.text
-            destinationViewController.lastName = lastNameTextField.text
-            let pickerIndex = statePicker.selectedRowInComponent(0)
-            destinationViewController.state = statePickerDataSource.stateList[pickerIndex]
+            if segue.identifier == SegueId.ZipCodePortrait.rawValue {
+                destinationViewController.zipCode = zipCodeTextFieldPortrait.text
+            } else if segue.identifier == SegueId.ZipCodeLandscape.rawValue {
+                 destinationViewController.zipCode = zipCodeTextFieldLandscape.text
+            } else if segue.identifier == SegueId.LastNamePortrait.rawValue {
+                destinationViewController.lastName = lastNameTextFieldPortrait.text
+            } else if segue.identifier == SegueId.LastNameLandscape.rawValue {
+                destinationViewController.lastName = lastNameTextFieldLandscape.text
+            } else if segue.identifier == SegueId.StatePortrait.rawValue {
+                let pickerIndex = statePickerPortrait.selectedRowInComponent(0)
+                destinationViewController.state = statePickerDataSource.stateList[pickerIndex]
+            } else if segue.identifier == SegueId.StateLandscape.rawValue {
+                let pickerIndex = statePickerLandscape.selectedRowInComponent(0)
+                destinationViewController.state = statePickerDataSource.stateList[pickerIndex]
+            } else {
+                alertWithTitle("Invalid segue.identifier", message: "", dismissText: "Okay", viewController: self)
+            }
         } else {
             alertWithTitle("Dest VC Cast Failed in Search VC", message: "", dismissText: "Okay", viewController: self)
         }
