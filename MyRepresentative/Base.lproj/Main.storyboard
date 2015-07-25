@@ -42,7 +42,7 @@
                                             <constraint firstAttribute="height" constant="30" id="r0j-Qi-GSk"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
                                         <connections>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="tka-Qn-YPG"/>
                                             <segue destination="DKc-Al-MtG" kind="show" identifier="search.by.zip.code.portrait.segue" id="tWu-yy-hJN"/>
@@ -68,7 +68,7 @@
                                             <constraint firstAttribute="height" constant="30" id="nYD-uQ-KjO"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                         <connections>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="qT5-8a-buq"/>
                                             <segue destination="DKc-Al-MtG" kind="show" identifier="search.by.last.name.portrait.segue" id="dtw-Kc-WGd"/>
@@ -187,7 +187,7 @@
                                                     <constraint firstAttribute="height" constant="30" id="z3q-7T-vug"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="BYZ-38-t0r" id="UF1-jt-Q5H"/>
                                                     <segue destination="DKc-Al-MtG" kind="show" identifier="search.by.zip.code.landscape.segue" id="bNv-YQ-Pum"/>
@@ -213,7 +213,7 @@
                                                     <constraint firstAttribute="height" constant="30" id="nP0-NJ-O2N"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="BYZ-38-t0r" id="JWq-kJ-RUB"/>
                                                     <segue destination="DKc-Al-MtG" kind="show" identifier="search.by.last.name.landscape.segue" id="ij9-Er-7Dp"/>
