@@ -42,25 +42,37 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         case StateLandscape = "search.by.state.landscape.segue"
     }
     
-    func updateHiddenViews() {
-        //let orientation = UIDevice.currentDevice().orientation
+    func updateForOrientation() {
         let orientation = UIApplication.sharedApplication().statusBarOrientation
 
+        //hide/unhide portrait or landscape views
+        //copy over input fields on orientation change
         if orientation == UIInterfaceOrientation.Portrait {
+            
             portraitView.hidden = false
             landscapeView.hidden = true
+            
+            zipCodeTextFieldPortrait.text = zipCodeTextFieldLandscape.text
+            lastNameTextFieldPortrait.text = lastNameTextFieldLandscape.text
+            statePickerPortrait.selectRow(statePickerLandscape.selectedRowInComponent(0), inComponent: 0, animated: false)
+
         } else {
+            
             portraitView.hidden = true
             landscapeView.hidden = false
+            
+            zipCodeTextFieldLandscape.text = zipCodeTextFieldPortrait.text
+            lastNameTextFieldLandscape.text = lastNameTextFieldPortrait.text
+            statePickerLandscape.selectRow(statePickerPortrait.selectedRowInComponent(0), inComponent: 0, animated: false)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        updateHiddenViews()
+        updateForOrientation()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHiddenViews", name: UIDeviceOrientationDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateForOrientation", name: UIDeviceOrientationDidChangeNotification, object: nil)
         
         let colors = UIColor.gradientColorsForSearch()
         doBackgroundGradientWithColors(colors[0], endColor: colors[1])
@@ -84,7 +96,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
 
         // I saw a wrong orientation happen once when coming back from the list view controller, so that's why I'm putting this here to guard against that happening again
-        updateHiddenViews()
+        updateForOrientation()
     }
     
     func prettifySearchByStateButton()
@@ -160,9 +172,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
                     alertWithTitle("Zip Code Must Be 5 Digits Long", message: "", dismissText: "Got It", viewController: self)
                     
                     return false
-                } else if containsLetters(zipCodeTextFieldPortrait.text) {
+                } else if containsNonNumbers(zipCodeTextFieldPortrait.text) {
                     
-                    alertWithTitle("Zip Codes Can't Contain Letters", message: "", dismissText: "Got It", viewController: self)
+                    alertWithTitle("Zip Codes Can Only Contain Numbers", message: "", dismissText: "Got It", viewController: self)
                     
                     return false
                 } else {
@@ -174,9 +186,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
                     alertWithTitle("Zip Code Must Be 5 Digits Long", message: "", dismissText: "Got It", viewController: self)
                     
                     return false
-                } else if containsLetters(zipCodeTextFieldLandscape.text) {
+                } else if containsNonNumbers(zipCodeTextFieldLandscape.text) {
                     
-                    alertWithTitle("Zip Codes Can't Contain Letters", message: "", dismissText: "Got It", viewController: self)
+                    alertWithTitle("Zip Codes Can Only Contain Numbers", message: "", dismissText: "Got It", viewController: self)
                     
                     return false
                 } else {
@@ -248,10 +260,10 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         }
     }        
     
-    func containsLetters(testString: String) -> Bool
+    func containsNonNumbers(testString: String) -> Bool
     {
-        let letters = NSCharacterSet.letterCharacterSet()
-        let range = testString.rangeOfCharacterFromSet(letters)
+        let numbers = NSCharacterSet(charactersInString: "1234567890")
+        let range = testString.rangeOfCharacterFromSet(numbers.invertedSet)
         
         // range will be nil if no letters is found
         if let test = range {
@@ -263,7 +275,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     
     func containsSpecialCharacters(testString: String) -> Bool
     {
-        let specialChars = NSCharacterSet(charactersInString: " !@#$%^&*()<>?:\"{}|~,./;'[]\\`=_+1234567890+")
+        let specialChars = NSCharacterSet(charactersInString: " !@#$%^&*()<>?:\"{}|~,./;'[]\\`=_+1234567890")
         let range = testString.rangeOfCharacterFromSet(specialChars)
         
         // range will be nil if anything but letters is found
