@@ -24,12 +24,12 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
     
     // for tableView
     let kCellReuseId = "representative.cell.id"
+
+    let kQueryTimeoutInSeconds = NSTimeInterval(4.0)
     
     // time out timers to present alert to user to either retry search or give up
     var repSearchTimer : NSTimer!
     var senSearchTimer : NSTimer!
-    
-    let kQueryTimeoutInSeconds : NSTimeInterval = 4.0
     
     // flags to check for if no match (both searches are complete and no results returned for either senator or house
     var senSearchDone = false
@@ -62,7 +62,7 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
             alertWithTitle("Search Type Is Not Valid", message: "", dismissText: "Okay", viewController: self)
         }
     }
-
+    
     override func viewWillDisappear(animated: Bool) {
         // Need to stop timers if user navigates back before they naturally expire
         repSearchTimer.invalidate()
@@ -73,7 +73,7 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
     {
         senSearchDone = false
         repSearchDone = false
-
+        
         // let user know we're doing something
         title = "Searching..."
         
@@ -114,6 +114,7 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
             queryWithUrlString(senatorUrlString)
             
             let representativeUrlString = String(format:"http://whoismyrepresentative.com/getall_reps_byname.php?name=%@&output=json", lastName)
+
             queryWithUrlString(representativeUrlString)
         }
         else if searchType == SearchType.State
@@ -131,7 +132,7 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
         }
         else
         {
-                navigationController?.popViewControllerAnimated(true)
+            navigationController?.popViewControllerAnimated(true)
             alertWithTitle("Unknown Search Type", message: "", dismissText: "Okay", viewController: self)
         }
         
@@ -145,37 +146,41 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
     {
         sender.invalidate()
         
-        // only present new alert if no existing alerts
-        if presentedViewController == nil {
-
-            let title = "Senator Search Timed Out"
-            let message = ""
-            if objc_getClass("UIAlertController") != nil {
-                
-                let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
-                    { _ -> Void in
-                        if let searchType = self.searchType {
-                            self.searchForRepresentativesBy(searchType)
-                        } else {
-                            self.navigationController?.popViewControllerAnimated(true)
-                            alertWithTitle("Retry Senator Search SearchType Error", message: "", dismissText: "Okay", viewController: self)
+        dispatch_async(
+            dispatch_get_main_queue(),
+            { () -> Void in
+                // only present new alert if no existing alerts
+                if self.presentedViewController == nil {
+                    
+                    let title = "Senator Search Timed Out"
+                    let message = ""
+                    if objc_getClass("UIAlertController") != nil {
+                        
+                        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                        let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
+                            { _ -> Void in
+                                if let searchType = self.searchType {
+                                    self.searchForRepresentativesBy(searchType)
+                                } else {
+                                    self.navigationController?.popViewControllerAnimated(true)
+                                    alertWithTitle("Retry Senator Search SearchType Error", message: "", dismissText: "Okay", viewController: self)
+                                }
                         }
+                        
+                        let giveUpOption = UIAlertAction(title: "Don't", style: UIAlertActionStyle.Default)
+                            { _ -> Void in }
+                        alertController.addAction(retryOption)
+                        alertController.addAction(giveUpOption)
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    } else {
+                        let alertView = UIAlertView(title: title, message: message, delegate: self, cancelButtonTitle: "Don't", otherButtonTitles: "Retry")
+                        
+                        alertView.show()
+                    }
+                    
                 }
-                
-                let giveUpOption = UIAlertAction(title: "Don't", style: UIAlertActionStyle.Default)
-                    { _ -> Void in }
-                alertController.addAction(retryOption)
-                alertController.addAction(giveUpOption)
-                
-                presentViewController(alertController, animated: true, completion: nil)
-            } else {
-                let alertView = UIAlertView(title: title, message: message, delegate: self, cancelButtonTitle: "Don't", otherButtonTitles: "Retry")
-
-                alertView.show()
-            }
-            
-        }
+        })
     }
     
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
@@ -194,37 +199,41 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
     {
         sender.invalidate()
         
-        // only present new alert if no existing alerts
-        if presentedViewController == nil {
-
-            let title = "Representative Search Timed Out"
-            let message = ""
-            if objc_getClass("UIAlertController") != nil {
-                
-                let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-                let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
-                    { _ -> Void in
-                        if let searchType = self.searchType {
-                            self.searchForRepresentativesBy(searchType)
-                        } else {
-                            self.navigationController?.popViewControllerAnimated(true)
-                            alertWithTitle("Retry Representative Search SearchType Error", message: "", dismissText: "Okay", viewController: self)
+        dispatch_async(
+            dispatch_get_main_queue(),
+            { () -> Void in
+                // only present new alert if no existing alerts
+                if self.presentedViewController == nil {
+                    
+                    let title = "Representative Search Timed Out"
+                    let message = ""
+                    if objc_getClass("UIAlertController") != nil {
+                        
+                        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+                        let retryOption = UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default)
+                            { _ -> Void in
+                                if let searchType = self.searchType {
+                                    self.searchForRepresentativesBy(searchType)
+                                } else {
+                                    self.navigationController?.popViewControllerAnimated(true)
+                                    alertWithTitle("Retry Representative Search SearchType Error", message: "", dismissText: "Okay", viewController: self)
+                                }
                         }
+                        
+                        let giveUpOption = UIAlertAction(title: "Don't", style: UIAlertActionStyle.Default)
+                            { _ -> Void in }
+                        alertController.addAction(retryOption)
+                        alertController.addAction(giveUpOption)
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    } else {
+                        let alertView = UIAlertView(title: title, message: message, delegate: self, cancelButtonTitle: "Don't", otherButtonTitles: "Retry")
+                        
+                        alertView.show()
+                    }
+                    
                 }
-                
-                let giveUpOption = UIAlertAction(title: "Don't", style: UIAlertActionStyle.Default)
-                    { _ -> Void in }
-                alertController.addAction(retryOption)
-                alertController.addAction(giveUpOption)
-                
-                presentViewController(alertController, animated: true, completion: nil)
-            } else {
-                let alertView = UIAlertView(title: title, message: message, delegate: self, cancelButtonTitle: "Don't", otherButtonTitles: "Retry")
-
-                alertView.show()
-            }
-            
-        }
+        })
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -329,13 +338,18 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
                                         if urlString.lowercaseString.rangeOfString("getall_reps") != nil || urlString.lowercaseString.rangeOfString("getall_mems") != nil {
                                             self.repSearchDone = true
                                         }
-
+                                        
                                         self.tableView.reloadData()
                                     }
                                 )
                             } else {
-                                self.navigationController?.popViewControllerAnimated(true)
-                                alertWithTitle("JSON Array Cast Failed", message: "", dismissText: "Okay", viewController: self)
+                                // update UI is on the main thread
+                                dispatch_async(
+                                    dispatch_get_main_queue(),
+                                    { () -> Void in
+                                        self.navigationController?.popViewControllerAnimated(true)
+                                        alertWithTitle("JSON Array Cast Failed", message: "", dismissText: "Okay", viewController: self)
+                                })
                             }
                         } else {
                             // no data returned from server
@@ -346,17 +360,17 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
                                 { () -> Void in
                                     // no results returned, set search to done based on url to get search type and invalidate timers
                                     if urlString.lowercaseString.rangeOfString("getall_sens") != nil || urlString.lowercaseString.rangeOfString("getall_mems") != nil {
-                                            self.senSearchDone = true
-                                            //println("sen search done")
-                                            self.senSearchTimer.invalidate()
+                                        self.senSearchDone = true
+                                        //println("sen search done")
+                                        self.senSearchTimer.invalidate()
                                     }
                                     
                                     if urlString.lowercaseString.rangeOfString("getall_reps") != nil || urlString.lowercaseString.rangeOfString("getall_mems") != nil {
-                                            self.repSearchDone = true
-                                            //println("rep search done")
-                                            self.repSearchTimer.invalidate()
+                                        self.repSearchDone = true
+                                        //println("rep search done")
+                                        self.repSearchTimer.invalidate()
                                     }
-
+                                    
                                     // only alert for no matches if both searches are done (and no results from either search), as we wouldn't want to alert the user unless a representative was not found in both the Senate and the House
                                     if self.senSearchDone && self.repSearchDone {
                                         if self.senatorArr.count == 0 && self.representativeArr.count == 0 {
@@ -367,8 +381,13 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
                             })
                         }
                     } else {
-                        self.navigationController?.popViewControllerAnimated(true)
-                        alertWithTitle("NSURLSession Error", message: "", dismissText: "Okay", viewController: self)
+                        // update UI is on the main thread
+                        dispatch_async(
+                            dispatch_get_main_queue(),
+                            { () -> Void in
+                                self.navigationController?.popViewControllerAnimated(true)
+                                alertWithTitle("NSURLSession Error", message: String(format:"Code %@", error), dismissText: "Okay", viewController: self)
+                        })
                     }
             })
             dataTask.resume()

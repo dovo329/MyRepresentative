@@ -84,8 +84,9 @@ class RepresentativeDetailViewController: UIViewController {
             }
             
         } else {
-            navigationController?.popViewControllerAnimated(true)
+            
             alertWithTitle("nil Representative", message: "", dismissText: "Okay", viewController: self)
+            navigationController?.popViewControllerAnimated(true)
         }
     }
     
