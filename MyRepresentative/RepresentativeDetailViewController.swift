@@ -32,7 +32,9 @@ class RepresentativeDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         if let rep = representative {
             nameLabel.text = rep.name
             
@@ -82,7 +84,6 @@ class RepresentativeDetailViewController: UIViewController {
             }
             
         } else {
-            // this should never happen, but if it does...
             navigationController?.popViewControllerAnimated(true)
             alertWithTitle("nil Representative", message: "", dismissText: "Okay", viewController: self)
         }
