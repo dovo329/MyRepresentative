@@ -185,7 +185,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
             } else if id==SegueId.LastNamePortrait.rawValue {
                 return lastNameTextFieldPortrait.text != ""
             } else if id==SegueId.LastNameLandscape.rawValue {
-                return lastNameTextFieldLandscape.text != ""
+                    return lastNameTextFieldLandscape.text != ""
             } else if id==SegueId.StatePortrait.rawValue || id==SegueId.StateLandscape.rawValue {
                 // will always have valid data from the picker
                 return true
@@ -221,9 +221,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
             } else if segue.identifier == SegueId.ZipCodeLandscape.rawValue {
                  destinationViewController.zipCode = zipCodeTextFieldLandscape.text
             } else if segue.identifier == SegueId.LastNamePortrait.rawValue {
-                destinationViewController.lastName = lastNameTextFieldPortrait.text
+                destinationViewController.zipCode = lastNameTextFieldPortrait.text
             } else if segue.identifier == SegueId.LastNameLandscape.rawValue {
-                destinationViewController.lastName = lastNameTextFieldLandscape.text
+                destinationViewController.zipCode = lastNameTextFieldLandscape.text
             } else if segue.identifier == SegueId.StatePortrait.rawValue {
                 let pickerIndex = statePickerPortrait.selectedRowInComponent(0)
                 destinationViewController.state = statePickerDataSource.stateList[pickerIndex]
