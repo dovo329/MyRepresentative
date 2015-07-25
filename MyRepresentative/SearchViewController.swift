@@ -17,13 +17,17 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var landscapeView: UIView!
     
     @IBOutlet weak var zipCodeTextField: UITextField!
-
+    @IBOutlet weak var zipCodeTextFieldLandscape: UITextField!
+    
     @IBOutlet weak var lastNameTextField: UITextField!
-
+    @IBOutlet weak var lastNameTextFieldLandscape: UITextField!
+    
     @IBOutlet weak var searchByStateButton: UIButton!
-
+    @IBOutlet weak var searchByStateButtonLandscape: UIButton!
+    
     @IBOutlet weak var statePicker: UIPickerView!
-
+    @IBOutlet weak var statePickerLandscape: UIPickerView!
+    
     @IBOutlet var statePickerDataSource: StatePickerDataSource!
     var bgGradLayer = CAGradientLayer()
     var numberPadBar = UIToolbar()
@@ -33,6 +37,9 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         case ZipCode = "search.by.zip.code.segue"
         case LastName = "search.by.last.name.segue"
         case State = "search.by.state.segue"
+        case ZipCodeLandscape = "search.by.zip.code.landscape.segue"
+        case LastNameLandscape = "search.by.last.name.landscape.segue"
+        case StateLandscape = "search.by.state.landscape.segue"
     }
     
     func updateHiddenViews() {
@@ -93,6 +100,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         numberPadBar.sizeToFit()
         
         zipCodeTextField.inputAccessoryView = numberPadBar
+        zipCodeTextFieldLandscape.inputAccessoryView = numberPadBar
     }
     
     func outsideTap(sender: UITapGestureRecognizer!) {
@@ -148,6 +156,22 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
                 } else {
                     return true
                 }
+            } else if id == SegueId.ZipCodeLandscape.rawValue {
+                if zipCodeTextFieldLandscape.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) != 5 {
+                    zipCodeTextFieldLandscape.text = ""
+                    
+                    alertWithTitle("Zip Code Must Be 5 Digits Long", message: "", dismissText: "Got It", viewController: self)
+                    
+                    return false
+                } else if containsLetters(zipCodeTextFieldLandscape.text) {
+                    zipCodeTextFieldLandscape.text = ""
+                    
+                    alertWithTitle("Zip Codes Can't Contain Letters", message: "", dismissText: "Got It", viewController: self)
+                    
+                    return false
+                } else {
+                    return true
+                }
             } else if id==SegueId.LastName.rawValue {
                 return lastNameTextField.text != ""
             } else if id==SegueId.State.rawValue {
@@ -166,7 +190,8 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 
         if let destinationViewController = segue.destinationViewController as? RepresentativeListViewController {
-            if segue.identifier == SegueId.ZipCode.rawValue {
+            if segue.identifier == SegueId.ZipCode.rawValue ||
+               segue.identifier == SegueId.ZipCodeLandscape.rawValue{
             destinationViewController.searchType = SearchType.ZipCode
         } else if segue.identifier == SegueId.LastName.rawValue {
             destinationViewController.searchType = SearchType.LastName

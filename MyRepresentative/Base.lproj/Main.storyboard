@@ -164,6 +164,7 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="BYZ-38-t0r" id="UF1-jt-Q5H"/>
+                                                    <segue destination="DKc-Al-MtG" kind="show" identifier="search.by.zip.code.landscape.segue" id="bNv-YQ-Pum"/>
                                                 </connections>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bv1-57-ezL" userLabel="spacerView1">
@@ -182,6 +183,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="BYZ-38-t0r" id="JWq-kJ-RUB"/>
+                                                    <segue destination="DKc-Al-MtG" kind="show" identifier="search.by.last.name.landscape.segue" id="ij9-Er-7Dp"/>
                                                 </connections>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Pw-yW-68B" userLabel="spacerView2">
@@ -189,7 +191,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.0" green="1" blue="0.19772736052779027" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="PKb-0z-a60" firstAttribute="width" secondItem="XzT-rN-jNj" secondAttribute="width" id="031-e6-Phi"/>
                                             <constraint firstItem="PKb-0z-a60" firstAttribute="top" secondItem="XzT-rN-jNj" secondAttribute="bottom" constant="15" id="3xq-VS-vR3"/>
@@ -240,6 +242,9 @@
                                                 <state key="normal" title="Search By State">
                                                     <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <segue destination="DKc-Al-MtG" kind="show" identifier="search.by.state.landscape.segue" id="sfa-V2-PQR"/>
+                                                </connections>
                                             </button>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gso-KX-Nif">
                                                 <rect key="frame" x="61" y="211" width="162" height="162"/>
@@ -253,7 +258,7 @@
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" red="1" green="0.0" blue="0.018539993604963279" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="2ss-Jx-pSX" firstAttribute="top" secondItem="gso-KX-Nif" secondAttribute="bottom" constant="15" id="7QZ-hm-PcM"/>
                                             <constraint firstItem="2ss-Jx-pSX" firstAttribute="height" secondItem="5zw-Ts-s5R" secondAttribute="height" id="9Pm-D9-elz"/>
@@ -323,12 +328,16 @@
                     <navigationItem key="navigationItem" title="Federal Representatives" id="0e3-6T-YXM"/>
                     <connections>
                         <outlet property="landscapeView" destination="wbm-9P-Jpt" id="I6L-sr-ttn"/>
-                        <outlet property="lastNameTextField" destination="Fnb-jg-F0L" id="TdL-vd-XSG"/>
+                        <outlet property="lastNameTextField" destination="6v7-sv-awm" id="e9o-wi-t7p"/>
+                        <outlet property="lastNameTextFieldLandscape" destination="6v7-sv-awm" id="Svf-2a-W4U"/>
                         <outlet property="portraitView" destination="jgP-o9-dK5" id="YZU-uN-Gd9"/>
-                        <outlet property="searchByStateButton" destination="Ox3-EY-4Ii" id="mxj-i2-Sy8"/>
-                        <outlet property="statePicker" destination="YYT-AY-zTk" id="rTQ-F7-fYQ"/>
+                        <outlet property="searchByStateButton" destination="RCG-6g-ZaE" id="ef0-ih-9SG"/>
+                        <outlet property="searchByStateButtonLandscape" destination="RCG-6g-ZaE" id="mfB-kq-Sye"/>
+                        <outlet property="statePicker" destination="gso-KX-Nif" id="9jI-ea-ygE"/>
                         <outlet property="statePickerDataSource" destination="OX0-kL-SIR" id="v6J-bM-kYF"/>
-                        <outlet property="zipCodeTextField" destination="uYe-BH-2Vi" id="i23-Af-pwK"/>
+                        <outlet property="statePickerLandscape" destination="gso-KX-Nif" id="kqP-CY-wBd"/>
+                        <outlet property="zipCodeTextField" destination="PKb-0z-a60" id="TDd-YL-A9v"/>
+                        <outlet property="zipCodeTextFieldLandscape" destination="PKb-0z-a60" id="dZ1-hh-nmE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -594,6 +603,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="tWu-yy-hJN"/>
+        <segue reference="dtw-Kc-WGd"/>
     </inferredMetricsTieBreakers>
 </document>
