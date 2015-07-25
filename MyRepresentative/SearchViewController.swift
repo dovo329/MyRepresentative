@@ -195,14 +195,18 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
                     return true
                 }
             } else if id==SegueId.LastNamePortrait.rawValue {
-                if containsSpecialCharacters(lastNameTextFieldPortrait.text) {
+                if lastNameTextFieldPortrait.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) == 0 {
+                    return false
+                } else if containsSpecialCharacters(lastNameTextFieldPortrait.text) {
                     alertWithTitle("Last Name Can't Have Special Characters", message: "", dismissText: "Got It", viewController: self)
                     return false
                 } else {
                     return true
                 }
             } else if id==SegueId.LastNameLandscape.rawValue {
-                if containsSpecialCharacters(lastNameTextFieldLandscape.text) {
+                if lastNameTextFieldLandscape.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) == 0 {
+                    return false
+                } else if containsSpecialCharacters(lastNameTextFieldLandscape.text) {
                     alertWithTitle("Last Name Can't Have Special Characters", message: "", dismissText: "Got It", viewController: self)
                     return false
                 } else {
