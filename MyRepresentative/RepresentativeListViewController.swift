@@ -59,6 +59,11 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
             alertWithTitle("Search Type Is Not Valid", message: "", dismissText: "Okay", viewController: self)
         }
     }
+
+    override func viewWillDisappear(animated: Bool) {
+        repSearchTimer.invalidate()
+        senSearchTimer.invalidate()
+    }
     
     func searchForRepresentativesBy(searchType: SearchType)
     {
