@@ -17,10 +17,14 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var landscapeView: UIView!
     
     @IBOutlet weak var zipCodeTextField: UITextField!
-    @IBOutlet weak var statePicker: UIPickerView!
-    @IBOutlet var statePickerDataSource: StatePickerDataSource!
+
     @IBOutlet weak var lastNameTextField: UITextField!
+
     @IBOutlet weak var searchByStateButton: UIButton!
+
+    @IBOutlet weak var statePicker: UIPickerView!
+
+    @IBOutlet var statePickerDataSource: StatePickerDataSource!
     var bgGradLayer = CAGradientLayer()
     var numberPadBar = UIToolbar()
     
