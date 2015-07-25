@@ -130,11 +130,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
                 // will always have valid data from the picker
                 return true
             } else {
-                fatalError("Invalid segue id!")
+                alertWithTitle("Invalid segue id", message: "", dismissText: "Okay", viewController: self)
                 return false
             }
         } else {
-            fatalError("nil segue id!")
+            alertWithTitle("nil segue id", message: "", dismissText: "Okay", viewController: self)
             return false
         }
     }
@@ -149,7 +149,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         } else if segue.identifier == SegueId.State.rawValue {
             destinationViewController.searchType = SearchType.State
         } else {
-            fatalError("Invalid segue.identifier")
+                alertWithTitle("Invalid segue.identifier", message: "", dismissText: "Okay", viewController: self)
             }
             
             destinationViewController.zipCode = zipCodeTextField.text
@@ -157,7 +157,7 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
             let pickerIndex = statePicker.selectedRowInComponent(0)
             destinationViewController.state = statePickerDataSource.stateList[pickerIndex]
         } else {
-            fatalError("Wrong destination view controller type, expected RepresentativeListViewController, cast failed")
+            alertWithTitle("Dest VC Cast Failed in Search VC", message: "", dismissText: "Okay", viewController: self)
         }
     }        
     
