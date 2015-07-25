@@ -7,6 +7,7 @@
 //
 //  Search UI to feed into http://whoismyrepresentative.com API
 //
+//  Known bug with ios 7.1 simulator when navigating back to this view controller from the RepresentativeListViewController where the layout gets messed up on at least the 4S model.  In ios 8.4 this problem doesn't exist
 
 import UIKit
 
@@ -79,7 +80,12 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         zipCodeTextFieldLandscape.text = ""
         lastNameTextFieldPortrait.text = ""
         lastNameTextFieldLandscape.text = ""
+        
+        // dismiss all keyboards to be safe, though it may not be necessary
         view.endEditing(true)
+
+        // I saw a wrong orientation happen once when coming back from the list view controller, so that's why I'm putting this here to guard against that happening again
+        updateHiddenViews()
     }
     
     func prettifySearchByStateButton()
@@ -151,13 +157,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         if let id = identifier {
             if id == SegueId.ZipCodePortrait.rawValue {
                 if zipCodeTextFieldPortrait.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) != 5 {
-                    zipCodeTextFieldPortrait.text = ""
                     
                     alertWithTitle("Zip Code Must Be 5 Digits Long", message: "", dismissText: "Got It", viewController: self)
                     
                     return false
                 } else if containsLetters(zipCodeTextFieldPortrait.text) {
-                    zipCodeTextFieldPortrait.text = ""
                     
                     alertWithTitle("Zip Codes Can't Contain Letters", message: "", dismissText: "Got It", viewController: self)
                     
@@ -167,13 +171,11 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
                 }
             } else if id == SegueId.ZipCodeLandscape.rawValue {
                 if zipCodeTextFieldLandscape.text.lengthOfBytesUsingEncoding(NSASCIIStringEncoding) != 5 {
-                    zipCodeTextFieldLandscape.text = ""
                     
                     alertWithTitle("Zip Code Must Be 5 Digits Long", message: "", dismissText: "Got It", viewController: self)
                     
                     return false
                 } else if containsLetters(zipCodeTextFieldLandscape.text) {
-                    zipCodeTextFieldLandscape.text = ""
                     
                     alertWithTitle("Zip Codes Can't Contain Letters", message: "", dismissText: "Got It", viewController: self)
                     
@@ -182,9 +184,19 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
                     return true
                 }
             } else if id==SegueId.LastNamePortrait.rawValue {
-                return lastNameTextFieldPortrait.text != ""
+                if containsSpecialCharacters(lastNameTextFieldPortrait.text) {
+                    alertWithTitle("Last Name Can't Have Special Characters", message: "", dismissText: "Got It", viewController: self)
+                    return false
+                } else {
+                    return true
+                }
             } else if id==SegueId.LastNameLandscape.rawValue {
-                return lastNameTextFieldLandscape.text != ""
+                if containsSpecialCharacters(lastNameTextFieldLandscape.text) {
+                    alertWithTitle("Last Name Can't Have Special Characters", message: "", dismissText: "Got It", viewController: self)
+                    return false
+                } else {
+                    return true
+                }
             } else if id==SegueId.StatePortrait.rawValue || id==SegueId.StateLandscape.rawValue {
                 // will always have valid data from the picker
                 return true
@@ -245,8 +257,20 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         // range will be nil if no letters is found
         if let test = range {
             return true
+        } else {
+            return false
         }
-            else {
+    }
+    
+    func containsSpecialCharacters(testString: String) -> Bool
+    {
+        let specialChars = NSCharacterSet(charactersInString: " !@#$%^&*()<>?:\"{}|~,./;'[]\\`=_+")
+        let range = testString.rangeOfCharacterFromSet(specialChars)
+        
+        // range will be nil if anything but letters is found
+        if let test = range {
+            return true
+        } else {
             return false
         }
     }
