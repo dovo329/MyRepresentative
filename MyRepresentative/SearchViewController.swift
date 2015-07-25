@@ -13,6 +13,9 @@ import UIKit
 
 class SearchViewController: UIViewController, UITextFieldDelegate {
     
+    @IBOutlet weak var portraitView: UIView!
+    @IBOutlet weak var landscapeView: UIView!
+    
     @IBOutlet weak var zipCodeTextField: UITextField!
     @IBOutlet weak var statePicker: UIPickerView!
     @IBOutlet var statePickerDataSource: StatePickerDataSource!
@@ -28,8 +31,25 @@ class SearchViewController: UIViewController, UITextFieldDelegate {
         case State = "search.by.state.segue"
     }
     
+    func updateHiddenViews() {
+        //let orientation = UIDevice.currentDevice().orientation
+        let orientation = UIApplication.sharedApplication().statusBarOrientation
+
+        if orientation == UIInterfaceOrientation.Portrait {
+            portraitView.hidden = false
+            landscapeView.hidden = true
+        } else {
+            portraitView.hidden = true
+            landscapeView.hidden = false
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        updateHiddenViews()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateHiddenViews", name: UIDeviceOrientationDidChangeNotification, object: nil)
         
         let colors = UIColor.gradientColorsForSearch()
         doBackgroundGradientWithColors(colors[0], endColor: colors[1])
