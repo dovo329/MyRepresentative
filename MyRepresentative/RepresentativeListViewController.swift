@@ -61,6 +61,7 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
     }
 
     override func viewWillDisappear(animated: Bool) {
+        // Need to stop timers if user navigates back before they naturally expire
         repSearchTimer.invalidate()
         senSearchTimer.invalidate()
     }
