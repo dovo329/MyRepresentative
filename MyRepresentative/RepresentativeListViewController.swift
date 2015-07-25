@@ -49,7 +49,10 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        // this code is in viewDidAppear instead of viewDidLoad because viewDidLoad is too early to pop a view controller and you get a crash in that case
         if let searchType = searchType {
             searchForRepresentativesBy(searchType)
         } else {
@@ -94,7 +97,6 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
         {
             if zipCode == ""
             {
-                // this should never happen, but if it does...
                 navigationController?.popViewControllerAnimated(true)
                 alertWithTitle("ZipCode Is Not Valid", message: "", dismissText: "Okay", viewController: self)
             }
@@ -105,7 +107,6 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
         {
             if lastName == ""
             {
-                // this should never happen, but if it does...
                 navigationController?.popViewControllerAnimated(true)
                 alertWithTitle("Last Name Is Not Valid", message: "", dismissText: "Okay", viewController: self)
             }
@@ -119,7 +120,6 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
         {
             if state == ""
             {
-                // this should never happen, but if it does...
                 navigationController?.popViewControllerAnimated(true)
                 alertWithTitle("State Is Not Valid", message: "", dismissText: "Okay", viewController: self)
             }
@@ -131,7 +131,6 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
         }
         else
         {
-            // this should never happen, but if it does...
                 navigationController?.popViewControllerAnimated(true)
             alertWithTitle("Unknown Search Type", message: "", dismissText: "Okay", viewController: self)
         }
@@ -159,7 +158,6 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
                         if let searchType = self.searchType {
                             self.searchForRepresentativesBy(searchType)
                         } else {
-                            // this should never happen, but if it does...
                             self.navigationController?.popViewControllerAnimated(true)
                             alertWithTitle("Retry Senator Search SearchType Error", message: "", dismissText: "Okay", viewController: self)
                         }
@@ -186,7 +184,6 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
             if let searchType = self.searchType {
                 self.searchForRepresentativesBy(searchType)
             } else {
-                // this should never happen, but if it does...
                 self.navigationController?.popViewControllerAnimated(true)
                 alertWithTitle("Retry Search SearchType Error", message: "", dismissText: "Okay", viewController: self)
             }
@@ -210,7 +207,6 @@ class RepresentativeListViewController: UITableViewController, UIAlertViewDelega
                         if let searchType = self.searchType {
                             self.searchForRepresentativesBy(searchType)
                         } else {
-                            // this should never happen, but if it does...
                             self.navigationController?.popViewControllerAnimated(true)
                             alertWithTitle("Retry Representative Search SearchType Error", message: "", dismissText: "Okay", viewController: self)
                         }
