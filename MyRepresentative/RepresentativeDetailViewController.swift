@@ -39,6 +39,7 @@ class RepresentativeDetailViewController: UIViewController, UIScrollViewDelegate
         scrollView.minimumZoomScale = 0.5
         scrollView.maximumZoomScale = 2.0
         scrollView.zoomScale = 1.0
+        scrollView.delegate = self // this is necessary to do programmatically instead of letting the storyboard handle it because scrollViewDidScroll inexplicably gets called after the navigation back button is hit and the previous view controller isn't a scrollView delegate so it crashes.  So on deinit it is set to nil, and on viewDidLoad it is reinitialized
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -158,7 +159,6 @@ class RepresentativeDetailViewController: UIViewController, UIScrollViewDelegate
     
     //func scrollViewDidZoom(scrollView: UIScrollView) {
     func scrollViewDidScroll(scrollView: UIScrollView) {
-
         let contentSize = scrollView.contentSize;
         let scrollViewSize = scrollView.bounds.size;
         
@@ -175,23 +175,11 @@ class RepresentativeDetailViewController: UIViewController, UIScrollViewDelegate
         }
         
         if scrollView.zoomScale < 1.0 {
-            //scrollView.setContentOffset(contentOffset, animated:true)
             scrollView.setContentOffset(contentOffset, animated:false)
         }
-        
-        //[super setContentOffset:contentOffset];
-        
-        /*let offsetX = max((scrollView.bounds.size.width - scrollView.contentSize.width)*0.5, 0.0)
-        let offsetY = max((scrollView.bounds.size.height - scrollView.contentSize.height)*0.5, 0.0)
-        
-        contentView.center = CGPointMake(scrollView.contentSize.width*0.5 + offsetX, scrollView.contentSize.height*0.5 + offsetY)*/
-        
-        /*
-        CGFloat offsetX = MAX((self.scrollView.bounds.size.width - self.scrollView.contentSize.width) * 0.5, 0.0);
-        CGFloat offsetY = MAX((self.scrollView.bounds.size.height - self.scrollView.contentSize.height) * 0.5, 0.0);
-        
-        self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5 + offsetX,
-        self.scrollView.contentSize.height * 0.5 + offsetY);
-        */
+    }
+    
+    deinit {
+        scrollView.delegate = nil
     }
 }
