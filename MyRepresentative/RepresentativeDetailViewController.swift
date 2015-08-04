@@ -155,4 +155,43 @@ class RepresentativeDetailViewController: UIViewController, UIScrollViewDelegate
     func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
         return contentView
     }
+    
+    //func scrollViewDidZoom(scrollView: UIScrollView) {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+
+        let contentSize = scrollView.contentSize;
+        let scrollViewSize = scrollView.bounds.size;
+        
+        var contentOffset : CGPoint = CGPointMake(0,0)
+        
+        if (contentSize.width < scrollViewSize.width)
+        {
+            contentOffset.x = -(scrollViewSize.width - contentSize.width) / 2.0;
+        }
+        
+        if (contentSize.height < scrollViewSize.height)
+        {
+            contentOffset.y = -(scrollViewSize.height - contentSize.height) / 2.0;
+        }
+        
+        if scrollView.zoomScale < 1.0 {
+            //scrollView.setContentOffset(contentOffset, animated:true)
+            scrollView.setContentOffset(contentOffset, animated:false)
+        }
+        
+        //[super setContentOffset:contentOffset];
+        
+        /*let offsetX = max((scrollView.bounds.size.width - scrollView.contentSize.width)*0.5, 0.0)
+        let offsetY = max((scrollView.bounds.size.height - scrollView.contentSize.height)*0.5, 0.0)
+        
+        contentView.center = CGPointMake(scrollView.contentSize.width*0.5 + offsetX, scrollView.contentSize.height*0.5 + offsetY)*/
+        
+        /*
+        CGFloat offsetX = MAX((self.scrollView.bounds.size.width - self.scrollView.contentSize.width) * 0.5, 0.0);
+        CGFloat offsetY = MAX((self.scrollView.bounds.size.height - self.scrollView.contentSize.height) * 0.5, 0.0);
+        
+        self.svgImageView.center = CGPointMake(self.scrollView.contentSize.width * 0.5 + offsetX,
+        self.scrollView.contentSize.height * 0.5 + offsetY);
+        */
+    }
 }
