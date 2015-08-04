@@ -542,6 +542,9 @@
                                     <constraint firstAttribute="trailing" secondItem="sT5-4A-lkT" secondAttribute="trailing" id="lNq-XD-quf"/>
                                     <constraint firstItem="sT5-4A-lkT" firstAttribute="top" secondItem="wef-Dr-3oq" secondAttribute="top" id="rNY-Vn-Zwa"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="p6G-2r-zNu" id="3DN-Pp-HYd"/>
+                                </connections>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -572,11 +575,13 @@
                     <navigationItem key="navigationItem" title="Details" id="E5u-84-vYa"/>
                     <connections>
                         <outlet property="addressLabel" destination="pvl-Me-83q" id="VZv-yr-rXI"/>
+                        <outlet property="contentView" destination="sT5-4A-lkT" id="Wq7-eB-7xK"/>
                         <outlet property="nameLabel" destination="luc-Yl-iCF" id="zWM-eZ-coE"/>
                         <outlet property="openInAppButton" destination="oM6-yW-ZAR" id="0yN-XP-vmN"/>
                         <outlet property="openInSafariButton" destination="nHK-OG-bs3" id="u1f-ip-dQx"/>
                         <outlet property="partyStateDistrictLabel" destination="uD5-gA-yZs" id="87l-oS-feH"/>
                         <outlet property="phoneLabel" destination="13v-nP-o7e" id="akV-LN-JTm"/>
+                        <outlet property="scrollView" destination="wef-Dr-3oq" id="pZF-q3-iqt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="F7m-dM-CTs" userLabel="First Responder" sceneMemberID="firstResponder"/>

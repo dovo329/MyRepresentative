@@ -10,7 +10,7 @@
 
 import UIKit
 
-class RepresentativeDetailViewController: UIViewController {
+class RepresentativeDetailViewController: UIViewController, UIScrollViewDelegate {
 
     var representative : Representative?
     var bgGradLayer = CAGradientLayer()
@@ -22,6 +22,10 @@ class RepresentativeDetailViewController: UIViewController {
     @IBOutlet weak var openInAppButton: UIButton!
     @IBOutlet weak var openInSafariButton: UIButton!
     
+    @IBOutlet weak var contentView: UIView!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     enum SegueId: String {
         case ToWeb = "to.web.segue"
     }
@@ -32,6 +36,9 @@ class RepresentativeDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollView.minimumZoomScale = 0.5
+        scrollView.maximumZoomScale = 2.0
+        scrollView.zoomScale = 1.0
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -143,5 +150,9 @@ class RepresentativeDetailViewController: UIViewController {
         } else {
             alertWithTitle("Wrong Dest VC type", message: "", dismissText: "Okay", viewController: self)
         }
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return contentView
     }
 }
