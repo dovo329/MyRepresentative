@@ -10,7 +10,7 @@
 
 import UIKit
 
-class RepresentativeDetailViewController: UIViewController {
+class RepresentativeDetailViewController: UIViewController, UIScrollViewDelegate {
 
     var representative : Representative?
     var bgGradLayer = CAGradientLayer()
@@ -22,6 +22,10 @@ class RepresentativeDetailViewController: UIViewController {
     @IBOutlet weak var openInAppButton: UIButton!
     @IBOutlet weak var openInSafariButton: UIButton!
     
+    @IBOutlet weak var contentView: UIView!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     enum SegueId: String {
         case ToWeb = "to.web.segue"
     }
@@ -32,6 +36,10 @@ class RepresentativeDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollView.minimumZoomScale = 0.5
+        scrollView.maximumZoomScale = 2.0
+        scrollView.zoomScale = 1.0
+        scrollView.delegate = self // this is necessary to do programmatically instead of letting the storyboard handle it because scrollViewDidScroll inexplicably gets called after the navigation back button is hit and the previous view controller isn't a scrollView delegate so it crashes.  So on deinit it is set to nil, and on viewDidLoad it is reinitialized
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -143,5 +151,35 @@ class RepresentativeDetailViewController: UIViewController {
         } else {
             alertWithTitle("Wrong Dest VC type", message: "", dismissText: "Okay", viewController: self)
         }
+    }
+    
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        return contentView
+    }
+    
+    //func scrollViewDidZoom(scrollView: UIScrollView) {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let contentSize = scrollView.contentSize;
+        let scrollViewSize = scrollView.bounds.size;
+        
+        var contentOffset : CGPoint = CGPointMake(0,0)
+        
+        if (contentSize.width < scrollViewSize.width)
+        {
+            contentOffset.x = -(scrollViewSize.width - contentSize.width) / 2.0;
+        }
+        
+        if (contentSize.height < scrollViewSize.height)
+        {
+            contentOffset.y = -(scrollViewSize.height - contentSize.height) / 2.0;
+        }
+        
+        if scrollView.zoomScale < 1.0 {
+            scrollView.setContentOffset(contentOffset, animated:false)
+        }
+    }
+    
+    deinit {
+        scrollView.delegate = nil
     }
 }
